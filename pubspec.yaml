@@ -35,8 +35,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  table_calendar: ^3.1.1
-  intl: ^0.19.0
+  #SplashScreen dependency_validator:
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -62,8 +62,22 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/images/logo.png
-     - assets/images/bg.jpg
+     - assets/onboarding_gifs/welcome.gif
+     - assets/onboarding_gifs/announce.gif
+     - assets/onboarding_gifs/peace.gif
+     - assets/onboarding_gifs/excited.gif
+     - assets/onboarding_gifs/announcement.gif
+     - assets/onboarding_gifs/code.gif
+     - assets/onboarding_gifs/event_notifications.gif
+     - assets/onboarding_gifs/group.gif
+     - assets/onboarding_gifs/heart.gif
+     - assets/onboarding_gifs/maintenance.gif
+     - assets/onboarding_gifs/meditating.gif
+     - assets/onboarding_gifs/searching.gif
+     - assets/onboarding_gifs/study.gif
+     - assets/onboarding_gifs/victory.gif
+     - assets/onboarding_gifs/study_new.gif
+     - assets/onboarding_gifs/hola_greet.gif
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
