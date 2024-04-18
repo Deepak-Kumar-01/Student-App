@@ -25,6 +25,8 @@ class _HomepageState extends State<Homepage> {
         backgroundColor: Colors.blue[800],
         iconTheme: const IconThemeData(color: Colors.white),
       ),
+
+
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
         onDestinationSelected: (int index){
@@ -40,6 +42,7 @@ class _HomepageState extends State<Homepage> {
           NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
+
       body: [const Home(),const Attendance(),const Routine(),const Profile()][_currentIndex],
     );
   }
