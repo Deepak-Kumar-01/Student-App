@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ScheduleScreen_Widget extends StatelessWidget {
+class ScheduleScreen extends StatelessWidget {
   // const ScheduleScreen_Widget({super.key});
 
   var studentAttendance = [100, 66, 75, 98];
