@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   #SplashScreen dependency_validator:
   flutter_native_splash: ^2.4.0
+  #Shared preferences:
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +80,10 @@ flutter:
      - assets/onboarding_gifs/victory.gif
      - assets/onboarding_gifs/study_new.gif
      - assets/onboarding_gifs/hola_greet.gif
+     - assets/logo/logo_1x.png
+     - assets/logo/logo_2x.png
+     - assets/logo/logo_4x.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

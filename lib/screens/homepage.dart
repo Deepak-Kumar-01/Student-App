@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:studentapp/screens/onboardingScreens.dart';
 import 'package:studentapp/screens/profile.dart';
 import 'package:studentapp/screens/routine.dart';
 import 'attendance.dart';
@@ -39,11 +38,10 @@ class _HomepageState extends State<Homepage> {
           NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
           NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
           NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
-          NavigationDestination(icon: Icon(Icons.person), label: "Test"),
 
         ],
       ),
-      body: [const Home(),const Attendance(),const Routine(),const Profile(),OnboardingScreen()][_currentIndex],
+      body: [const Home(),const Attendance(),const Routine(),const Profile()][_currentIndex],
     );
   }
 }
