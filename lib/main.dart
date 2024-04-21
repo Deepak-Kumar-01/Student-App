@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:studentapp/screens/homepage.dart';
-import 'package:studentapp/screens/onboardingScreens.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:studentapp/screens/splashScreen.dart';
 
-void main(){
+void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -13,24 +16,10 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: "Mobile Application",
       debugShowCheckedModeBanner: false,
-      // home: Homepage(),
-      home: Testing(),
+      home: SplashScreen(),
     );
   }
 }
-class Testing extends StatefulWidget {
-  const Testing({super.key});
 
-  @override
-  State<Testing> createState() => _TestingState();
-}
 
-class _TestingState extends State<Testing> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: OnboardingScreen()
-    );
-  }
-}
 
