@@ -64,31 +64,37 @@ class _SignUpMediumDeviceState extends State<SignUpMediumDevice> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image(
-                    image: AssetImage("assets/logo/logo_1x.png"),
-                    width: size.width * 0.23,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                        image: AssetImage("assets/logo/logo_1x.png"),
+                        width: size.width * 0.25,
+                      ),
+                      SizedBox(height: 10,),
+                      Text(
+                        "JSSATEN",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.blue[900]),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Welcome Everyone",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.orange[900]),
+                    height: 10,
                   ),
                   SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Welcome to a World of Limitless Choices-Your Perfect Product Awaits!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[800]),
+                    width: size.width * 0.9,
+                    child: Text(
+                      "Welcome to JSSATEN, your home for discovery, innovation, and lifelong friendships.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey[800]),
+                    ),
                   ),
                 ],
               ),

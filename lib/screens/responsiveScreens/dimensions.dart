@@ -1,2 +1,2 @@
-const smallDeviceWidth=360;
+const smallDeviceWidth=400;
 const mediumDeviceWidth=411;

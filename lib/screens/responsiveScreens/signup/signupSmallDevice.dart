@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../homepage.dart';
 import '../controllers/login/loginFormController.dart';
@@ -57,43 +58,49 @@ class _SignUpSmallDeviceState extends State<SignUpSmallDevice> {
       // ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 100, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
           child: Column(
             children: [
               //Logo and Welcome Message
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image(
-                    image: AssetImage("assets/logo/logo_1x.png"),
-                    width: size.width * 0.23,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                        image: AssetImage("assets/logo/logo_1x.png"),
+                        width: size.width * 0.20,
+                      ),
+                    SizedBox(width: 10,),
+                      Text(
+                        "JSSATEN",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.blue[900]),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Welcome Everyone",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.blue[900]),
+                    height: 10,
                   ),
                   SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Welcome to a World of Limitless Choices-Your Perfect Product Awaits!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[800]),
+                    width: size.width * 0.9,
+                    child: Text(
+                      "Welcome to JSSATEN, your home for discovery, innovation, and lifelong friendships.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey[800]),
+                    ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               //Login Form
               Form(
@@ -103,10 +110,14 @@ class _SignUpSmallDeviceState extends State<SignUpSmallDevice> {
                   SizedBox(
                     width: 300,
                     child: TextField(
+                      maxLines: 1,
                         controller: _controller1,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email_outlined),
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                              // borderRadius: BorderRadius.circular(30)
+                          ),
+                          contentPadding: EdgeInsets.symmetric(vertical: 10),
                           label: Text("University Email"),
                           hintText: "",
                         )),
@@ -120,7 +131,10 @@ class _SignUpSmallDeviceState extends State<SignUpSmallDevice> {
                         controller: _controller2,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.password_sharp),
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            // borderRadius: BorderRadius.circular(30)
+                          ),
+                          contentPadding: EdgeInsets.symmetric(vertical: 10),
                           label: Text("Password"),
                           hintText: "",
                         )),
@@ -133,13 +147,14 @@ class _SignUpSmallDeviceState extends State<SignUpSmallDevice> {
                   isLoginClicked
                       ? Text("")
                       : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             SizedBox(
-                              width: size.width * 0.3,
+                              width: size.width * 0.34,
                               child: DropdownButtonFormField<String>(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
+                                  contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
                                 ),
                                 value: dropdownValue,
                                 onChanged: (String? value) {
@@ -165,6 +180,8 @@ class _SignUpSmallDeviceState extends State<SignUpSmallDevice> {
                               child: DropdownButtonFormField<String>(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
+                                  contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+
                                 ),
                                 value: branchDropdown,
                                 onChanged: (String? value) {
@@ -207,55 +224,58 @@ class _SignUpSmallDeviceState extends State<SignUpSmallDevice> {
                   ),
                   //Buttons
                   SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
 
-                  // CREATE ACCOUNT BUTTON
-                  SizedBox(
-                    width: size.width * 0.6,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Homepage()));
-                          });
-                        },
-                        child: Text(
-                          "Create Account",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(15),
-                            // shape: RoundedRectangleBorder(),
-                            backgroundColor: Colors.blue[900])),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  // LOGIN BUTTON
-                  SizedBox(
-                    width: size.width * 0.6,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ResponsiveLogin()));
-                            // isLoginClicked = true;
-                          });
-                        },
-                        child: Text(
-                          "Log in",
-                          style: TextStyle(color: Colors.black, fontSize: 18),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            side: BorderSide(
-                                width: 1, color: Colors.grey.shade500),
-                            padding: EdgeInsets.all(15),
-                            backgroundColor: Colors.white)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // CREATE ACCOUNT BUTTON
+                      SizedBox(
+                        width: size.width * 0.4,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Homepage()));
+                              });
+                            },
+                            child: Text(
+                              "Create Account",
+                              style: TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.all(5),
+                                // shape: RoundedRectangleBorder(),
+                                backgroundColor: Colors.blue[900])),
+                      ),
+
+                      // LOGIN BUTTON
+                      SizedBox(
+                        width: size.width * 0.4,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResponsiveLogin()));
+                                // isLoginClicked = true;
+                              });
+                            },
+                            child: Text(
+                              "Log in",
+                              style: TextStyle(color: Colors.grey[900], fontSize: 14),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                side: BorderSide(
+                                    width: 1, color: Colors.grey.shade500),
+                                padding: EdgeInsets.all(5),
+                                backgroundColor: Colors.white)),
+                      )
+                    ],
                   )
                 ],
               )),
