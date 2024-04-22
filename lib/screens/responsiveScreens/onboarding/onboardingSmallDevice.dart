@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:studentapp/screens/responsiveScreens/onboarding/nextButton/mediumDeviceNextButton.dart';
+import 'package:studentapp/screens/responsiveScreens/onboarding/nextButton/smallDeviceNextButton.dart';
+import 'package:studentapp/screens/responsiveScreens/onboarding/pageIndicator/mediumDevicePageIndicator.dart';
 import 'package:studentapp/screens/responsiveScreens/onboarding/pageIndicator/pageIndicator.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
+import 'package:studentapp/screens/responsiveScreens/onboarding/pageIndicator/smallDevicePageIndicator.dart';
 import 'package:studentapp/screens/splashScreen.dart';
+import '../dimensions.dart';
 import 'customPageWidget/customPageWidget.dart';
+import 'getStartedButton/mediumGetStartedButton.dart';
+import 'getStartedButton/smallGetStartedButton.dart';
 import 'onboardingButtons/onboardingNextButton.dart';
 import 'onboardingButtons/onboardingSkipButton.dart';
 
-class OnboardingMediumDevice extends StatefulWidget {
-  const OnboardingMediumDevice({super.key});
+
+class OnboardingSmallDevice extends StatefulWidget {
+  const OnboardingSmallDevice({super.key});
   @override
-  State<OnboardingMediumDevice> createState() => _OnboardingMediumDeviceState();
+  State<OnboardingSmallDevice> createState() => _OnboardingSmallDeviceState();
 }
 
-class _OnboardingMediumDeviceState extends State<OnboardingMediumDevice> {
+class _OnboardingSmallDeviceState extends State<OnboardingSmallDevice> {
   int currentValue = 0;
   void onPageChange(int index) {
     setState(() {
@@ -24,6 +32,7 @@ class _OnboardingMediumDeviceState extends State<OnboardingMediumDevice> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    print("${size.width}");
     final pageController = PageController(
       initialPage: 0,
     );
@@ -38,23 +47,22 @@ class _OnboardingMediumDeviceState extends State<OnboardingMediumDevice> {
             CustomPageWidget(
               size: size,
               image: "assets/onboarding_gifs/code.gif",
-              title: "Welcome To JSS Student App",
-              subTitle:
-              "Welcome to a World of Limitless Choices-Your Perfect Product Awaits!",
+                title: "Academic Odyssey",
+                subTitle:"Navigating Your Academic Journey with Ease and Confidence Through Comprehensive Support and Resources"
             ),
             CustomPageWidget(
               size: size,
               image: "assets/onboarding_gifs/event_notifications.gif",
-              title: "Monitor Attendance/Events and much more",
+              title: "AttendEase & EventSync",
               subTitle:
-              "Welcome to a World of Limitless Choices-Your Perfect Product Awaits!",
+              "Track Attendance and Keep Tabs on Upcoming Events with Ease",
             ),
             CustomPageWidget(
               size: size,
               image: "assets/onboarding_gifs/excited.gif",
-              title: "Lets Get Started",
+              title: "Campus Connect",
               subTitle:
-              "Welcome to a World of Limitless Choices-Your Perfect Product Awaits!",
+              "Building Bridges Between Students, Faculty, and Resources for Enhanced Learning and Achievement",
             ),
             // SignUp()
             // MyAuth(isLoginClicked: true,),
@@ -65,35 +73,16 @@ class _OnboardingMediumDeviceState extends State<OnboardingMediumDevice> {
             size: size, lastIndex: 3, controller: pageController),
         //Page Indicator
         currentValue < 2
-            ? PageIndicator(size: size, currentValue: currentValue)
+            ? SmallPageIndicator(size: size, currentValue: currentValue)
             : Text(""),
         //Button
         currentValue < 2
-            ? OnboardingNextButton(
+            ? SmallNextButton(
           size: size,
           controller: pageController,
           currentIndex: currentValue + 1,
         )
-            : Positioned(
-          top: size.height * 0.75,
-          left: size.width * 0.25,
-          child: ElevatedButton(
-            onPressed: ()async{
-              var sharedPref=await SharedPreferences.getInstance();
-              sharedPref.setBool(SplashScreenState.KEYONBOARDING,true);
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ResponsiveSignUp()));
-            },
-            child: Text(
-              "Let's Get Started",
-              style: TextStyle(color: Colors.white, fontSize: 22),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue[900],
-              shape: RoundedRectangleBorder(),
-              padding: EdgeInsets.all(20),
-            ),
-          ),
-        ),
+            : size.width>smallDeviceWidth?MdStartedButton(size: size):SmStartedButton(size: size),
       ]),
     );
   }

@@ -11,8 +11,10 @@ class ResponsiveSignUp extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > smallDeviceWidth) {
+          print("Medium Screen");
           return SignUpMediumDevice();
         } else {
+          print("Small Screen");
           return SignUpSmallDevice();
         }
       },
