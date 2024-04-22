@@ -9,12 +9,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Class Schedule',
-      home: ScheduleScreen_1(),
+      home: UpcomingClasses_1(),
     );
   }
 }
 
-class ScheduleScreen_1 extends StatelessWidget {
+class UpcomingClasses_1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

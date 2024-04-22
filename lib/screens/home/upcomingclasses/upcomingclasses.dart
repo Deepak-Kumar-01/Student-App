@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ScheduleScreen extends StatelessWidget {
+class UpcomingClasses extends StatelessWidget {
   // const ScheduleScreen_Widget({super.key});
 
   var studentAttendance = [100, 66, 75, 98];
@@ -42,7 +42,7 @@ class ScheduleScreen extends StatelessWidget {
             shadowColor: Colors.black,
             child: Stack(
               children: [
-            // ----------------------------------
+// ----------------------------------
                 Container(
                 width: double.infinity,
                 height: 180,
@@ -55,20 +55,24 @@ class ScheduleScreen extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(15)
                 ),
+
+//===================ListView.builder=================
                 child: ListView.builder(
                   itemBuilder: (context, index) {
             
                     var subjectShortForm = scheduleList[index]["subjectShortForm"];
                     var subjectTeacher = scheduleList[index]["subjectTeacher"];
                     var subjectAttendance = studentAttendance[index];
-            
+
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+
                           Row(
                             children: [
+//====================subject short form and teacher name inside two container=============
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 6),
                                 child: Container(
@@ -100,6 +104,8 @@ class ScheduleScreen extends StatelessWidget {
             
                             ],
                           ),
+
+// ======================Time and Attendance percentage=======================
                           Row(
                             children: [
                               Padding(
@@ -135,6 +141,7 @@ class ScheduleScreen extends StatelessWidget {
             ),
           ),
         ),
+
 
           //---------------Upcoming classes------------
           Positioned(

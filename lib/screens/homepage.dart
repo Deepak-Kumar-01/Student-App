@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/screens/appbar/appbarmenu.dart';
+import 'package:studentapp/screens/appbar/custom_appbar_shape.dart';
 import 'package:studentapp/screens/profile.dart';
 import 'package:studentapp/screens/routine.dart';
 import 'attendance.dart';
@@ -13,20 +15,61 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _currentIndex=0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: Colors.blue[400],
+      // drawer: Drawer(
+      //   backgroundColor: Colors.blue[400],
+      // ),
 
-      ),
+      // -----------------Initial appBar ---------------------------,
+      // appBar: AppBar(
+      //   title: Text("Home",style: TextStyle(color: Colors.white),),
+      //   backgroundColor: Colors.blue[800],
+      //   iconTheme: const IconThemeData(color: Colors.white),
+      // ),
+
+      // -----------------custom appBar ---------------------------,
       appBar: AppBar(
-        title: Text("Home",style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.blue[800],
-        iconTheme: const IconThemeData(color: Colors.white),
+        toolbarHeight: 150,
+        // toolbarHeight: 120,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.white), // Change the color of the drawer icon here
+        shadowColor: Colors.transparent,
+        excludeHeaderSemantics: true,
+        elevation: 0.0,
+        forceMaterialTransparency: true,
+        centerTitle: true,
+        // title: Text("AppBar"),
+
+        // leading: Container(
+        //   color: Colors.red,
+        //   // margin: EdgeInsets.only(top: 0), // Adjust the top margin to position the icon
+        //   child: IconButton(
+        //     icon: Icon(Icons.menu),
+        //       onPressed: () {
+        //       // Add your onPressed logic here
+        //       },
+        //   ),
+        // ),
+
+        flexibleSpace: ClipPath(
+          clipper: CustomAppBarShape(),
+          child: Container(
+            height: 150,
+            width: MediaQuery.of(context).size.width,
+            // color: Color(0xff5757A4),
+            color: Colors.blue[700],
+
+//================AppBar Menu===================
+            child: AppBarMenu(),
+          ),
+        ),
       ),
 
 
+// ==================Footer======================
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
         onDestinationSelected: (int index){
@@ -44,6 +87,10 @@ class _HomepageState extends State<Homepage> {
       ),
 
       body: [const Home(),const Attendance(),const Routine(),const Profile()][_currentIndex],
+      // body: CustomAppBar_Widget_1(),
+
     );
   }
 }
+
+
