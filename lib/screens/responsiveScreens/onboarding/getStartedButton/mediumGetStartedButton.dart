@@ -26,7 +26,7 @@ class MdStartedButton extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange[900],
+          backgroundColor: Colors.blue[900],
           shape: RoundedRectangleBorder(),
           padding: EdgeInsets.all(20),
         ),
