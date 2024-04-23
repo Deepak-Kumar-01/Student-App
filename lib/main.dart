@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import './views/jssaten.dart';
+import 'package:my_first_app/faculty.dart';
+
 
 
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    home: jssaten(),
+     home:Faculty(),
     );
   }
 }
+
