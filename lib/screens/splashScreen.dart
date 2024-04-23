@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:studentapp/screens/homepage.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/onboarding/onboardingController.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
 
@@ -14,14 +15,20 @@ class SplashScreen extends StatefulWidget {
 
 class SplashScreenState extends State<SplashScreen> {
   static String KEYONBOARDING = "Onboarding";
+  static String KEYSIGNUP = "signup";
+  static String KEYLOGIN = "login";
+
   void WhereToGo() async {
     var sharedPref = await SharedPreferences.getInstance();
     var isOnboarded = sharedPref.getBool(KEYONBOARDING);
+    print("${isOnboarded}");
+    var isLogin=sharedPref.getBool(KEYLOGIN);
+    var isSignup= sharedPref.getBool(KEYSIGNUP);
 
       if (isOnboarded != null) {
         if (isOnboarded) {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => ResponsiveSignUp()));
+              MaterialPageRoute(builder: (context) => isLogin==true?Homepage():ResponsiveSignUp()));
         } else {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => ResponsiveOnboarding()));
@@ -57,20 +64,20 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[800],
+      backgroundColor: Colors.orange[800],
       //SPLASHSCREEN LOGO->JSS
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Image(
-      //           image: AssetImage("assets/logo/logo_2x.png"),
-      //         width: 150,
-      //         height: 150,
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+                image: AssetImage("assets/logo/logo_2x.png"),
+              width: 150,
+              height: 150,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
