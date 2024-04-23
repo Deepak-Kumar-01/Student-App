@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
+import 'package:studentapp/screens/splashScreen.dart';
 
 import '../../homepage.dart';
 
@@ -129,7 +131,9 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                             width: size.width * 0.4,
                             child: ElevatedButton(
                                 onPressed: () {
-                                  setState(() {
+                                  setState(()async {
+                                    var sharedpref=await SharedPreferences.getInstance();
+                                    sharedpref.setBool(SplashScreenState.KEYLOGIN, true);
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studentapp/screens/homepage.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
+
+import '../../splashScreen.dart';
 
 class LoginMediumDevice extends StatefulWidget {
   const LoginMediumDevice({super.key});
@@ -122,7 +125,9 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                     width: size.width * 0.6,
                     child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
+                          setState(() async{
+                            var sharedpref=await SharedPreferences.getInstance();
+                            sharedpref.setBool(SplashScreenState.KEYLOGIN, true);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(

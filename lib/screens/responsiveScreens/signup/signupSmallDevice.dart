@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:studentapp/screens/splashScreen.dart';
 import '../../homepage.dart';
 import '../controllers/login/loginFormController.dart';
 
@@ -234,7 +236,7 @@ class _SignUpSmallDeviceState extends State<SignUpSmallDevice> {
                       SizedBox(
                         width: size.width * 0.4,
                         child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: (){
                               setState(() {
                                 Navigator.pushReplacement(
                                     context,

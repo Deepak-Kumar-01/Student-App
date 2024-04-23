@@ -5,4 +5,6 @@ flutter_native_splash:
   image_dark: "assets/logo/logo_2x.png"
 
   android_12:
-   color: "#42a5f5"
+   color: "#034694"
+   image: "assets/logo/logo_2x.png"
+
