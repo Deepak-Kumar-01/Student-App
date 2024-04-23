@@ -37,6 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.6
   table_calendar: ^3.1.1
   intl: ^0.19.0
+  #SplashScreen dependency_validator:
+  flutter_native_splash: ^2.4.0
+  #Shared preferences:
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +68,25 @@ flutter:
   assets:
      - assets/images/logo.png
      - assets/images/bg.jpg
+     - assets/onboarding_gifs/welcome.gif
+     - assets/onboarding_gifs/announce.gif
+     - assets/onboarding_gifs/peace.gif
+     - assets/onboarding_gifs/excited.gif
+     - assets/onboarding_gifs/announcement.gif
+     - assets/onboarding_gifs/code.gif
+     - assets/onboarding_gifs/event_notifications.gif
+     - assets/onboarding_gifs/group.gif
+     - assets/onboarding_gifs/heart.gif
+     - assets/onboarding_gifs/maintenance.gif
+     - assets/onboarding_gifs/meditating.gif
+     - assets/onboarding_gifs/searching.gif
+     - assets/onboarding_gifs/study.gif
+     - assets/onboarding_gifs/victory.gif
+     - assets/onboarding_gifs/study_new.gif
+     - assets/onboarding_gifs/hola_greet.gif
+     - assets/logo/logo_1x.png
+     - assets/logo/logo_2x.png
+     - assets/logo/logo_4x.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -77,12 +100,24 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+     - family: Poppins-Bold
+       fonts:
+         - asset: assets/fonts/Poppins/Poppins-Bold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
+
+     - family: Poppins-Regular
+       fonts:
+         - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+       #       - asset: fonts/TrajanPro_Bold.ttf
+       #         weight: 700
+
+     - family: Poppins-SemiBold
+       fonts:
+         - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
+       #       - asset: fonts/TrajanPro_Bold.ttf
+       #         weight: 700
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

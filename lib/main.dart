@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:studentapp/screens/homepage.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:studentapp/screens/splashScreen.dart';
 
-void main(){
+void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -13,31 +17,9 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Mobile Application",
-      home: Homepage(),  //--------Initial home------------
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
     );
   }
 }
 
-
-
-// -----------image demo-----------------
-// class ImageContainer extends StatefulWidget {
-//   const ImageContainer({super.key});
-//   @override
-//   State<ImageContainer> createState() => _ImageContainerState();
-// }
-// class _ImageContainerState extends State<ImageContainer> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Container(
-//         child: Image(
-//           image: AssetImage(
-//             "assets/images/bg.jpg"
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-//

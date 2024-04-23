@@ -83,6 +83,7 @@ class _HomepageState extends State<Homepage> {
           NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
           NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
           NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
+
         ],
       ),
 
