@@ -9,7 +9,7 @@ class Routine extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Routine",style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700),)
+          Text("Routine",style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700),),
         ],
       ),
     );
