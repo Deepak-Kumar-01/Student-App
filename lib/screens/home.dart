@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:studentapp/screens/facultyClub/facultyClubCalendar.dart';
 import 'package:studentapp/screens/home/upcomingclasses/upcomingclasses.dart';
 
 class Home extends StatelessWidget {
@@ -29,7 +28,13 @@ class Home extends StatelessWidget {
             ),
 
 //--------------Society and faculty------------------------
-           FacultyClubCalendar(),
+            Padding(
+              padding: EdgeInsets.only(left: 4, right: 4, top: 10, bottom: 10),
+              child: Container(
+                height: 180,
+                color: Colors.red,
+              ),
+            ),
 
 //----------------Upcoming classes--------------------------
             Container(
