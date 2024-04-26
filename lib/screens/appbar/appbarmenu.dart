@@ -14,8 +14,9 @@ class _AppBarMenuState extends State<AppBarMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // height: 10,  //height is not working, use padding to adjust menu
       child: Padding(
-        padding: EdgeInsets.only(left: 0, bottom: 20, top: 10),
+        padding: EdgeInsets.only(left: 0, bottom: 35, top: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -30,7 +31,7 @@ class _AppBarMenuState extends State<AppBarMenu> {
                     icon: Icon(Icons.menu, color: Colors.white, size: 30,),
                     onPressed: () {
                       print("Drawer");
-                      Scaffold.of(context).openDrawer();
+                      // Scaffold.of(context).openDrawer();
                     },
                   ),
                 ),
