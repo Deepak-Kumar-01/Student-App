@@ -1,4 +1,13 @@
-// Same code as custom_button_2.dart
+//========How to use Custom_Button==========
+//          Custom_Button(
+//             btnName: "CODE-ZEN",
+//             btnSize: 100,
+//             btnBorderRadius: 5,
+//             btnIcon: Icon(Icons.code,color: Colors.white, size: 20,),
+//             btnFunction: () {
+//               print("CODE-ZEN clicked..");
+//             },
+//           ),
 
 import 'package:flutter/material.dart';
 
@@ -9,7 +18,8 @@ class Custom_Button extends StatelessWidget {
   final Color? btnBgColor;
   final Color? btnTextColor;
   final Icon? btnIcon;
-  final double btnSize;
+  final double btnWidth;
+  final double btnHeight;
   final double btnTextSize;
   final double btnBorderRadius;
   final Function()? btnFunction;
@@ -22,7 +32,8 @@ class Custom_Button extends StatelessWidget {
     this.btnIcon,
     this.btnBorderRadius=50,
     this.btnTextSize = 14,
-    this.btnSize = 100,
+    this.btnWidth = 100,
+    this.btnHeight = 14,
     this.btnFunction = defaultFunction,
   });
 
@@ -44,7 +55,7 @@ class Custom_Button extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(btnBorderRadius)
           ),
-          fixedSize: Size(btnSize, 10), // Set width and height of the button
+          fixedSize: Size(btnWidth, btnHeight), // Set width and height of the button
         ),
 
         child: btnIcon == null ?
