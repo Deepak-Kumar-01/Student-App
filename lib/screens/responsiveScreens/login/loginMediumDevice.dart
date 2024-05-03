@@ -124,16 +124,14 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                   SizedBox(
                     width: size.width * 0.6,
                     child: ElevatedButton(
-                        onPressed: () {
-                          setState(() async{
-                            var sharedpref=await SharedPreferences.getInstance();
-                            sharedpref.setBool(SplashScreenState.KEYLOGIN, true);
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Homepage()));
-                          });
-                        },
+                      onPressed: ()async{
+                        await SharedPreferences.getInstance().then((value) => value.setBool(SplashScreenState.KEYLOGIN, true)).then((value) => setState(() {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Homepage()));
+                        }));
+                      },
                         child: Text(
                           "Log in",
                           style: TextStyle(color: Colors.white, fontSize: 18),
