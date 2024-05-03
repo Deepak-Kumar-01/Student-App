@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:studentapp/screens/facultyClub/facultyClubCalendar.dart';
-import 'package:studentapp/screens/home/upcomingclasses/upcomingclasses.dart';
+import 'package:studentapp/screens/responsiveScreens/controllers/Home/UpcomingClasses/upcommigClassesController.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -33,9 +31,9 @@ class Home extends StatelessWidget {
 
 //----------------Upcoming classes--------------------------
             Container(
-              height: 190,
+              height: 200,  // this height control its child widget height
               color: Colors.green,
-              child: UpcomingClasses(),
+              child: ResponsiveUpcomingClasses(),
             ),
           ],
         ),

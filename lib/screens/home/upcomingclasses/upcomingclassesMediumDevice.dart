@@ -1,7 +1,8 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class UpcomingClasses extends StatelessWidget {
+class UpcomingClassesMediumDevice extends StatelessWidget {
   // const ScheduleScreen_Widget({super.key});
 
   var studentAttendance = [100, 66, 75, 98];
@@ -42,10 +43,10 @@ class UpcomingClasses extends StatelessWidget {
             shadowColor: Colors.black,
             child: Stack(
               children: [
-// ----------------------------------
+// ----------------------------------------------------
                 Container(
                 width: double.infinity,
-                height: 180,
+                // height: 200, // to resize its height go to home.dart to resize it
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -59,7 +60,7 @@ class UpcomingClasses extends StatelessWidget {
 //===================ListView.builder=================
                 child: ListView.builder(
                   itemBuilder: (context, index) {
-            
+
                     var subjectShortForm = scheduleList[index]["subjectShortForm"];
                     var subjectTeacher = scheduleList[index]["subjectTeacher"];
                     var subjectAttendance = studentAttendance[index];
@@ -74,18 +75,18 @@ class UpcomingClasses extends StatelessWidget {
                             children: [
 //====================subject short form and teacher name inside two container=============
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 6),
+                                padding: const EdgeInsets.only(bottom: 6, left: 5),
                                 child: Container(
-                                  width: 100,
-                                  height: 100,
+                                  width: 118,
+                                  height: 118,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(100),
                                     color:  subjectAttendance >= 75 ? Colors.green[700] : Colors.red,
                                   ),
                                   child: Container(
-                                    width: 90,
-                                    height: 90,
+                                    width: 108,
+                                    height: 108,
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
@@ -94,14 +95,14 @@ class UpcomingClasses extends StatelessWidget {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Text("$subjectShortForm", style: TextStyle(fontWeight: FontWeight.bold),),
-                                        Text("$subjectTeacher", style: TextStyle(fontSize: 12),),
+                                        Text("$subjectShortForm", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),),
+                                        Text("$subjectTeacher", style: TextStyle(fontSize: 14),),
                                       ],
                                     ),
                                   ),
                                 ),
                               ),
-            
+
                             ],
                           ),
 
@@ -109,7 +110,7 @@ class UpcomingClasses extends StatelessWidget {
                           Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 8, right: 8),
+                                padding: const EdgeInsets.only(left: 6, right: 5),
                                 child: Text("8:45 AM", style: TextStyle(color: whiteColor,  fontWeight: FontWeight.bold),),
                               ),
                               Container(
@@ -122,13 +123,13 @@ class UpcomingClasses extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6)
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
+                                  padding: const EdgeInsets.only(left:3, right: 3, top: 3, bottom: 3),
                                   child: Text("$subjectAttendance%", style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold, ),),
                                 ),
                               )
                             ],
                           ),
-            
+
                         ],
                       ),
                     );
@@ -170,97 +171,3 @@ class UpcomingClasses extends StatelessWidget {
     );
   }
 }
-
-//--------------Initial code--------------------
-//Stack(
-//         children: [
-//
-//           Padding(
-//           padding: const EdgeInsets.all(11.0),
-//           child: Stack(
-//             children: [
-//           // ----------------------------------
-//               Container(
-//               width: double.infinity,
-//               height: 200,
-//               decoration: BoxDecoration(
-//                 color: Colors.blue,
-//                 borderRadius: BorderRadius.circular(15)
-//               ),
-//               child: ListView.builder(
-//                 itemBuilder: (context, index) {
-//                   return Row(
-//                     children: [
-//
-//                       Padding(
-//                         padding: const EdgeInsets.all(8.0),
-//                         child: Container(
-//                           width: 100,
-//                           height: 100,
-//                           alignment: Alignment.center,
-//                           decoration: BoxDecoration(
-//                             borderRadius: BorderRadius.circular(100),
-//                             color:  Colors.red,
-//                           ),
-//                           child: Container(
-//                             width: 90,
-//                             height: 90,
-//                             alignment: Alignment.center,
-//                             decoration: BoxDecoration(
-//                               borderRadius: BorderRadius.circular(100),
-//                               color: Colors.white,
-//                             ),
-//                             child: Text("COA"),
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   );
-//                 },
-//                 itemCount: 15,
-//                 scrollDirection: Axis.horizontal,
-//               ),
-//             ),
-//             ]
-//           ),
-//         ),
-//           //----------------------------------
-//           Positioned(
-//             left: 5,
-//             top: 5,
-//             child: Container(
-//               decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(12),
-//                   gradient: LinearGradient(
-//                       colors: [
-//                         Color(0xffD973B7),
-//                         Color(0xff5656B8)
-//                       ]
-//                   )
-//               ),
-//               child: Padding(
-//                 padding: const EdgeInsets.all(8.0),
-//                 child: Text("UPCOMING CLASSES", style: TextStyle(color: Colors.white,),),
-//               ),
-//             ),
-//           ),
-//
-//         ]
-//       ),
-
-
-
-          //  -----------Upcoming classes-------------------
-          // Container(
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //         gradient: LinearGradient(
-          //           colors: [
-          //             Color(0xffD973B7),
-          //             Color(0xff5656B8)
-          //           ]
-          //         )
-          //       ),
-          //       child: Text("UPCOMING CLASSES", style: TextStyle(color: Colors.white,),),
-          //     ),
-          //   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studentapp/screens/appbar/appbarmenu.dart';
+import 'package:studentapp/screens/appbar/appbarmenu_1.dart';
 import 'package:studentapp/screens/appbar/custom_appbar_shape.dart';
 import 'package:studentapp/screens/profile.dart';
 import 'package:studentapp/screens/routine.dart';
@@ -18,9 +19,13 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+  final size=MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 150,
+        // toolbarHeight: 150,
+        toolbarHeight: size.height*0.16 ,
+        // toolbarHeight: 118,
         // toolbarHeight: 120,
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.white), // Change the color of the drawer icon here
@@ -31,7 +36,7 @@ class _HomepageState extends State<Homepage> {
         centerTitle: true,
 
         flexibleSpace: ClipPath(
-          clipper: CustomAppBarShape(),
+          clipper: CustomAppBarShape(), //<<<===
           child: Container(
             height: 150,
             width: MediaQuery.of(context).size.width,
@@ -46,6 +51,7 @@ class _HomepageState extends State<Homepage> {
 
 // ==================Footer======================
       bottomNavigationBar: NavigationBar(
+        height: 70,
         selectedIndex: _currentIndex,
         onDestinationSelected: (int index){
           setState(() {
