@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:studentapp/screens/appbar/appbarmenu.dart';
-import 'package:studentapp/screens/appbar/appbarmenu_1.dart';
 import 'package:studentapp/screens/appbar/custom_appbar_shape.dart';
 import 'package:studentapp/screens/profile.dart';
 import 'package:studentapp/screens/routine.dart';
@@ -22,11 +21,14 @@ class _HomepageState extends State<Homepage> {
   final size=MediaQuery.of(context).size;
 
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: Colors.blue,
+      ),
+
       appBar: AppBar(
-        // toolbarHeight: 150,
-        toolbarHeight: size.height*0.16 ,
-        // toolbarHeight: 118,
-        // toolbarHeight: 120,
+        toolbarHeight: 120,
+        // toolbarHeight: size.height*0.16 ,
+        automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.white), // Change the color of the drawer icon here
         shadowColor: Colors.transparent,
@@ -38,11 +40,11 @@ class _HomepageState extends State<Homepage> {
         flexibleSpace: ClipPath(
           clipper: CustomAppBarShape(), //<<<===
           child: Container(
-            height: 150,
+            height: 120,
             width: MediaQuery.of(context).size.width,
             color: Colors.blue[700],
 
-//================AppBar Menu===================
+            //======AppBar Menu======
             child: AppBarMenu(),
           ),
         ),
@@ -69,7 +71,6 @@ class _HomepageState extends State<Homepage> {
       ),
 
       body: [const Home(),const Attendance(),const Routine(),const Profile()][_currentIndex],
-      // body: CustomAppBar_Widget_1(),
 
     );
   }

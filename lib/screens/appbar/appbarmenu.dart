@@ -15,50 +15,51 @@ class _AppBarMenuState extends State<AppBarMenu> {
   Widget build(BuildContext context) {
     return Container(
       // height: 10,  //height is not working, use padding to adjust menu
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
 
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(11.0),
-                // child: Icon(Icons.menu, color: Colors.white, size: 30,),
-                child: Builder(builder: (context) {
-                  return IconButton(
-                    icon: Icon(Icons.menu, color: Colors.white, size: 30,),
-                    onPressed: () {
-                      print("Drawer");
-                      Scaffold.of(context).openDrawer();
-                    },
-                  );
-                },)
-              ),
-
-              Spacer(),
-
-              Padding(
-                padding: EdgeInsets.all(11.0),
-                // child: Icon(Icons.notifications, color: Colors.white, size: 30,),
-                child: IconButton(
-                  icon: Icon(Icons.notifications, color: Colors.white, size: 30,),
-                  onPressed: () {},
+            Row(
+              children: [
+                Padding(
+                    padding: EdgeInsets.all(11.0),
+                    child: Builder(builder: (context) {
+                      return IconButton(
+                        icon: Icon(Icons.menu, color: Colors.white, size: 30,),
+                        onPressed: () {
+                          print("Drawer");
+                          Scaffold.of(context).openDrawer();
+                        },
+                      );
+                    },)
                 ),
 
-              ),
-            ],
-          ),
+                Spacer(),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text("PYQ    ", style: myStyle,),
-              Text("Notes  ", style: myStyle,),
-              Text("Faculty", style: myStyle,),
-              Text("Clubs  ", style: myStyle,),
-            ],
-          ),
-        ],
+                Padding(
+                  padding: EdgeInsets.all(11.0),
+                  child: IconButton(
+                    icon: Icon(Icons.notifications, color: Colors.white, size: 30,),
+                    onPressed: () {},
+                  ),
+
+                ),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("PYQ    ", style: myStyle,),
+                Text("Notes  ", style: myStyle,),
+                Text("Faculty", style: myStyle,),
+                Text("Clubs", style: myStyle,),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
