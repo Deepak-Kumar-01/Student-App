@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studentapp/screens/custombutton/custom_button.dart';
+import 'package:studentapp/screens/home/CarouseSlider/carouselSlider.dart';
 
 class Routine extends StatelessWidget {
   const Routine({super.key});
@@ -11,16 +12,8 @@ class Routine extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("Routine",style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700),),
-          Custom_Button(
-            btnName: "Button",
-            btnWidth: 100,
-            btnBorderRadius: 5,
-            btnIcon: Icon(Icons.code,color: Colors.white, size: 20,),
-            btnFunction: () {
-              print("Button clicked..");
-            },
-            btnBgColor: Colors.green,
-          ),
+
+          CarouselSlider()
         ],
       ),
     );
