@@ -22,7 +22,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
   int selectedIndex = 0;
 
   Timer getTimer() {
-    return Timer.periodic( Duration(milliseconds: 3000), (timer) {
+    return Timer.periodic( Duration(milliseconds: 4000), (timer) {
       if (currentPage < images.length-1) {
         currentPage++;
         // currentPage = (currentPage + 1) % images.length;
@@ -61,7 +61,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
         return GestureDetector(
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("index $carouselImage"))
+                SnackBar(content: Text("index: $carouselImage"))
             );
           },
           onPanDown: (details) {
@@ -77,11 +77,47 @@ class _CarouselSliderState extends State<CarouselSlider> {
               borderRadius: BorderRadius.circular(11),
               child: Container(
                 height: 100,
-                child: Image.asset(
-                  carouselImage,
-                  fit: BoxFit.cover,
+                color: Colors.grey[300],
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: AspectRatio(
+                        aspectRatio: 1 / 2,
+                        child: Image.asset(
+                          carouselImage,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Events Details",
+                          textAlign: TextAlign.center, // Adjust text alignment as needed
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+
+              // child: Container(
+              //   height: 100,
+              //   color: Colors.grey[300],
+              //   child: Row(
+              //     children: [
+              //       Image.asset(
+              //         carouselImage,
+              //         fit: BoxFit.cover,
+              //       ),
+              //       Text("data")
+              //     ],
+              //   ),
+              // ),
+
             ),
           ),
         );
@@ -134,7 +170,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
 
                   Positioned(
                     bottom: 5,
-                    left: MediaQuery.of(context).size.width*0.4,
+                    left: MediaQuery.of(context).size.width*0.42,
                     child: Row(
                       children: dotList(),
                     ),

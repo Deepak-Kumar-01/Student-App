@@ -28,8 +28,7 @@ class _HomepageState extends State<Homepage> {
 
       appBar: AppBar(
         // toolbarHeight: 100,
-        // toolbarHeight: 130,
-        toolbarHeight: size.width <= smallDeviceWidth ? 130:130,
+        toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
         // toolbarHeight: size.height*0.18,
         automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
         backgroundColor: Colors.transparent,
