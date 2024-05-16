@@ -21,7 +21,8 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
     return Column(
       children: [
         Container(
-          height: size.height * 0.066,
+          // height: size.height * 0.066,
+          height: 40,
           width: size.width * 0.30,
           decoration: BoxDecoration(
               color: Colors.red,
@@ -79,7 +80,8 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
             ],
           ),
           style: ElevatedButton.styleFrom(
-            fixedSize: Size(size.width*0.30, size.height*0.13),
+            // fixedSize: Size(size.width*0.30, size.height*0.13),
+            fixedSize: Size(size.width*0.30, 60),
             padding: EdgeInsets.all(5),
             backgroundColor: Colors.grey.shade900,
             shape: RoundedRectangleBorder(

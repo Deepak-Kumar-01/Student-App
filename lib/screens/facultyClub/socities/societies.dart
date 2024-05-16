@@ -21,18 +21,16 @@ class Socities extends StatelessWidget {
 
         color: Color(0xff1975D0)
       ),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: Column(
-          children: [
-            SocitiesButton(
-              size: size,butnColor1: Colors.black,butnColor2: Colors.white,
-            ),
-            SocitiesButton(
-              size: size,butnColor1: Colors.white,butnColor2: Colors.black,
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SocitiesButton(
+            size: size,butnColor1: Colors.black,butnColor2: Colors.white,
+          ),
+          SocitiesButton(
+            size: size,butnColor1: Colors.white,butnColor2: Colors.black,
+          ),
+        ],
       ),
     );
   }

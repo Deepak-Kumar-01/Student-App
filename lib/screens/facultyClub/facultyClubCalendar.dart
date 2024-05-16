@@ -68,12 +68,15 @@ class _FacultyClubCalendarState extends State<FacultyClubCalendar> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              is_SocietyColor ? Socities() : Faculty(),
-              DateAndCalendar(),
-            ],
+          child: Container(
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                is_SocietyColor ? Socities() : Faculty(),
+                DateAndCalendar(),
+              ],
+            ),
           ),
         )
       ],
