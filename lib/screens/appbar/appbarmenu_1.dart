@@ -29,7 +29,6 @@ class _AppBarMenuState extends State<AppBarMenu_1> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
