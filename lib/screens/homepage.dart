@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/screens/admin/admin.dart';
 import 'package:studentapp/screens/appbar/appbarmenu.dart';
 import 'package:studentapp/screens/appbar/custom_appbar_shape.dart';
 import 'package:studentapp/screens/profile.dart';
@@ -22,10 +23,6 @@ class _HomepageState extends State<Homepage> {
     final size=MediaQuery.of(context).size;
 
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: Colors.blue,
-      ),
-
       appBar: AppBar(
         // toolbarHeight: 100,
         // toolbarHeight: 130,
@@ -50,6 +47,49 @@ class _HomepageState extends State<Homepage> {
             //======AppBar Menu======
             child: AppBarMenu(),
           ),
+        ),
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.blue,
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Admin Login'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                // Add your onTap code here, for example navigate to another page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AdminHomePage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                // Navigate to settings page or perform any action
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
+              },
+            ),
+          ],
         ),
       ),
 
