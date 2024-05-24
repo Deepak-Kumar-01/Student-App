@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
 import 'package:studentapp/screens/responsiveScreens/onboarding/nextButton/mediumDeviceNextButton.dart';
-import 'package:studentapp/screens/responsiveScreens/onboarding/nextButton/smallDeviceNextButton.dart';
-import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
 import 'package:studentapp/screens/responsiveScreens/onboarding/pageIndicator/mediumDevicePageIndicator.dart';
-import 'package:studentapp/screens/responsiveScreens/onboarding/pageIndicator/smallDevicePageIndicator.dart';
-import 'package:studentapp/screens/splashScreen.dart';
 import 'customPageWidget/customPageWidget.dart';
 import 'getStartedButton/mediumGetStartedButton.dart';
 import 'getStartedButton/smallGetStartedButton.dart';

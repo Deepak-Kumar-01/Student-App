@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
-import 'package:studentapp/screens/splashScreen.dart';
-
-import '../../homepage.dart';
+import 'package:studentapp/services/authentication.dart';
+import 'package:studentapp/wrapper.dart';
+import '../../../flashMessage/customSnackBar.dart';
+import '../../../services/secureStorage.dart';
 
 class LoginSmallDevice extends StatefulWidget {
   const LoginSmallDevice({super.key});
@@ -15,6 +15,75 @@ class LoginSmallDevice extends StatefulWidget {
 class _LoginSmallDeviceState extends State<LoginSmallDevice> {
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
+  final AuthServices _authRef = AuthServices();
+
+  Future<void> _loginAndNavigate() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevents dismissing the dialog
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.blue[900],
+          ),
+        );
+      },
+    );
+    User? user;
+    try {
+      user = await _authRef.signInCustomStudentUniversityRoll(
+          _controller1.text, _controller2.text);
+      print("user fetched:${user?.uid}");
+    } catch (e) {
+      print("Error:$e");
+    }
+    // Close the dialog
+    if (mounted) {
+      Navigator.of(context).pop();
+    }
+    if(user!=null){
+      try{
+        await UserSecureStorage.setUserUID(
+            "${user.uid}");
+        if(mounted){
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => Wrapper()),
+                (Route<dynamic> route) => false,
+          );
+        }
+      }catch(e){
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: CustomSnackBar(errorMsg: "${e.toString()}"),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+          );
+        }
+      }
+    }else{
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: CustomSnackBar(errorMsg: "User does not exist"),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller1.dispose();
+    _controller2.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -32,10 +101,10 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image(
-                        image: AssetImage("assets/logo/logo_1x.png"),
+                        image: const AssetImage("assets/logo/logo_1x.png"),
                         width: size.width * 0.20,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -48,7 +117,7 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
@@ -64,7 +133,7 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Form(
@@ -75,7 +144,7 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                     child: TextField(
                         maxLines: 1,
                         controller: _controller1,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.email_outlined),
                           border: OutlineInputBorder(
                               // borderRadius: BorderRadius.circular(30)
@@ -85,14 +154,14 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                           hintText: "",
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   SizedBox(
                     width: 300,
                     child: TextField(
                         controller: _controller2,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.password_sharp),
                           border: OutlineInputBorder(
                               // borderRadius: BorderRadius.circular(30)
@@ -102,7 +171,7 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                           hintText: "",
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   //Checkbox and Forgot Password
@@ -123,7 +192,7 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                     ],
                   ),
                   //Buttons
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -132,52 +201,17 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                       SizedBox(
                         width: size.width * 0.4,
                         child: ElevatedButton(
-                            onPressed: () async {
-                              await SharedPreferences.getInstance()
-                                  .then((value) => value.setBool(
-                                      SplashScreenState.KEYLOGIN, true))
-                                  .then((value) => setState(() {
-                                    print(value);
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Homepage()));
-                                      }));
-                            },
-                            child: Text(
+                          onPressed: _loginAndNavigate,
+                            style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(5),
+                                // shape: RoundedRectangleBorder(),
+                                backgroundColor: Colors.blue[900]),
+                            child: const Text(
                               "Log in",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 14),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.all(5),
-                                // shape: RoundedRectangleBorder(),
-                                backgroundColor: Colors.blue[900])),
+                            )),
                       ),
-                      SizedBox(
-                        width: size.width * 0.4,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ResponsiveSignUp()));
-                              });
-                            },
-                            child: Text(
-                              "Create Account",
-                              style: TextStyle(
-                                  color: Colors.grey[900], fontSize: 14),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                side: BorderSide(
-                                    width: 1, color: Colors.grey.shade500),
-                                padding: EdgeInsets.all(5),
-                                backgroundColor: Colors.white)),
-                      )
                     ],
                   )
                 ],

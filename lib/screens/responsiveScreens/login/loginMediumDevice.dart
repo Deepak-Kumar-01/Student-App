@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:studentapp/screens/homepage.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
+import 'package:studentapp/services/authentication.dart';
 
-import '../../splashScreen.dart';
+import '../../../flashMessage/customSnackBar.dart';
+import '../../../modals/authStudent.dart';
+import '../../../services/secureStorage.dart';
+import '../../../wrapper.dart';
 
 class LoginMediumDevice extends StatefulWidget {
   const LoginMediumDevice({super.key});
@@ -15,6 +18,66 @@ class LoginMediumDevice extends StatefulWidget {
 class _LoginMediumDeviceState extends State<LoginMediumDevice> {
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
+  AuthServices _authRef = AuthServices();
+  Future<void> _loginAndNavigate() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevents dismissing the dialog
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.blue[900],
+          ),
+        );
+      },
+    );
+    User? user;
+    try {
+      user = await _authRef.signInCustomStudentUniversityRoll(
+          _controller1.text, _controller2.text);
+      print("user fetched:${user?.uid}");
+    } catch (e) {
+      print("Error:$e");
+    }
+    // Close the dialog
+    if (mounted) {
+      Navigator.of(context).pop();
+    }
+    if(user!=null){
+      try{
+        await UserSecureStorage.setUserUID(
+            "${user.uid}");
+        if(mounted){
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => Wrapper()),
+                (Route<dynamic> route) => false,
+          );
+        }
+      }catch(e){
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: CustomSnackBar(errorMsg: "${e.toString()}"),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+          );
+        }
+      }
+    }else{
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: CustomSnackBar(errorMsg: "User does not exist"),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+        );
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -32,10 +95,12 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image(
-                        image: AssetImage("assets/logo/logo_1x.png"),
+                        image: const AssetImage("assets/logo/logo_1x.png"),
                         width: size.width * 0.25,
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Text(
                         "JSSATEN",
                         textAlign: TextAlign.center,
@@ -46,7 +111,7 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
@@ -62,42 +127,42 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Form(
                   child: Column(
                 children: [
                   SizedBox(
-                    width:300,
+                    width: 300,
                     child: TextField(
                         controller: _controller1,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.email_outlined),
                           border: OutlineInputBorder(),
                           label: Text("University Email"),
                           hintText: "",
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   SizedBox(
                     width: 300,
                     child: TextField(
                         controller: _controller2,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.password_sharp),
                           border: OutlineInputBorder(),
                           label: Text("Password"),
                           hintText: "",
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
 
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   //Checkbox and Forgot Password
@@ -110,61 +175,30 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                             value: true,
                             onChanged: (val) {},
                           ),
-                          Text("Remember Me")
+                          const Text("Remember Me")
                         ],
                       ),
                       TextButton(
-                          onPressed: () {}, child: Text("Forgot Password?"))
+                          onPressed: () {}, child: const Text("Forgot Password?"))
                     ],
                   ),
                   //Buttons
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   SizedBox(
                     width: size.width * 0.6,
                     child: ElevatedButton(
-                      onPressed: ()async{
-                        await SharedPreferences.getInstance().then((value) => value.setBool(SplashScreenState.KEYLOGIN, true)).then((value) => setState(() {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Homepage()));
-                        }));
-                      },
-                        child: Text(
-                          "Log in",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
+                        onPressed:_loginAndNavigate,
                         style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.all(15),
                             // shape: RoundedRectangleBorder(),
-                            backgroundColor: Colors.blue[900])),
+                            backgroundColor: Colors.blue[900]),
+                        child: const Text(
+                          "Log in",
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        )),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: size.width * 0.6,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ResponsiveSignUp()));
-                          });
-                        },
-                        child: Text(
-                          "Create Account",
-                          style: TextStyle(color: Colors.black, fontSize: 18),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            side: BorderSide(
-                                width: 1, color: Colors.grey.shade500),
-                            padding: EdgeInsets.all(15),
-                            backgroundColor: Colors.white)),
-                  )
                 ],
               )),
             ],

@@ -11,10 +11,8 @@ class ResponsiveLogin extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > smallDeviceWidth) {
-          print("Medium Device");
           return LoginMediumDevice();
         } else {
-          print("Small Device");
           return LoginSmallDevice();
         }
       },
