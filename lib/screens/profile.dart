@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
@@ -14,18 +13,22 @@ class Profile extends StatelessWidget {
       //   title: Text('Example'),
       // ),
       drawer: Drawer(
-        // Drawer contents
-      ),
+          // Drawer contents
+          ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Profile",style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700),),
+            Text(
+              "Profile",
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                },
+                child: Text("Open")),
 
-            ElevatedButton(onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
-            }, child: Text("Open")
-            )
           ],
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../../splashScreen.dart';
-import '../../controllers/signup/signupFormController.dart';
+import 'package:studentapp/services/secureStorage.dart';
+import 'package:studentapp/wrapper.dart';
 class SmStartedButton extends StatelessWidget {
   const SmStartedButton({
     super.key,
@@ -17,9 +16,20 @@ class SmStartedButton extends StatelessWidget {
       left: size.width * 0.29,
       child: ElevatedButton(
         onPressed: ()async{
-          var sharedPref=await SharedPreferences.getInstance();
-          sharedPref.setBool(SplashScreenState.KEYONBOARDING,true);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ResponsiveSignUp()));
+          showDialog(
+              context: context,
+              builder: (context){
+                return Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.blue[900],
+                  ),
+                );
+              });
+          await UserSecureStorage.setOnboarding("true");
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) =>Wrapper()),
+                (Route<dynamic> route) => false,
+          );
         },
         child: Text(
           "Let's Get Started",

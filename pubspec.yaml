@@ -40,13 +40,15 @@ dependencies:
   #SplashScreen dependency_validator:
   flutter_native_splash: ^2.4.0
   #Shared preferences:
-  shared_preferences: ^2.2.3
+#  shared_preferences: ^2.2.3
   #file handling
   file_picker: ^8.0.3
   excel: ^4.0.3
   firebase_auth: ^4.19.5
   cloud_firestore: ^4.17.3
   firebase_core: ^2.31.0
+  provider: ^6.1.2
+  flutter_secure_storage: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -74,26 +76,12 @@ flutter:
   assets:
      - assets/images/logo.png
      - assets/images/bg.jpg
-     - assets/onboarding_gifs/welcome.gif
-     - assets/onboarding_gifs/announce.gif
-     - assets/onboarding_gifs/peace.gif
      - assets/onboarding_gifs/excited.gif
-     - assets/onboarding_gifs/announcement.gif
      - assets/onboarding_gifs/code.gif
      - assets/onboarding_gifs/event_notifications.gif
-     - assets/onboarding_gifs/group.gif
-     - assets/onboarding_gifs/heart.gif
-     - assets/onboarding_gifs/maintenance.gif
-     - assets/onboarding_gifs/meditating.gif
-     - assets/onboarding_gifs/searching.gif
-     - assets/onboarding_gifs/study.gif
-     - assets/onboarding_gifs/victory.gif
-     - assets/onboarding_gifs/study_new.gif
-     - assets/onboarding_gifs/hola_greet.gif
-     - assets/logo/logo_1x.png
      - assets/logo/logo_2x.png
-     - assets/logo/logo_4x.png
-  #   - images/a_dot_ham.jpeg
+     - assets/logo/logo_1x.png
+#     - assets/logo/logo_4x.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

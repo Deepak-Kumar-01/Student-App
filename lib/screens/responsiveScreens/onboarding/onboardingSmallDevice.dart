@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:studentapp/screens/responsiveScreens/onboarding/nextButton/mediumDeviceNextButton.dart';
 import 'package:studentapp/screens/responsiveScreens/onboarding/nextButton/smallDeviceNextButton.dart';
-import 'package:studentapp/screens/responsiveScreens/onboarding/pageIndicator/mediumDevicePageIndicator.dart';
-import 'package:studentapp/screens/responsiveScreens/onboarding/pageIndicator/pageIndicator.dart';
-import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
 import 'package:studentapp/screens/responsiveScreens/onboarding/pageIndicator/smallDevicePageIndicator.dart';
-import 'package:studentapp/screens/splashScreen.dart';
 import '../dimensions.dart';
 import 'customPageWidget/customPageWidget.dart';
 import 'getStartedButton/mediumGetStartedButton.dart';
 import 'getStartedButton/smallGetStartedButton.dart';
-import 'onboardingButtons/onboardingNextButton.dart';
 import 'onboardingButtons/onboardingSkipButton.dart';
 
 
@@ -64,8 +57,6 @@ class _OnboardingSmallDeviceState extends State<OnboardingSmallDevice> {
               subTitle:
               "Building Bridges Between Students, Faculty, and Resources for Enhanced Learning and Achievement",
             ),
-            // SignUp()
-            // MyAuth(isLoginClicked: true,),
           ],
         ),
         //Skip Button
