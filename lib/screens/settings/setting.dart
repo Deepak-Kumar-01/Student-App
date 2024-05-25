@@ -36,11 +36,13 @@ class _AppSettingState extends State<AppSetting> {
                           });
                       await _authRef.signOutUser();
                       await UserSecureStorage.setUserUID("null");
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) =>Wrapper()),
-                            // (Route<dynamic> route) => false,
-                      );
+                      if(mounted){
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) =>Wrapper()),
+                          (Route<dynamic> route) => false,
+                        );
+                      }
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,

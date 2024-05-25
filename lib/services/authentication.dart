@@ -29,6 +29,10 @@ class AuthServices {
     }
   }
 
+  // Stream<CustomStudent?> get user {
+  //   return _auth
+  //       .authStateChanges().map((User? user) => _userFromFirebaseUser(user));
+  // }
   Stream<CustomStudent?> get user {
     return _auth
         .authStateChanges().map((User? user) => _userFromFirebaseUser(user));
