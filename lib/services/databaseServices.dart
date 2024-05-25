@@ -6,7 +6,6 @@ const String USERS_REF = "users";
 
 class DatabaseServices {
   final _firestore = FirebaseFirestore.instance;
-  final CollectionReference _usersCollectionRef = FirebaseFirestore.instance.collection('users');
   late DocumentReference<AppUser> _userDocRef;
   late final CollectionReference _usersRef;
   DatabaseServices() {
