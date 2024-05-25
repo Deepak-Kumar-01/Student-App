@@ -19,7 +19,7 @@ class Wrapper extends StatefulWidget {
 
 class _WrapperState extends State<Wrapper> {
   CustomStudent? _user;
-  final String? userUid = FirebaseAuth.instance.currentUser?.uid;
+   String? userUid;
   String _isOnboarded = "false";
   Future<void> initialization() async {
     print('ready in 3...');
@@ -29,6 +29,7 @@ class _WrapperState extends State<Wrapper> {
       _isOnboarded = onBoardingStatus ?? "false";
     });
     print('ready in 1...');
+    userUid=await UserSecureStorage.getUserUID();
     print('go!');
     FlutterNativeSplash.remove();
   }
