@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/screens/admin/admin.dart';
 import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
 
 import '../../screens/appbar/appbarmenu.dart';
@@ -23,6 +24,7 @@ class AdminDashboard extends StatelessWidget {
     "PYQ",
     "Routine",
     "Society",
+    "Student",
   ];
 
   final List<Color> colors = [
@@ -66,43 +68,48 @@ class AdminDashboard extends StatelessWidget {
     // Color(0xff00c95d), //green
   ];
 
-
   @override
   Widget build(BuildContext context) {
-  final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
-
-      drawer: Drawer(
-        backgroundColor: Colors.blue,
-      ),
+      // drawer: Drawer(
+      //   backgroundColor: Colors.blue,
+      // ),
 
       appBar: AppBar(
-        // toolbarHeight: 100,
-        toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
-        // toolbarHeight: size.height*0.18,
-        automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
-        backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Colors.white), // Change the color of the drawer icon here
-        shadowColor: Colors.transparent,
-        excludeHeaderSemantics: true,
-        elevation: 0.0,
-        forceMaterialTransparency: true,
-        centerTitle: true,
-
-        flexibleSpace: ClipPath(
-          clipper: CustomAppBarShape(),
-          child: Container(
-            // // height: 150,
-            // width: MediaQuery.of(context).size.width,
-            color: Colors.blue[700],
-
-            //======AppBar Menu======
-            child: AppBarMenu(),
-          ),
+        backgroundColor: Colors.blue[700],
+        iconTheme: IconThemeData(
+          color: Colors.white
         ),
       ),
-
+      // appBar: AppBar(
+      //   // toolbarHeight: 100,
+      //   toolbarHeight: size.width <= smallDeviceWidth ? 100 : 130,
+      //   // toolbarHeight: size.height*0.18,
+      //   automaticallyImplyLeading:
+      //       false, // to disable auto menu button when using drawer
+      //   backgroundColor: Colors.transparent,
+      //   iconTheme: IconThemeData(
+      //       color: Colors.white), // Change the color of the drawer icon here
+      //   shadowColor: Colors.transparent,
+      //   excludeHeaderSemantics: true,
+      //   elevation: 0.0,
+      //   forceMaterialTransparency: true,
+      //   centerTitle: true,
+      //
+      //   flexibleSpace: ClipPath(
+      //     clipper: CustomAppBarShape(),
+      //     child: Container(
+      //       // // height: 150,
+      //       // width: MediaQuery.of(context).size.width,
+      //       color: Colors.blue[700],
+      //
+      //       //======AppBar Menu======
+      //       child: AppBarMenu(),
+      //     ),
+      //   ),
+      // ),
 
 
       body: Padding(
@@ -110,92 +117,108 @@ class AdminDashboard extends StatelessWidget {
         child: SingleChildScrollView(
           child: Center(
             child: Wrap(
-              spacing: 5.0, // Horizontal spacing
-              runSpacing: 5.0, // Vertical spacing
-              alignment: WrapAlignment.center,
+                spacing: 5.0, // Horizontal spacing
+                runSpacing: 5.0, // Vertical spacing
+                alignment: WrapAlignment.center,
+                children: [
 
-              children:[
+                  Dashboard_Container(
+                    containerColor: colors[7],
+                    containerText: containerDetails[7],
+                    containerFunction: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return AdminHomePage();
+                        },
+                      ));
+                    },
+                  ),
 
-                Dashboard_Container(
+                  Dashboard_Container(
                     containerColor: colors[0],
                     containerText: containerDetails[0],
                     containerFunction: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return Attendance();
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return Attendance();
+                        },
+                      ));
                     },
-                ),
-
-                Dashboard_Container(
+                  ),
+                  Dashboard_Container(
                     containerColor: colors[1],
                     containerText: containerDetails[1],
                     containerFunction: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return Faculty();
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return Faculty();
+                        },
+                      ));
                     },
-                ),
-
-                Dashboard_Container(
+                  ),
+                  Dashboard_Container(
                     containerColor: colors[2],
                     containerText: containerDetails[2],
                     containerFunction: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return Notes();
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return Notes();
+                        },
+                      ));
                     },
-                ),
-
-                Dashboard_Container(
+                  ),
+                  Dashboard_Container(
                     containerColor: colors[3],
                     containerText: containerDetails[3],
                     containerFunction: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return NotificationAdmin();
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return NotificationAdmin();
+                        },
+                      ));
                     },
-                ),
-
-                Dashboard_Container(
+                  ),
+                  Dashboard_Container(
                     containerColor: colors[4],
                     containerText: containerDetails[4],
                     containerFunction: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return PYQ();
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return PYQ();
+                        },
+                      ));
                     },
-                ),
-
-                Dashboard_Container(
+                  ),
+                  Dashboard_Container(
                     containerColor: colors[5],
                     containerText: containerDetails[5],
                     containerFunction: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return Routine();
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return Routine();
+                        },
+                      ));
                     },
-                ),
-
-                Dashboard_Container(
+                  ),
+                  Dashboard_Container(
                     containerColor: colors[6],
                     containerText: containerDetails[6],
                     containerFunction: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return Society();
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return Society();
+                        },
+                      ));
                     },
-                ),
+                  ),
 
-              ]
-            ),
+                ]),
           ),
         ),
       ),
     );
-
   }
 }
-
 
 //----------------Dashboard_Container-----------------
 class Dashboard_Container extends StatelessWidget {
@@ -207,7 +230,6 @@ class Dashboard_Container extends StatelessWidget {
   final Color containerColor;
   final String containerText;
   final Function()? containerFunction;
-
 
   Dashboard_Container({
     this.containerHeight = 100,
@@ -239,150 +261,39 @@ class Dashboard_Container extends StatelessWidget {
         //   width: 1.3,
         // ),
       ),
-
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
           Padding(
             padding: const EdgeInsets.all(8),
-            child: Text(containerText,
+            child: Text(
+              containerText,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xffF3F9F9)),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xffF3F9F9)),
             ),
           ),
-
-          //-------------1st method---------------
           ClipRRect(
-            borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), bottomLeft: Radius.circular(8)),
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(8),
+                  bottomLeft: Radius.circular(8)),
               child: Custom_Button(
-                btnBgColor:  Color(0xff2F334E),
+                btnBgColor: Color(0xff2F334E),
                 btnTextSize: 15,
                 btnName: "MANAGE",
-                btnIcon: Icon(Icons.arrow_forward_ios, color: Colors.white, size: 14,),
+                btnIcon: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                  size: 14,
+                ),
                 btnWidth: 110,
                 btnBorderRadius: 0,
                 btnFunction: containerFunction,
-              )
-          ),
-
-          //-------------2nd method---------------
-          // Container(
-          //     decoration: BoxDecoration(
-          //         color: Color(0xff2F334E),
-          //         border: Border(
-          //             // top: BorderSide(color: Color(0xffF3F9F9), width: 1)
-          //         ),
-          //         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),bottomRight: Radius.circular(8), )
-          //     ),
-          //
-          //   child: TextButton(
-          //     onPressed: containerFunction,
-          //     child: Row(
-          //       // mainAxisSize: MainAxisSize.max,
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         Text('MANAGE', style: TextStyle(color: Color(0xffF3F9F9)),), // Your text
-          //         Padding(
-          //           padding: const EdgeInsets.only(left: 1.6),
-          //           child: Icon(Icons.arrow_forward_ios, color: Color(0xffF3F9F9), size: 17,),
-          //         ), // Your icon
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
-//========================================
-          // Container(
-          //   height: 30,
-          //   decoration: BoxDecoration(
-          //       color: Colors.purple[200],
-          //       border: Border(
-          //           top: BorderSide(color: Colors.black, width: 1)
-          //       ),
-          //       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),bottomRight: Radius.circular(8), )
-          //   ),
-          //
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: [
-          //       Container(
-          //         height: 1, // Height of the line
-          //         color: Colors.black, // Color of the line
-          //       ),
-          //       Text(
-          //         "MANAGE",
-          //         style: TextStyle(),
-          //       ),
-          //       IconButton(
-          //         onPressed: () {},
-          //         icon: Icon(
-          //           Icons.arrow_forward,
-          //           size: 20,
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // )
+              )),
         ],
       ),
     );
   }
 }
-
-
-
-// return Scaffold(
-//   body: Padding(
-//     padding: const EdgeInsets.all(20.0),
-//     child: GridView.builder(
-//
-//       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-//         maxCrossAxisExtent: 120, // Max width for each item
-//         mainAxisSpacing: 8.0, // Vertical spacing
-//         crossAxisSpacing: 8.0, // Horizontal spacing
-//         childAspectRatio: 1, // Aspect ratio of the items
-//       ),
-//       itemCount: 10,
-//       itemBuilder: (context, index) {
-//         return Container(
-//           width: 100,
-//           height: 100,
-//           color: Colors.blue,
-//         );
-//       },
-//     ),
-//   ),
-// );
-
-
-// return Scaffold(
-//   body: Wrap(
-//     // crossAxisAlignment: WrapCrossAlignment.start,
-//     alignment: WrapAlignment.spaceEvenly,
-//     spacing: 8.0, // Horizontal spacing between containers
-//     runSpacing: 8.0, // Vertical spacing between containers
-//     children: List.generate(10, (index) {
-//       print("object : $index");
-//       return Container(
-//         width: 100,
-//         height: 100,
-//         color: Colors.blue,
-//       );
-//     }),
-//   ),
-// );
-
-// return ListView.builder(itemBuilder: (context, index) {
-//   return Wrap(
-//     alignment: WrapAlignment.center,
-//     direction: Axis.horizontal,
-//     spacing: 11,
-//     runSpacing: 11,
-//     children: [Dashboard_Container()],
-//   );
-// },
-//   itemCount: 4,
-//   scrollDirection: Axis.horizontal,
-// );
