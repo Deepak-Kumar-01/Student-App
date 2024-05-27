@@ -10,7 +10,9 @@ import 'package:studentapp/screens/routine.dart';
 import 'package:studentapp/screens/settings/setting.dart';
 import 'package:studentapp/services/databaseServices.dart';
 import '../modals/users.dart';
+import '../services/authentication.dart';
 import '../services/secureStorage.dart';
+import '../wrapper.dart';
 import 'attendance.dart';
 import 'home.dart';
 
@@ -27,6 +29,7 @@ class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
   String? _uid;
   AppUser? _appUser;
+  AuthServices _authRef = AuthServices();
   void init() async {
     final uid = await UserSecureStorage.getUserUID();
     setState(() {
@@ -120,15 +123,27 @@ class _HomepageState extends State<Homepage> {
                   ),
                   ListTile(
                     leading: const Icon(Icons.settings),
-                    title: const Text('Settings'),
-                    onTap: () {
-                      Navigator.pop(context); // Close the drawer
-                      // Navigate to settings page or perform any action
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AppSetting()),
-                      );
-                    },
+                    title: const Text('Logout'),
+                      onTap: () async {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.blue[900],
+                                ),
+                              );
+                            });
+                        await _authRef.signOutUser();
+                        await UserSecureStorage.setUserUID("null");
+                        if(mounted){
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) =>Wrapper()),
+                                (Route<dynamic> route) => false,
+                          );
+                        }
+                      },
                   ),
                 ],
               ),
