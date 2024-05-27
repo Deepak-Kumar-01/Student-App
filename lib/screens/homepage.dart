@@ -9,6 +9,7 @@ import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
 import 'package:studentapp/screens/routine.dart';
 import 'package:studentapp/screens/settings/setting.dart';
 import 'package:studentapp/services/databaseServices.dart';
+import 'package:studentapp/testing/admin/adminDashboard.dart';
 import '../modals/users.dart';
 import '../services/authentication.dart';
 import '../services/secureStorage.dart';
@@ -108,6 +109,18 @@ class _HomepageState extends State<Homepage> {
                         ),
                       ],
                     ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: const Text('Admin Login'),
+                    onTap: () {
+                      Navigator.pop(context); // Close the drawer
+                      // Add your onTap code here, for example navigate to another page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AdminDashboard()),
+                      );
+                    },
                   ),
                   ListTile(
                     leading: Icon(Icons.home),

@@ -31,8 +31,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Admin"),
-        backgroundColor: Colors.orange,
+        title: Text("Student"),
+        backgroundColor: Color(0xff00c95d),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -133,9 +133,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
               }
             }
             setAuthForStudent.add(rowMap);
-            String email = "${rowMap['admissionNo'].toString()}@jssaten.ac.in";
+            String email = "${rowMap['universityEmailId'].toString()}@jssaten.ac.in";
             await _authRef.createAuthCredential(
-                email, rowMap['dob'].toString());
+                email,
+                rowMap['dob'].toString());
             print("USER: ${FirebaseAuth.instance.currentUser?.uid} ");
             String uid = "${FirebaseAuth.instance.currentUser?.uid}";
             final adminUID = await UserSecureStorage.getUserUID();
