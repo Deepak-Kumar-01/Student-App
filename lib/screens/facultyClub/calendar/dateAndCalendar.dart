@@ -24,7 +24,8 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
           height: 40,
           width: size.width * 0.30,
           decoration: BoxDecoration(
-              color: Colors.red,
+              color: Colors.lightBlue[100],
+              border: Border.all(color: Colors.black),
               borderRadius:
               BorderRadius.vertical(top: Radius.circular(10))),
           child: Row(
@@ -33,16 +34,16 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
               Text(
                 months,
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
+                  color: Colors.blue[800],
+                  fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 years,
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
+                  color: Colors.blue[800],
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -62,27 +63,32 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
               });
             };
           },
-          
+
 
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "${days} ",
-                style: TextStyle(fontSize:21,color: Colors.white),
+                style: TextStyle(fontSize:24,color: Colors.blue),
               ),
               Text(
                 "${weeks} ",
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize:12,color: Colors.white),
+                    TextStyle(fontWeight: FontWeight.bold, fontSize:13,color: Colors.blue),
               ),
             ],
           ),
           style: ElevatedButton.styleFrom(
+            side: const BorderSide(
+              width: 1, // Thickness of the border
+              color: Colors.black, // Color of the border
+            ),
+
             // fixedSize: Size(size.width*0.30, size.height*0.13),
             fixedSize: Size(size.width*0.30, 60),
             padding: EdgeInsets.all(5),
-            backgroundColor: Colors.grey.shade900,
+            backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius:
                   BorderRadius.vertical(bottom: Radius.circular(8)),
