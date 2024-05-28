@@ -9,7 +9,8 @@ class Faculty extends StatelessWidget {
     return  Container(
       height:size.height*0.2 ,
       width: size.width*0.60,
-      decoration:BoxDecoration(color: Colors.lightBlue,borderRadius: BorderRadius.circular(10)),
+
+      decoration:BoxDecoration(color: Colors.lightBlue[200],borderRadius: BorderRadius.circular(10),border: Border.all(color: Colors.black)),
       child: Column(
         children: [
           Row(
@@ -27,7 +28,7 @@ class Faculty extends StatelessWidget {
 
 
               Padding(
-                padding: const EdgeInsets.fromLTRB(10,8,0,0),
+                padding: const EdgeInsets.fromLTRB(10,6,0,0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +110,7 @@ class Faculty extends StatelessWidget {
                           child: OutlinedButton(
                             onPressed: () {},
                             child: Text('View profile',style:TextStyle(color: Colors.black,fontSize: 10),textAlign: TextAlign.center,),
-                            style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white),padding: WidgetStatePropertyAll(EdgeInsets.fromLTRB(5, 4, 5, 5))),
+                            style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white),padding: WidgetStatePropertyAll(EdgeInsets.fromLTRB(5, 4, 5, 5))),
                           ),
                         ),
                       ],
