@@ -24,7 +24,7 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
           height: 40,
           width: size.width * 0.30,
           decoration: BoxDecoration(
-              color: Colors.lightBlue[100],
+              color: Colors.white,
               border: Border.all(color: Colors.black),
               borderRadius:
               BorderRadius.vertical(top: Radius.circular(10))),
@@ -34,7 +34,7 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
               Text(
                 months,
                 style: TextStyle(
-                  color: Colors.blue[800],
+                  color: Colors.black,
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),
@@ -42,7 +42,7 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
               Text(
                 years,
                 style: TextStyle(
-                  color: Colors.blue[800],
+                  color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -70,12 +70,12 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
             children: [
               Text(
                 "${days} ",
-                style: TextStyle(fontSize:24,color: Colors.blue),
+                style: TextStyle(fontSize:24,color: Colors.white),
               ),
               Text(
                 "${weeks} ",
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize:13,color: Colors.blue),
+                    TextStyle(fontWeight: FontWeight.bold, fontSize:13,color: Colors.black),
               ),
             ],
           ),
@@ -88,8 +88,9 @@ class _DateAndCalendarState extends State<DateAndCalendar> {
             // fixedSize: Size(size.width*0.30, size.height*0.13),
             fixedSize: Size(size.width*0.30, 60),
             padding: EdgeInsets.all(5),
-            backgroundColor: Colors.white,
+            backgroundColor: Color(0xffffd1e3),
             shape: RoundedRectangleBorder(
+
               borderRadius:
                   BorderRadius.vertical(bottom: Radius.circular(8)),
             ),
