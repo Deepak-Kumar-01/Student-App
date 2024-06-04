@@ -56,7 +56,7 @@ class _HomepageState extends State<Homepage> {
           return Scaffold(
             appBar: AppBar(
               // toolbarHeight: 100,
-              toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
+              toolbarHeight: size.width <= smallDeviceWidth ? 108:130,
               // toolbarHeight: size.height*0.18,
               automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
               backgroundColor: Colors.transparent,
@@ -116,18 +116,6 @@ class _HomepageState extends State<Homepage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => AdminDashboard()),
-                      );
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.home),
-                    title: const Text('Admin Login'),
-                    onTap: () {
-                      Navigator.pop(context); // Close the drawer
-                      // Add your onTap code here, for example navigate to another page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AdminHomePage()),
                       );
                     },
                   ),

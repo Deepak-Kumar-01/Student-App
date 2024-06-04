@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studentapp/screens/admin/admin.dart';
-import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
-
-import '../../screens/appbar/appbarmenu.dart';
-import '../../screens/appbar/custom_appbar_shape.dart';
+import 'package:studentapp/screens/admin/Student.dart';
 import '../../screens/attendance.dart';
 import '../../screens/custombutton/custom_button.dart';
 import '../../screens/facultyClub/faculty/faculty.dart';
@@ -128,7 +124,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return AdminHomePage();
+                          return Student();
                         },
                       ));
                     },
