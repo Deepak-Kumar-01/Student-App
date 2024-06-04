@@ -49,6 +49,19 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    double toolbarHeight;
+    if (size.height <= 640) {
+      // Small screen
+      toolbarHeight = 108;
+    } else if (size.height <= 731) {
+      // Medium screen
+      toolbarHeight = 105;
+    } else {
+      // Large screen
+      toolbarHeight = 100;
+    }
+
     AppUser? user = Provider.of<AppUser?>(context);
     return StreamBuilder(
         stream:DatabaseServices()
@@ -59,7 +72,8 @@ class _HomepageState extends State<Homepage> {
           return Scaffold(
             appBar: AppBar(
               // toolbarHeight: 100,
-              toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
+              toolbarHeight: toolbarHeight,
+              // toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
               // toolbarHeight: size.height*0.18,
               automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
               backgroundColor: Colors.transparent,
