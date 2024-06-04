@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/screens/facultyClub/Assignment/assignment.dart';
 import 'package:studentapp/screens/facultyClub/facultyClubCalendar.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/Home/UpcomingClasses/upcommigClassesController.dart';
 
@@ -27,7 +28,7 @@ class Home extends StatelessWidget {
             ),
 
 //--------------Society and faculty------------------------
-           FacultyClubCalendar(),
+          Assignment(),
 
 //----------------Upcoming classes--------------------------
             Container(
