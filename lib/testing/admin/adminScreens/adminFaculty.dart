@@ -1,14 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-class Society extends StatefulWidget {
-  const Society({super.key});
+class AdminFaculty extends StatelessWidget {
+  const AdminFaculty({super.key});
 
-  @override
-  State<Society> createState() => _SocietyState();
-}
-
-class _SocietyState extends State<Society> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +14,7 @@ class _SocietyState extends State<Society> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Society", style: TextStyle(fontSize: 30),),
+            Text("Faculty", style: TextStyle(fontSize: 30),),
             ElevatedButton(onPressed: () {
               Navigator.pop(context);
             }, child: Text("Back"))

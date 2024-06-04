@@ -1,14 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-class NotificationAdmin extends StatefulWidget {
-  const NotificationAdmin({super.key});
+class AdminAttendance extends StatelessWidget {
+  const AdminAttendance({super.key});
 
-  @override
-  State<NotificationAdmin> createState() => _NotificationAdminState();
-}
-
-class _NotificationAdminState extends State<NotificationAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +14,7 @@ class _NotificationAdminState extends State<NotificationAdmin> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Notification", style: TextStyle(fontSize: 30),),
+            Text("Attendance", style: TextStyle(fontSize: 30),),
             ElevatedButton(onPressed: () {
               Navigator.pop(context);
             }, child: Text("Back"))

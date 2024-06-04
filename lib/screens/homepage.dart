@@ -11,7 +11,9 @@ import 'package:studentapp/screens/settings/setting.dart';
 import 'package:studentapp/services/databaseServices.dart';
 import 'package:studentapp/testing/admin/adminDashboard.dart';
 import '../modals/users.dart';
+import '../services/authentication.dart';
 import '../services/secureStorage.dart';
+import '../wrapper.dart';
 import 'attendance.dart';
 import 'home.dart';
 
@@ -28,6 +30,7 @@ class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
   String? _uid;
   AppUser? _appUser;
+  AuthServices _authRef = AuthServices();
   void init() async {
     final uid = await UserSecureStorage.getUserUID();
     setState(() {
@@ -56,7 +59,7 @@ class _HomepageState extends State<Homepage> {
           return Scaffold(
             appBar: AppBar(
               // toolbarHeight: 100,
-              toolbarHeight: size.width <= smallDeviceWidth ? 108:130,
+              toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
               // toolbarHeight: size.height*0.18,
               automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
               backgroundColor: Colors.transparent,
@@ -120,16 +123,40 @@ class _HomepageState extends State<Homepage> {
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('Settings'),
+                    leading: Icon(Icons.home),
+                    title: const Text('Admin Login'),
                     onTap: () {
                       Navigator.pop(context); // Close the drawer
-                      // Navigate to settings page or perform any action
+                      // Add your onTap code here, for example navigate to another page
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AppSetting()),
+                        MaterialPageRoute(builder: (context) => AdminHomePage()),
                       );
                     },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: const Text('Logout'),
+                      onTap: () async {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.blue[900],
+                                ),
+                              );
+                            });
+                        await _authRef.signOutUser();
+                        await UserSecureStorage.setUserUID("null");
+                        if(mounted){
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) =>Wrapper()),
+                                (Route<dynamic> route) => false,
+                          );
+                        }
+                      },
                   ),
                 ],
               ),
