@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/screens/facultyClub/Assignment/assignment.dart';
 import 'package:studentapp/screens/facultyClub/facultyClubCalendar.dart';
 import 'package:studentapp/screens/home/CarouseSlider/carouselSlider.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/Home/UpcomingClasses/upcommigClassesController.dart';
@@ -20,7 +21,7 @@ class Home extends StatelessWidget {
             CarouselSlider(),
 
 //--------------Society and faculty------------------------
-           FacultyClubCalendar(),
+          Assignment(),
 
 //----------------Upcoming classes--------------------------
             Container(
