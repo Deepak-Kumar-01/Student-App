@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:studentapp/screens/clubList/ClubList.dart';
 class Assignmentss {
   final String title;
   final String dueDate;
@@ -30,7 +29,7 @@ class _AssignmentState extends State<Assignment> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 250,
+        height: 150,
         width: 380,
         decoration: BoxDecoration(color: Colors.grey[200],borderRadius: BorderRadius.circular(15),boxShadow: [
           BoxShadow(
@@ -46,24 +45,21 @@ class _AssignmentState extends State<Assignment> {
           )
         ]),
         child: Column(
+
           children: [
-             Padding(
+            const Padding(
               padding: EdgeInsets.fromLTRB(10.0,5,0,21),
               child: Row(
+
                 children: [
                   Text("Assignments",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-                  ElevatedButton(onPressed: (){
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) =>ClubList()),
-                    );
-                  }, child: Icon(Icons.arrow_forward_ios)),
-                  
+
                 ],
 
               ),
             ),
             SizedBox(
-              height: 188,
+              height: 88,
 
               child: SingleChildScrollView(
                 child: Column(
@@ -73,7 +69,7 @@ class _AssignmentState extends State<Assignment> {
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 2,
+                      itemCount: assignments.length,
                       itemBuilder: (context,index){
                         final assignment=assignments[index];
                         return ListTile(
@@ -101,6 +97,7 @@ class _AssignmentState extends State<Assignment> {
                       },
 
                     ),
+
                   ],
                 ),
               ),
