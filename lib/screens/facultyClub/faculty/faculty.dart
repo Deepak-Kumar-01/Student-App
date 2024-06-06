@@ -91,7 +91,7 @@ class Faculty extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15.0,0,0,0),
-                              child: Text('Followers',style: TextStyle(fontSize: 12),),
+                              child: Text('Followers',style: TextStyle(fontSize: 12,color: Colors.white),),
                             ),
                           ],
                         ),
@@ -107,7 +107,7 @@ class Faculty extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {},
                             child: Text('Follow',style:TextStyle(color: Colors.white,fontSize: 10),textAlign: TextAlign.center,),
-                              style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.black),padding: WidgetStatePropertyAll(EdgeInsets.fromLTRB(5, 4, 5, 5))),
+                              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.black),padding: MaterialStatePropertyAll(EdgeInsets.fromLTRB(5, 4, 5, 5))),
                           ),
                         ),
                         SizedBox(width: 8.0),
@@ -117,7 +117,10 @@ class Faculty extends StatelessWidget {
                           child: OutlinedButton(
                             onPressed: () {},
                             child: Text('View profile',style:TextStyle(color: Colors.black,fontSize: 10),textAlign: TextAlign.center,),
-                            style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.white),padding: WidgetStatePropertyAll(EdgeInsets.fromLTRB(5, 4, 5, 5))),
+
+                            style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white),padding: MaterialStatePropertyAll(EdgeInsets.fromLTRB(5, 4, 5, 5))),
+
+
                           ),
                         ),
                       ],
@@ -132,7 +135,7 @@ class Faculty extends StatelessWidget {
 
         ],
       ),
-
     );
   }
+
 }

@@ -92,7 +92,7 @@ class _AssignmentState extends State<Assignment> {
                               // Handle "Mark as Complete" button press
                               // You can add your logic here
                             },
-                            style: ButtonStyle(backgroundColor:WidgetStatePropertyAll(Colors.lightBlue),shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                            style: ButtonStyle(backgroundColor:MaterialStatePropertyAll(Colors.lightBlue),shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18),
                                 )
