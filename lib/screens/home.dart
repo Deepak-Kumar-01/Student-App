@@ -22,6 +22,7 @@ class Home extends StatelessWidget {
 
 //--------------Society and faculty------------------------
           Assignment(),
+          SizedBox(height: 40,),
 
 //----------------Upcoming classes--------------------------
             Container(

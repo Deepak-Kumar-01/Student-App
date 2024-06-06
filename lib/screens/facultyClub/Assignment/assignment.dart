@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/screens/facultyClub/Assignment/assignmentlist.dart';
+
+import '../../clubList/ClubList.dart';
 class Assignmentss {
   final String title;
   final String dueDate;
@@ -29,37 +32,45 @@ class _AssignmentState extends State<Assignment> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 150,
+        height: 267,
         width: 380,
         decoration: BoxDecoration(color: Colors.grey[200],borderRadius: BorderRadius.circular(15),boxShadow: [
           BoxShadow(
-              color: Colors.white,
-              offset: const Offset(4,4),
-              blurRadius: 15,
+              color: Colors.grey,
+              offset: const Offset(2,2),
+              blurRadius: 5,
               spreadRadius: 1),
           const BoxShadow(
-            color: Colors.white,
-            offset: Offset(-4,-4),
-            blurRadius: 15,
+            color: Colors.grey,
+            offset: Offset(-2,-2),
+            blurRadius: 5,
             spreadRadius:1,
           )
         ]),
         child: Column(
 
           children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(10.0,5,0,21),
+             Padding(
+              padding: EdgeInsets.fromLTRB(13.0,8,0,21),
               child: Row(
 
                 children: [
-                  Text("Assignments",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-
+                  Text("Assignments",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
+                  SizedBox(width: 100),
+                  ElevatedButton(onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Assignmentlist()),
+                    );
+                  }, child: Icon(Icons.arrow_forward_ios_rounded),
+                      style: ButtonStyle(surfaceTintColor: WidgetStatePropertyAll(Colors.orange[900]),),
+                  ),
                 ],
 
               ),
+
             ),
+            Divider(height: 10,thickness: 5,color: Colors.blueGrey,),
             SizedBox(
-              height: 88,
+              height: 180,
 
               child: SingleChildScrollView(
                 child: Column(
@@ -69,7 +80,7 @@ class _AssignmentState extends State<Assignment> {
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: assignments.length,
+                      itemCount:2,
                       itemBuilder: (context,index){
                         final assignment=assignments[index];
                         return ListTile(
@@ -77,6 +88,7 @@ class _AssignmentState extends State<Assignment> {
                           subtitle: Text('Due: ${assignment.dueDate}'),
                           trailing:  ElevatedButton(
                             onPressed: () {
+
                               // Handle "Mark as Complete" button press
                               // You can add your logic here
                             },
