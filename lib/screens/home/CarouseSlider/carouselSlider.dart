@@ -49,7 +49,6 @@ class _CarouselSliderState extends State<CarouselSlider> {
 
   @override
   Widget build(BuildContext context) {
-
     var eventDateAndTime = selectedIndex > eventDetails.length - 1
         ? "Null"
         : eventDetails[selectedIndex]["eventDateAndTime"]!;
@@ -74,29 +73,24 @@ class _CarouselSliderState extends State<CarouselSlider> {
         barrierDismissible: true,
         context: context,
         builder: (context) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Container(
-              //   // width: double.infinity,
-              //   height: 100,
-              //   decoration: BoxDecoration(
-              //       color: Colors.green,
-              //       borderRadius: BorderRadius.only(
-              //           topRight: Radius.circular(11),
-              //           topLeft: Radius.circular(11))),
-              // ),
-              BackdropFilter(
+          return Center(
+            child: SingleChildScrollView(
+              child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                 child: AlertDialog(
+                  insetPadding: EdgeInsets.only(
+                      top: 1, bottom: 20, left: 20, right: 20),
                   titlePadding: EdgeInsets.all(0),
+                  contentTextStyle:
+                      TextStyle(fontSize: 15, color: Colors.black),
                   contentPadding:
-                  EdgeInsets.only(top: 0, bottom: 8, left: 20, right: 20),
+                      EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+                  actionsPadding: EdgeInsets.only(bottom: 18, top: 10),
                   shape: RoundedRectangleBorder(
-                    // borderRadius: BorderRadius.only(
-                    //     bottomRight: Radius.circular(11),
-                    //     bottomLeft: Radius.circular(11)
-                    // ),
+                      // borderRadius: BorderRadius.only(
+                      //     bottomRight: Radius.circular(11),
+                      //     bottomLeft: Radius.circular(11)
+                      // ),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,37 +104,46 @@ class _CarouselSliderState extends State<CarouselSlider> {
                         ),
                         child: Container(
                           // width: double.infinity,
-                          height: 111,
+                          // height: 111,
                           // decoration: BoxDecoration(
                           //     color: Colors.red,
                           //     borderRadius: BorderRadius.only(
                           //         topRight: Radius.circular(11),
                           //         topLeft: Radius.circular(11))),
-                          child: Expanded(
-                            child: AspectRatio(
-                              aspectRatio: 9 / 2,
-                              child: Image.asset(
-                                images[selectedIndex],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                          child: Image.asset(
+                            // images[selectedIndex],
+                            eventDetails[selectedIndex]["eventImage"]!,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 20, right: 20, top: 11, bottom: 8),
+                            left: 20, right: 20, top: 11, bottom: 0),
                         child: Container(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                eventDateAndTime,
-                                style: TextStyle(fontSize: 16),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 2, right: 2),
+                                    child: Icon(Icons.watch_later_outlined, size: 12,),
+                                  ),
+                                  Text(
+                                    eventDateAndTime,
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                eventLocation,
-                                style: TextStyle(fontSize: 16),
+                              Row(
+                                children: [
+                                  Icon(Icons.location_on_outlined, size: 16,),
+                                  Text(
+                                    eventLocation,
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                ],
                               ),
                               Text(eventTitle),
                             ],
@@ -158,25 +161,30 @@ class _CarouselSliderState extends State<CarouselSlider> {
                         onPressed: () {
                           print("$eventLink clicked...");
                         },
-                        child: Text("Register")),
+                        child: Text("Register", style: TextStyle(color: Colors.white),),
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.blue
+                      ),
+
+                    ),
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text("Close"))
+                        child: Text("Close")
+                    )
                   ],
-                  insetPadding: EdgeInsets.only(top: 0, left: 20, right: 20),
                 ),
               ),
-            ],
+            ),
           );
         },
       );
     }
 
 //=================Carousel Items=====================
-    List<Widget> carouselItems = images.map(
-      (carouselImage) {
+    List<Widget> carouselItems = eventDetails.map(
+      (eventData) {
         return GestureDetector(
           onTap: () {
             // ScaffoldMessenger.of(context)
@@ -195,7 +203,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
               left: 8,
               right: 8,
               top: 11,
-              bottom: 25,
+              bottom: 15,
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(11),
@@ -213,7 +221,8 @@ class _CarouselSliderState extends State<CarouselSlider> {
                     height: double.infinity,
                     child: Image.asset(
                       // "assets/images/coding.jpg",
-                      carouselImage,
+                      eventData["eventImage"]!,
+                      // carouselImage,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -225,7 +234,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
                             // Color(0xff24e02d),
                             // Colors.black,
                             Color(0xdb000000),
-                            Color(0x0),
+                            Color(0x00000000),
                           ],
                           stops: [
                             0.3,
@@ -237,7 +246,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
                     ),
                   ),
 
-                        //================= Title and Details =====================
+                  //================= Title and Details =====================
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -297,14 +306,15 @@ class _CarouselSliderState extends State<CarouselSlider> {
             borderRadius: BorderRadius.circular(50)),
         child: CircleAvatar(
           radius: 3.5,
-          backgroundColor: isActive ? Colors.grey[600] : Colors.grey[300],
+          backgroundColor: isActive ? Colors.blue[500] : Colors.grey[350],
+          // backgroundColor: isActive ? Colors.grey[600] : Colors.grey[300],
         ),
       );
     }
 
     List<Widget> dotList() {
       List<Widget> list = [];
-      for (int i = 0; i < images.length; i++) {
+      for (int i = 0; i < eventDetails.length; i++) {
         list.add(i == selectedIndex ? dot(true) : dot(false));
       }
       return list;
@@ -327,14 +337,15 @@ class _CarouselSliderState extends State<CarouselSlider> {
                       selectedIndex = page;
                     });
                   },
-                ),
-                Positioned(
-                  bottom: 5,
-                  left: MediaQuery.of(context).size.width * 0.42,
+                ) ,
+                Align(
+                  alignment: Alignment.bottomCenter,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: dotList(),
                   ),
-                )
+                ),
               ],
             ),
           ),
