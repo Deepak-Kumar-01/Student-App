@@ -65,9 +65,10 @@ class Custom_Button extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text("$btnName  ",
+                style: TextStyle(color: btnTextColor, fontSize: btnTextSize)
+            ),
             btnIcon!,
-            Text("$btnName",
-                style: TextStyle(color: btnTextColor, fontSize: btnTextSize)),
           ],
         ),
       ),
