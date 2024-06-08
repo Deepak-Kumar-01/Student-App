@@ -4,35 +4,36 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:studentapp/services/excelHandler.dart';
 import 'dart:io';
-import 'package:studentapp/services/authentication.dart';
-import 'package:studentapp/services/databaseServices.dart';
-import 'package:studentapp/services/secureStorage.dart';
-
 import '../../modals/users.dart';
+import '../../services/authentication.dart';
+import '../../services/databaseServices.dart';
+import '../../services/secureStorage.dart';
 
-class AdminHomePage extends StatefulWidget {
-  const AdminHomePage({super.key});
+class Student extends StatefulWidget {
+  const Student({super.key});
 
   @override
-  State<AdminHomePage> createState() => _AdminHomePageState();
+  State<Student> createState() => _StudentState();
 }
 
-class _AdminHomePageState extends State<AdminHomePage> {
+class _StudentState extends State<Student> {
   List<Map<String, dynamic>> setAuthForStudent = [];
   Map<String, dynamic> rowMap = {};
   List<String> headers = [];
 
   AuthServices _authRef = AuthServices();
   DatabaseServices _databaseRef = DatabaseServices();
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    print("Height${size.height}");
     return Scaffold(
       appBar: AppBar(
-        title: Text("Student"),
-        backgroundColor: Color(0xff00c95d),
+        title: Text("Student",style: TextStyle(color: Colors.white),),
+        // backgroundColor: Color(0xff00c95d),
+        backgroundColor: Colors.blue[800],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -41,56 +42,79 @@ class _AdminHomePageState extends State<AdminHomePage> {
           child: Column(
             children: [
               //Create New Session
-
-              ElevatedButton(
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.account_box,
-                        ),
-                      ),
-                      Text("Create New Session"),
-                    ],
-                  )),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    FloatingActionButton(
+                        onPressed: (){},
+                      child: Icon(Icons.add,color: Colors.white,),
+                      backgroundColor: Colors.blue[800],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text("Create New Session"),
+                    ),
+                  ],
+                ),
+              ),
               //Edit Ongoing Session
-              ElevatedButton(
-                  onPressed: () {},
-                  child: const Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.edit,
-                        ),
-                      ),
-                      Text("Edit Ongoing Session"),
-                    ],
-                  )),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    FloatingActionButton(
+                      onPressed: (){},
+                      child: Icon(Icons.add,color: Colors.white,),
+                      backgroundColor: Colors.blue[800],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text("Edit Ongoing Session"),
+                    ),
+                  ],
+                ),
+              ),
               //Temporary Create Auth for Students
-              ElevatedButton(
-                  // onPressed: selectExcelFile,
-                  onPressed: extractUserAuthDetail,
-                  child: const Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.login,
-                        ),
-                      ),
-                      Text("Create Auth for Students"),
-                    ],
-                  )),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    FloatingActionButton(
+                      onPressed: extractUserAuthDetail,
+                      child: Icon(Icons.add,color: Colors.white,),
+                      backgroundColor: Colors.blue[800],
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text("Create Auth for Students"),
+                    ),
+                  ],
+                ),
+              ),
+              //Testing Custom Excel File
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    FloatingActionButton(
+                      onPressed: ExcelHandler().extractUserAuthDetail,
+                      child: Icon(Icons.add,color: Colors.white,),
+                      backgroundColor: Colors.blue[800],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text("Handling Custom Excel"),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
   void extractUserAuthDetail() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -119,7 +143,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
             for (int colIndex = 0; colIndex < sheet.maxColumns; colIndex++) {
               var cellValue = sheet
                   .cell(CellIndex.indexByColumnRow(
-                      columnIndex: colIndex, rowIndex: rowIndex))
+                  columnIndex: colIndex, rowIndex: rowIndex))
                   .value;
               if (headers[colIndex] == 'dob') {
                 String extractedDate = cellValue.toString();
@@ -134,9 +158,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
               }
             }
             setAuthForStudent.add(rowMap);
-            String email = "${rowMap['universityEmailId'].toString()}@jssaten.ac.in";
             await _authRef.createAuthCredential(
-                email,
+                rowMap['universityEmailId'].toString(),
                 rowMap['dob'].toString());
             print("USER: ${FirebaseAuth.instance.currentUser?.uid} ");
             String uid = "${FirebaseAuth.instance.currentUser?.uid}";

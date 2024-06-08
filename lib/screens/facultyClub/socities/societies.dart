@@ -12,6 +12,7 @@ class Socities extends StatelessWidget {
       width: size.width * 0.60,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.black),
       //   gradient: LinearGradient(
       //     colors: [
       //       Color(0xffd973b7),
@@ -19,7 +20,7 @@ class Socities extends StatelessWidget {
       //     ]
       // ),
 
-        color: Color(0xff1975D0)
+        color: Colors.lightBlue[200]
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
