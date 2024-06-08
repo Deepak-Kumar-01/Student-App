@@ -5,15 +5,15 @@
 // ];
 
 
-List images = [
-  'assets/images/carousel/book.jpeg',
-  'assets/images/carousel/coding.jpg',
-  'assets/images/carousel/coding2.jpeg',
-  'assets/images/carousel/coding4.jpeg',
-  'assets/images/carousel/cricket.png',
-  'assets/images/carousel/fall_culturalfestival.png',
-  'assets/images/carousel/music.png',
-];
+// List images = [
+//   'assets/images/carousel/book.jpeg',
+//   'assets/images/carousel/coding.jpg',
+//   'assets/images/carousel/coding2.jpeg',
+//   'assets/images/carousel/coding4.jpeg',
+//   'assets/images/carousel/cricket.png',
+//   'assets/images/carousel/fall_culturalfestival.png',
+//   'assets/images/carousel/music.png',
+// ];
 
 
 List<String> eventTitle1 = [
