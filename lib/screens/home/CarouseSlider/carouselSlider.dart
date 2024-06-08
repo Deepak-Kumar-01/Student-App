@@ -23,7 +23,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
   //=========== generating pages ==============
   Timer getTimer() {
     return Timer.periodic(Duration(milliseconds: 4000), (timer) {
-      if (currentPage < images.length - 1) {
+      if (currentPage < eventDetails.length - 1) {
         currentPage++;
         // currentPage = (currentPage + 1) % images.length;
       } else {
@@ -138,7 +138,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
                               ),
                               Row(
                                 children: [
-                                  Icon(Icons.location_on_outlined, size: 16,),
+                                  Icon(Icons.location_on_outlined, size: 15,),
                                   Text(
                                     eventLocation,
                                     style: TextStyle(fontSize: 14),
@@ -202,7 +202,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
             padding: const EdgeInsets.only(
               left: 8,
               right: 8,
-              top: 11,
+              top: 5,
               bottom: 15,
             ),
             child: ClipRRect(
@@ -241,7 +241,8 @@ class _CarouselSliderState extends State<CarouselSlider> {
                             0.99
                           ],
                           begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter),
+                          end: Alignment.topCenter
+                      ),
                       // borderRadius: BorderRadius.circular(11)
                     ),
                   ),
@@ -252,31 +253,29 @@ class _CarouselSliderState extends State<CarouselSlider> {
                     children: [
                       Container(
                         // color: Colors.green,
-                        height: 85,
+                        height: 72,
                         alignment: Alignment.center,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 5, bottom: 5, left: 20, right: 20),
+                              top: 2, bottom: 2, left: 20, right: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                // "FLUTTER",
                                 eventTitle,
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold),
                               ),
                               Expanded(
                                 child: Text(
-                                  textAlign: TextAlign.center,
-                                  // "Details",
                                   eventDescription,
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: 15,
                                   ),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
@@ -326,7 +325,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
       child: Column(
         children: [
           Container(
-            height: 170,
+            height: 160,
             child: Stack(
               children: [
                 PageView(
