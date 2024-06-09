@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/screens/admin/admin.dart';
+import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
+import 'package:studentapp/testing/admin/adminScreens/adminAttendance.dart';
+import 'package:studentapp/testing/admin/adminScreens/adminFaculty.dart';
+import 'package:studentapp/testing/admin/adminScreens/adminRoutine.dart';
+
+import '../../screens/appbar/appbarmenu.dart';
+import '../../screens/appbar/custom_appbar_shape.dart';
+
 import 'package:studentapp/screens/admin/Student.dart';
 import 'package:studentapp/screens/admin/adminRoutine.dart';
+
 import '../../screens/attendance.dart';
 import '../../screens/custombutton/custom_button.dart';
 import '../../screens/facultyClub/faculty/faculty.dart';
 import '../../screens/routine.dart';
-import 'adminScreens/Notes.dart';
-import 'adminScreens/PYQ.dart';
-import 'adminScreens/Society.dart';
-import 'adminScreens/notificationAdmin.dart';
+import 'adminScreens/adminNotes.dart';
+import 'adminScreens/adminPYQ.dart';
+import 'adminScreens/adminSociety.dart';
+import 'adminScreens/adminNotificationAdmin.dart';
 
 class AdminDashboard extends StatelessWidget {
   // const Dashboard({super.key});
@@ -80,37 +90,10 @@ class AdminDashboard extends StatelessWidget {
           color: Colors.white
         ),
       ),
-      // appBar: AppBar(
-      //   // toolbarHeight: 100,
-      //   toolbarHeight: size.width <= smallDeviceWidth ? 100 : 130,
-      //   // toolbarHeight: size.height*0.18,
-      //   automaticallyImplyLeading:
-      //       false, // to disable auto menu button when using drawer
-      //   backgroundColor: Colors.transparent,
-      //   iconTheme: IconThemeData(
-      //       color: Colors.white), // Change the color of the drawer icon here
-      //   shadowColor: Colors.transparent,
-      //   excludeHeaderSemantics: true,
-      //   elevation: 0.0,
-      //   forceMaterialTransparency: true,
-      //   centerTitle: true,
-      //
-      //   flexibleSpace: ClipPath(
-      //     clipper: CustomAppBarShape(),
-      //     child: Container(
-      //       // // height: 150,
-      //       // width: MediaQuery.of(context).size.width,
-      //       color: Colors.blue[700],
-      //
-      //       //======AppBar Menu======
-      //       child: AppBarMenu(),
-      //     ),
-      //   ),
-      // ),
 
 
       body: Padding(
-        padding: const EdgeInsets.only(top: 8, left: 4, right: 4),
+        padding: const EdgeInsets.only(top: 15, left: 4, right: 4),
         child: SingleChildScrollView(
           child: Center(
             child: Wrap(
@@ -137,7 +120,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return Attendance();
+                          return AdminAttendance();
                         },
                       ));
                     },
@@ -148,7 +131,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return Faculty();
+                          return AdminFaculty();
                         },
                       ));
                     },
@@ -159,7 +142,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return Notes();
+                          return AdminNotes();
                         },
                       ));
                     },
@@ -170,7 +153,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return NotificationAdmin();
+                          return AdminNotification();
                         },
                       ));
                     },
@@ -181,7 +164,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return PYQ();
+                          return AdminPYQ();
                         },
                       ));
                     },
@@ -203,7 +186,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return Society();
+                          return AdminSociety();
                         },
                       ));
                     },
@@ -252,14 +235,14 @@ class Dashboard_Container extends StatelessWidget {
         // color: Color(0xff8C4DE8),
         // color: Color(0xffF11E60),
         color: containerColor,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8),),
         // border: Border.all(
         //   color: Colors.black,
         //   width: 1.3,
         // ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
@@ -272,10 +255,12 @@ class Dashboard_Container extends StatelessWidget {
                   color: Color(0xffF3F9F9)),
             ),
           ),
+
           ClipRRect(
               borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(8),
-                  bottomLeft: Radius.circular(8)),
+                  bottomLeft: Radius.circular(8)
+              ),
               child: Custom_Button(
                 btnBgColor: Color(0xff2F334E),
                 btnTextSize: 15,
@@ -288,7 +273,8 @@ class Dashboard_Container extends StatelessWidget {
                 btnWidth: 110,
                 btnBorderRadius: 0,
                 btnFunction: containerFunction,
-              )),
+              )
+          ),
         ],
       ),
     );
