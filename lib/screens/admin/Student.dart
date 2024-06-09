@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:studentapp/services/excelHandler.dart';
 import 'dart:io';
@@ -22,6 +24,7 @@ class _StudentState extends State<Student> {
   List<Map<String, dynamic>> setAuthForStudent = [];
   Map<String, dynamic> rowMap = {};
   List<String> headers = [];
+  TextEditingController _sessionController= TextEditingController();
 
   AuthServices _authRef = AuthServices();
   DatabaseServices _databaseRef = DatabaseServices();
@@ -46,10 +49,22 @@ class _StudentState extends State<Student> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    FloatingActionButton(
-                        onPressed: (){},
-                      child: Icon(Icons.add,color: Colors.white,),
-                      backgroundColor: Colors.blue[800],
+                    InkWell(
+                      onTap: () {
+                        _createSession();
+                      },
+                      borderRadius: BorderRadius.circular(50), // Adjust the radius to make it fully circular
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.blue[800],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                            child: Icon(Icons.add,color:Colors.white)
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -63,10 +78,22 @@ class _StudentState extends State<Student> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    FloatingActionButton(
-                      onPressed: (){},
-                      child: Icon(Icons.add,color: Colors.white,),
-                      backgroundColor: Colors.blue[800],
+                    InkWell(
+                      onTap: () {
+                        // Your onTap action here
+                      },
+                      borderRadius: BorderRadius.circular(50), // Adjust the radius to make it fully circular
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.blue[800],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                            child: Icon(Icons.add,color:Colors.white)
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -80,10 +107,22 @@ class _StudentState extends State<Student> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    FloatingActionButton(
-                      onPressed: extractUserAuthDetail,
-                      child: Icon(Icons.add,color: Colors.white,),
-                      backgroundColor: Colors.blue[800],
+                    InkWell(
+                      onTap: () {
+                        extractUserAuthDetail();
+                      },
+                      borderRadius: BorderRadius.circular(50), // Adjust the radius to make it fully circular
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.blue[800],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                            child: Icon(Icons.add,color:Colors.white)
+                        ),
+                      ),
                     ),
                     Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -97,15 +136,28 @@ class _StudentState extends State<Student> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    FloatingActionButton(
-                      onPressed: ExcelHandler().extractUserAuthDetail,
-                      child: Icon(Icons.add,color: Colors.white,),
-                      backgroundColor: Colors.blue[800],
+                    InkWell(
+                      onTap: () {
+                        // Your onTap action here
+                      },
+                      borderRadius: BorderRadius.circular(50), // Adjust the radius to make it fully circular
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.blue[800],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                            child: Icon(Icons.add,color:Colors.white)
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text("Handling Custom Excel"),
                     ),
+
                   ],
                 ),
               ),
@@ -137,6 +189,7 @@ class _StudentState extends State<Student> {
                 .value
                 .toString());
           }
+          print("header: $headers");
           print(sheet.maxRows);
           //keys mapped to its value object file created
           for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++) {
@@ -184,5 +237,58 @@ class _StudentState extends State<Student> {
         }
       }
     }
+  }
+  void _createSession() async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+
+            title: Text("Create New Session"),
+            content:Container(
+              width: MediaQuery.of(context).size.width*0.8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _sessionController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text("Start"),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20,),
+                  Expanded(
+                    child: TextField(
+                      controller: _sessionController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text("End"),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              MaterialButton(
+                onPressed: () {
+                  // Todo todo = Todo(
+                  //     task: _todoController.text,
+                  //     isDone: false,
+                  //     createdOn: Timestamp.now(),
+                  //     updatedOn: Timestamp.now());
+                  // _databaseServices.addTodo(todo);
+                  // Navigator.pop(context);
+                  // _todoController.clear();
+                },
+                child: Text("Create",style: TextStyle(color: Colors.white),),
+                color: Colors.deepPurple[800],
+              )
+            ],
+          );
+        });
   }
 }

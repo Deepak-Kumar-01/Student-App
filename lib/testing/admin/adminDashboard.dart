@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studentapp/screens/admin/Student.dart';
+import 'package:studentapp/screens/admin/adminRoutine.dart';
 import '../../screens/attendance.dart';
 import '../../screens/custombutton/custom_button.dart';
 import '../../screens/facultyClub/faculty/faculty.dart';
@@ -191,7 +192,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return Routine();
+                          return AdminRoutine();
                         },
                       ));
                     },
