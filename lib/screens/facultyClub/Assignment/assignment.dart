@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../clubList/ClubList.dart';
 import 'assignmentlist.dart';
 class Assignmentss {
@@ -8,10 +7,8 @@ class Assignmentss {
 
   Assignmentss(this.title, this.dueDate);
 }
-
 class Assignment extends StatefulWidget {
   const Assignment({super.key});
-
 
   @override
   State<Assignment> createState() => _AssignmentState();

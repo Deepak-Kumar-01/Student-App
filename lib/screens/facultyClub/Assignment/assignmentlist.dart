@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 class Assignmentss {
   final String title;
   final String dueDate;
 
   Assignmentss(this.title, this.dueDate);
 }
+
 class Assignmentlist extends StatefulWidget {
   const Assignmentlist({Key? key}) : super(key: key);
 
@@ -30,7 +32,6 @@ class _HomePageState extends State<Assignmentlist> {
     Assignmentss('TAFL Homework', 'October 25, 2021'),
     Assignmentss('TAFL Homework', 'October 25, 2021'),
 
-
     // Add more assignments here
   ];
 
@@ -38,30 +39,51 @@ class _HomePageState extends State<Assignmentlist> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Assignments',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,),)),
+        title: Center(
+            child: Text(
+          'Assignments',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 40,
+          ),
+        )),
         backgroundColor: Colors.blueGrey,
       ),
       body: ListView.separated(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemCount: assignments.length,
-        itemBuilder: (context,index){
-          final assignment=assignments[index];
+        itemBuilder: (context, index) {
+          final assignment = assignments[index];
           return ListTile(
-            title: Text(assignment.title,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-            subtitle: Text('Due: ${assignment.dueDate}',style: TextStyle(fontSize: 15),),
-            trailing: ElevatedButton(onPressed: (){}, child: Text("Marl as Completed",style: TextStyle(color: Colors.black),),style: ButtonStyle(backgroundColor:MaterialStatePropertyAll(Colors.lightBlue),shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                )
+            title: Text(
+              assignment.title,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            ),),
+            subtitle: Text(
+              'Due: ${assignment.dueDate}',
+              style: TextStyle(fontSize: 15),
+            ),
+            trailing: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                "Marl as Completed",
+                style: TextStyle(color: Colors.black),
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
+                shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                )),
+              ),
+            ),
           );
-
-        }, separatorBuilder: (BuildContext context, int index) { return Divider(height: 10,thickness: 2); },
-
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(height: 10, thickness: 2);
+        },
       ),
-
     );
   }
 }
