@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/screens/home.dart';
+import 'package:studentapp/screens/homepage.dart';
 class Assignmentss {
   final String title;
   final String dueDate;
@@ -40,7 +42,8 @@ class _HomePageState extends State<Assignmentlist> {
       appBar: AppBar(
         title: Center(child: Text('Assignments',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40,),)),
         backgroundColor: Colors.blueGrey,
-      ),
+    ),
+
       body: ListView.separated(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
