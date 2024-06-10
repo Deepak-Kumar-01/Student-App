@@ -50,7 +50,7 @@ class _HomePageState extends State<Assignmentlist> {
           return ListTile(
             title: Text(assignment.title,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             subtitle: Text('Due: ${assignment.dueDate}',style: TextStyle(fontSize: 15),),
-            trailing: ElevatedButton(onPressed: (){}, child: Text("Marl as Completed",style: TextStyle(color: Colors.black),),style: ButtonStyle(backgroundColor:WidgetStatePropertyAll(Colors.lightBlue),shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+            trailing: ElevatedButton(onPressed: (){}, child: Text("Marl as Completed",style: TextStyle(color: Colors.black),),style: ButtonStyle(backgroundColor:MaterialStatePropertyAll(Colors.lightBlue),shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 )
