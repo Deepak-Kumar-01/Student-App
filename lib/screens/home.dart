@@ -22,8 +22,6 @@ class Home extends StatelessWidget {
 
 //--------------Society and faculty------------------------
           Assignment(),
-          SizedBox(height: 50,),
-
 //----------------Upcoming classes--------------------------
             Container(
               height: 200,  // this height control its child widget height
