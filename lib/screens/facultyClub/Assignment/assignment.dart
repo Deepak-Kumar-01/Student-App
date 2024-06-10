@@ -31,14 +31,14 @@ class _AssignmentState extends State<Assignment> {
     return Container(
         height: 250,
         width: 380,
-        decoration: BoxDecoration(color: Colors.grey[200],borderRadius: BorderRadius.circular(15),boxShadow: [
+        decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(15),boxShadow: [
           BoxShadow(
-              color: Colors.grey,
+              color: Colors.white,
               offset: const Offset(2,2),
               blurRadius: 5,
               spreadRadius: 1),
           const BoxShadow(
-            color: Colors.grey,
+            color: Colors.white,
             offset: Offset(-2,-2),
             blurRadius: 5,
             spreadRadius:1,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class Assignmentss {
   final String title;
   final String dueDate;
@@ -48,7 +47,8 @@ class _HomePageState extends State<Assignmentlist> {
           ),
         )),
         backgroundColor: Colors.blueGrey,
-      ),
+    ),
+
       body: ListView.separated(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
