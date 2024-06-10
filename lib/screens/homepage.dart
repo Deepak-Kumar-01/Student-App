@@ -75,7 +75,7 @@ class _HomepageState extends State<Homepage> {
                 child: Container(
                   // // height: 150,
                   // width: MediaQuery.of(context).size.width,
-                  color: Colors.blue[700],
+                  color: Colors.blue[800],
 
                   //======AppBar Menu======
                   child: AppBarMenu(),
