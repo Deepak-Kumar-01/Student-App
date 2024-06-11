@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class Assignmentss {
   final String title;
   final String dueDate;
@@ -38,17 +39,15 @@ class _HomePageState extends State<Assignmentlist> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text(
+        title: Text(
           'Assignments',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 40,
-          ),
-        )),
-        backgroundColor: Colors.blueGrey,
-    ),
-
+          style: TextStyle(fontSize: 22, color: Colors.white),
+        ),
+        backgroundColor: Colors.blue[800],
+        iconTheme: IconThemeData(
+          color: Colors.white, // Change the back arrow color here
+        ),
+      ),
       body: ListView.separated(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
@@ -68,10 +67,10 @@ class _HomePageState extends State<Assignmentlist> {
               onPressed: () {},
               child: Text(
                 "Marl as Completed",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               ),
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
+                backgroundColor: MaterialStatePropertyAll(Colors.green),
                 shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
