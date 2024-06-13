@@ -164,23 +164,41 @@ class _HomepageState extends State<Homepage> {
 
 
 // ==================Footer======================
-            bottomNavigationBar: NavigationBar(
+            bottomNavigationBar: Container(
               height: 70,
-              selectedIndex: _currentIndex,
-              onDestinationSelected: (int index){
-                setState(() {
-                  _currentIndex=index;
-                });
-              },
-              indicatorColor: Colors.blue[200],
-              destinations: const [
-                NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-                NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
-                NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
-                NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
-                NavigationDestination(icon: Icon(Icons.data_object), label: "UserData")
+              color: Colors.transparent,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8)
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 3,
+                      color: Colors.blue,
+                    ),
+                    NavigationBar(
+                      height: 67,
+                      selectedIndex: _currentIndex,
+                      onDestinationSelected: (int index){
+                        setState(() {
+                          _currentIndex=index;
+                        });
+                      },
+                      indicatorColor: Colors.blue[200],
+                      destinations: const [
+                        NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+                        NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
+                        NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
+                        NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
+                        NavigationDestination(icon: Icon(Icons.data_object), label: "UserData")
 
-              ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
 
             body: [const Home(),const Attendance(),const Routine(),const Profile(),const UserData()][_currentIndex],
