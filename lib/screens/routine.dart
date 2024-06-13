@@ -13,7 +13,7 @@ class Routine extends StatelessWidget {
         children: [
           Text("Routine",style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700),),
 
-
+          CarouselSlider(),
         ],
       ),
     );

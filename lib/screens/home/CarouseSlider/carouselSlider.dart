@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:studentapp/screens/home/CarouseSlider/carouselSlider_API.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CarouselSlider extends StatefulWidget {
   const CarouselSlider({super.key});
@@ -49,21 +50,11 @@ class _CarouselSliderState extends State<CarouselSlider> {
 
   @override
   Widget build(BuildContext context) {
-    var eventDateAndTime = selectedIndex > eventDetails.length - 1
-        ? "Null"
-        : eventDetails[selectedIndex]["eventDateAndTime"]!;
-    var eventLocation = selectedIndex > eventDetails.length - 1
-        ? "Null"
-        : eventDetails[selectedIndex]["eventLocation"]!;
-    var eventTitle = selectedIndex > eventDetails.length - 1
-        ? "Null"
-        : eventDetails[selectedIndex]["eventTitle"]!;
-    var eventDescription = selectedIndex > eventDetails.length - 1
-        ? "Null"
-        : eventDetails[selectedIndex]["eventDescription"]!;
-    var eventLink = selectedIndex > eventDetails.length - 1
-        ? "Null"
-        : eventDetails[selectedIndex]["eventLink"]!;
+    var eventDateAndTime = eventDetails[selectedIndex]["eventDateAndTime"]!;
+    var eventLocation = eventDetails[selectedIndex]["eventLocation"]!;
+    var eventTitle = eventDetails[selectedIndex]["eventTitle"]!;
+    var eventDescription = eventDetails[selectedIndex]["eventDescription"]!;
+    var eventLink = eventDetails[selectedIndex]["eventLink"]!;
 
 //================= Show POPUP function =====================
 
@@ -160,6 +151,11 @@ class _CarouselSliderState extends State<CarouselSlider> {
                     TextButton(
                         onPressed: () {
                           print("$eventLink clicked...");
+
+                          launchUrl(
+                            Uri.parse(eventLink),
+                            mode: LaunchMode.externalNonBrowserApplication
+                          );
                         },
                         child: Text("Register", style: TextStyle(color: Colors.white),),
                       style: TextButton.styleFrom(
