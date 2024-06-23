@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:studentapp/modals/routine.dart';
+import 'dart:io';
 
+import 'package:studentapp/modals/routine.dart';
 class AdminRoutine extends StatefulWidget {
   const AdminRoutine({super.key});
 
@@ -14,78 +13,30 @@ class AdminRoutine extends StatefulWidget {
 }
 
 class _AdminRoutineState extends State<AdminRoutine> {
-  List<String> days = ["MON", "TUE", "WED", "THRU", "FRI", "SAT"];
-  List<String> timeSlot = [];
-  List<Map<String, Map<String, dynamic>>> periodDetails = [];
-  List<Map<String, dynamic>> routine = [];
-  List<Map<String, dynamic>> subFacMap = [];
-  List<String> codeMapping = [];
-  Map<String, dynamic> subjCodeDetails = {};
-  late Timetable timetable;
-  List<dynamic> slots = [];
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //testing
-  final Map<String, dynamic> mcaTimetable = {
-    'semesters': {
-      'semester_1': {
-        'name': 'Second Semester',
-        'timetable': {
-          'day_1': {
-            'day': 'Monday',
-            'slots': [
-              {'time': '9:00 AM', 'subject': 'Mathematics', 'room': '101'},
-              {
-                'time': '11:00 AM',
-                'subject': 'Computer Science',
-                'room': '102'
-              },
-            ],
-          },
-          'day_2': {
-            'day': 'Tuesday',
-            'slots': [
-              {'time': '10:00 AM', 'subject': 'Physics', 'room': '103'},
-              {'time': '1:00 PM', 'subject': 'Chemistry', 'room': '104'},
-            ],
-          },
-        },
-      },
-    },
-  };
+  //day wise time slots
+  List<Map<String,dynamic>> slots=[{}];
   Map<String, dynamic> btechTimetable = {};
   String currentSem = "semester_4";
   String semName = "Fourth Semester";
+  List<String> timeSlot = [];
+  //[subject code,subject name,faculty name]
+  List<String> facultySheetData=[];
+  List<String> days = ["MON", "TUE", "WED", "THRU", "FRI", "SAT"];
+  Map<String, dynamic> subjCodeDetails = {};
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 
-  Future<void> createDegreeTimetable(
-      String degreeId, Map<String, dynamic> timetableData) async {
-    print("TimeTable: ${timetableData}");
-    CollectionReference degrees = firestore.collection('degrees');
-
-    for (String semesterId in timetableData['semesters'].keys) {
-      print("SemesterId: $semesterId");
-      await degrees.doc(degreeId).collection('semesters').doc(semesterId).set({
-        'name': timetableData['semesters'][semesterId]['name'],
-      });
-      for (String dayId
-          in timetableData['semesters'][semesterId]['timetable'].keys) {
-        await degrees
-            .doc(degreeId)
-            .collection('semesters')
-            .doc(semesterId)
-            .collection('timetable')
-            .doc(dayId)
-            .set({
-          'day': timetableData['semesters'][semesterId]['timetable'][dayId]
-              ['day'],
-          'slots': timetableData['semesters'][semesterId]['timetable'][dayId]
-              ['slots'],
-        });
-      }
-    }
+  void addSlot(String time, String? subCode, String? subject,String? facultyName) {
+    slots.add({
+      "time": time,
+      "subject code":subCode,
+      "subject name": subject,
+      "faculty name": facultyName,
+    });
   }
-
-  void extractTimeTable() async {
+  //Extract Data from excel file
+  Future<Map<String, dynamic>> extractTimetable()async{
+    //initializing btech timetable
     btechTimetable.addAll({
       "semesters": {
         currentSem: {"name": semName, "timetable": {}}
@@ -96,43 +47,36 @@ class _AdminRoutineState extends State<AdminRoutine> {
       allowedExtensions: ['xlsx'],
       allowMultiple: false,
     );
-    if (result != null) {
+    if(result!=null){
       File file = File(result.files.single.path!);
       var bytes = file.readAsBytesSync();
       var excel = Excel.decodeBytes(bytes);
-      //get subcode mapped to subject
-      print(excel.tables.keys.last);
-      for (var table in excel.tables.keys) {
+      for(var table in excel.tables.keys){
+        //sheet variable contains number of sheet in excel:sheet?.sheetName
         var sheet = excel.tables[table];
         //Reading Faculty Sheet
-        if (sheet!.sheetName == "Faculty") {
-          subFacMap.clear();
-          routine.clear();
-          for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++) {
-            for (int colIndex = 0; colIndex < sheet.maxColumns; colIndex++) {
+        if(sheet!.sheetName == "Faculty"){
+          facultySheetData.clear();
+          for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++){
+            for (int colIndex = 0; colIndex < sheet.maxColumns; colIndex++){
               var cellValue = sheet
                   .cell(CellIndex.indexByColumnRow(
-                      columnIndex: colIndex, rowIndex: rowIndex))
+                  columnIndex: colIndex, rowIndex: rowIndex))
                   .value;
-              codeMapping.add(cellValue.toString());
+              facultySheetData.add(cellValue.toString());
             }
             subjCodeDetails.addAll({
-              codeMapping[0]: {
-                "Subject": codeMapping[1],
-                "Faculty": codeMapping[2]
+              facultySheetData[0]: {
+                "Subject": facultySheetData[1],
+                "Faculty": facultySheetData[2]
               }
             });
-            codeMapping.clear();
           }
-          break;
-        } else {
-          continue;
+          //{KCA 201: {Subject: Theory of Automata & Formal Languages, Faculty: Ms.Janeet Kaur}
+          // print("SubjectCodeDetails: ${subjCodeDetails}");
         }
-      }
-      //Reading Routine Sheet
-      for (var table in excel.tables.keys) {
-        var sheet = excel.tables[table];
-        if (sheet != null && sheet.sheetName == "Routine") {
+        //Reading Routine sheet
+        if(sheet.sheetName=="Routine"){
           timeSlot.clear();
           for (int i = 1; i < sheet.maxColumns; i++) {
             timeSlot.add(sheet
@@ -140,43 +84,79 @@ class _AdminRoutineState extends State<AdminRoutine> {
                 .value
                 .toString());
           }
-          for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++) {
-            slots.clear();
-
-            periodDetails.clear();
-            for (int colIndex = 1; colIndex < sheet.maxColumns; colIndex++) {
+          // print("TimeSlots: $timeSlot");
+          for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++){
+            List<Map<String, dynamic>> daySlots = []; // Create a new list for each day
+            // slots.clear();
+            // btechTimetable.clear();
+            for (int colIndex = 1; colIndex < sheet.maxColumns; colIndex++){
               var cellValue = sheet
                   .cell(CellIndex.indexByColumnRow(
-                      columnIndex: colIndex, rowIndex: rowIndex))
+                  columnIndex: colIndex, rowIndex: rowIndex))
                   .value;
-
+              var subCode=cellValue.toString();
               String key = timeSlot[colIndex - 1];
               String? subj = subjCodeDetails[cellValue.toString()]?["Subject"];
-              String? faculty =
-                  subjCodeDetails[cellValue.toString()]?["Faculty"];
-              slots.add({
-                'time': key,
-                "Sub Code": "$cellValue",
-                'subject': "$subj",
-                "faculty Name": "$faculty"
+              String? faculty = subjCodeDetails[cellValue.toString()]?["Faculty"];
+              // addSlot(key, subCode, subj, faculty);
+              daySlots.add({
+                "time": key,
+                "subCode": subCode,
+                "subject": subj,
+                "faculty": faculty,
               });
-              print("SLOTS: $slots");
             }
+            // print("Slots $rowIndex\n:$slots");
             btechTimetable["semesters"][currentSem]["timetable"]
-                ["day_${rowIndex - 1}"] = {
+            ["day_${rowIndex - 1}"] = {
               "day": days[rowIndex - 1],
-              "slots": slots
+              "slots": daySlots,
             };
           }
-          // await createDegreeTimetable("btec",btechTimetable);
         }
       }
     }
+    return btechTimetable;
   }
+  //Firebase Logic for uploading Timetable
+  Future<void> createDegreeTimetable(String degreeId, Map<String, dynamic> timetableData) async {
+    // print("TimeTable: ${timetableData}");
+    CollectionReference degrees = firestore.collection('degrees');
 
+    for (String semesterId in timetableData['semesters'].keys) {
+      print("SemesterId: $semesterId");
+      await degrees.doc(degreeId).collection('semesters').doc(semesterId).set({
+        'name': timetableData['semesters'][semesterId]['name'],
+      });
+      for (String dayId
+      in timetableData['semesters'][semesterId]['timetable'].keys) {
+        await degrees
+            .doc(degreeId)
+            .collection('semesters')
+            .doc(semesterId)
+            .collection('timetable')
+            .doc(dayId)
+            .set({
+          'day': timetableData['semesters'][semesterId]['timetable'][dayId]
+          ['day'],
+          'slots': timetableData['semesters'][semesterId]['timetable'][dayId]
+          ['slots'],
+        });
+      }
+    }
+  }
+  //UploadTimeTable Function gets called on onClick
+  void uploadTimetable ()async{
+    Map<String, dynamic> result=await extractTimetable();
+    await createDegreeTimetable("btec", btechTimetable).then((_) {
+      print('Timetable updated successfully');
+    }).catchError((error) {
+      print('Failed to update timetable: $error');
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+     return Scaffold(
       appBar: AppBar(
         title: Text("Routine"),
         backgroundColor: Colors.blue[800],
@@ -187,7 +167,7 @@ class _AdminRoutineState extends State<AdminRoutine> {
           children: [
             InkWell(
               onTap: () {
-                extractTimeTable();
+                uploadTimetable();
               },
               borderRadius: BorderRadius.circular(50),
               child: Container(
@@ -209,4 +189,5 @@ class _AdminRoutineState extends State<AdminRoutine> {
       ),
     );
   }
+
 }
