@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:studentapp/modals/authStudent.dart';
+import 'package:studentapp/providers/authProvider.dart';
 import 'package:studentapp/services/authentication.dart';
 import 'package:studentapp/wrapper.dart';
 import 'firebase_options.dart';
@@ -28,9 +29,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<CustomStudent?>.value(
-      value: AuthServices().user,
-      initialData: null,
+    return  MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MyAuthProvider>(
+          create: (_) => MyAuthProvider(),
+        ),
+      ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Wrapper(),

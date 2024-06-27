@@ -1,4 +1,5 @@
 class CustomStudent{
   final String? uid;
-  CustomStudent({this.uid});
+  final String? role;
+  CustomStudent({this.uid,this.role});
 }

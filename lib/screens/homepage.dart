@@ -11,6 +11,7 @@ import 'package:studentapp/screens/settings/setting.dart';
 import 'package:studentapp/services/databaseServices.dart';
 import 'package:studentapp/testing/admin/adminDashboard.dart';
 import '../modals/users.dart';
+import '../providers/authProvider.dart';
 import '../services/authentication.dart';
 import '../services/secureStorage.dart';
 import '../wrapper.dart';
@@ -18,9 +19,8 @@ import 'attendance.dart';
 import 'home.dart';
 
 class Homepage extends StatefulWidget {
-  final studentUid;
 
-  const Homepage({super.key, required this.studentUid});
+  const Homepage({super.key});
 
   @override
   State<Homepage> createState() => _HomepageState();
@@ -28,28 +28,18 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
-  String? _uid;
-  AppUser? _appUser;
-  AuthServices _authRef = AuthServices();
-  void init() async {
-    final uid = await UserSecureStorage.getUserUID();
-    setState(() {
-      _uid = uid;
-      print("Init State _uid:$uid}");
-    });
-  }
 
   @override
   void initState() {
     super.initState();
-    init();
-    // Future.delayed(Duration(seconds: 2),()=>print("App Running"));
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    final authProvider = Provider.of<MyAuthProvider?>(context);
+    AppUser? userData=authProvider?.appUser;
+    // print("APPUSER DATA Inside Homepage:${userData?.toJson()}");
     double toolbarHeight;
     if (size.height <= 640) {
       // Small screen
@@ -61,15 +51,7 @@ class _HomepageState extends State<Homepage> {
       // Large screen
       toolbarHeight = 100;
     }
-
-    AppUser? user = Provider.of<AppUser?>(context);
-    return StreamBuilder(
-        stream:DatabaseServices()
-            .getUserData(_uid??"null")
-            .map((snapshot) => snapshot.data()),
-        builder: (context,snapshot){
-          _appUser=snapshot.data;
-          return Scaffold(
+    return Scaffold(
             appBar: AppBar(
               // toolbarHeight: 100,
               toolbarHeight: toolbarHeight,
@@ -109,14 +91,21 @@ class _HomepageState extends State<Homepage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${_appUser?.name}',
+                          '${userData?.name}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24,
                           ),
                         ),
                         Text(
-                          '${_appUser?.universityEmailId}',
+                          '${userData?.universityEmailId}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          '${userData?.role}',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -125,18 +114,18 @@ class _HomepageState extends State<Homepage> {
                       ],
                     ),
                   ),
-                  ListTile(
-                    leading: Icon(Icons.home),
-                    title: const Text('Admin Login'),
-                    onTap: () {
-                      Navigator.pop(context); // Close the drawer
-                      // Add your onTap code here, for example navigate to another page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AdminDashboard()),
-                      );
-                    },
-                  ),
+              userData?.role!="student"?ListTile(
+                leading: Icon(Icons.home),
+                title: const Text('Admin Login'),
+                onTap: () {
+                  Navigator.pop(context); // Close the drawer
+                  // Add your onTap code here, for example navigate to another page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AdminDashboard()),
+                  );
+                },
+              ):Text(""),
                   ListTile(
                     leading: const Icon(Icons.settings),
                     title: const Text('Logout'),
@@ -150,7 +139,8 @@ class _HomepageState extends State<Homepage> {
                                 ),
                               );
                             });
-                        await _authRef.signOutUser();
+                        // await _authRef.signOutUser();
+                        await authProvider!.signOut();
                         await UserSecureStorage.setUserUID("null");
                         if(mounted){
                           Navigator.of(context).pop();
@@ -207,7 +197,5 @@ class _HomepageState extends State<Homepage> {
             body: [const Home(),const Attendance(),const Routine(),const Profile(),const UserData()][_currentIndex],
 
           );
-        });
-
   }
 }

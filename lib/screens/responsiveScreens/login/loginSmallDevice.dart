@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:studentapp/providers/authProvider.dart';
 import 'package:studentapp/services/authentication.dart';
 import 'package:studentapp/wrapper.dart';
 import '../../../flashMessage/customSnackBar.dart';
@@ -16,6 +17,7 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final AuthServices _authRef = AuthServices();
+  final MyAuthProvider _authProvider=MyAuthProvider();
 
   Future<void> _loginAndNavigate() async {
     showDialog(
@@ -31,9 +33,8 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
     );
     User? user;
     try {
-      user = await _authRef.signInCustomStudentUniversityRoll(
-          _controller1.text, _controller2.text);
-      print("user fetched:${user?.uid}");
+      user = await _authProvider.signIn(_controller1.text, _controller2.text);
+      print("Login Success inside LoginMedium:$user");
     } catch (e) {
       print("Error:$e");
     }
@@ -55,7 +56,7 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: CustomSnackBar(errorMsg: "${e.toString()}"),
+              content: CustomSnackBar(errorMsg: e.toString()),
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.transparent,
               elevation: 0,

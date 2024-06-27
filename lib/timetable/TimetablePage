@@ -1,0 +1,86 @@
+class _TimetableDialogState extends State<TimetableDialog> {
+  String? selectedDepartment;
+  String? selectedSemester;
+  List<String> semesters = [];
+
+  final Map<String, List<String>> departmentSemesters = {
+    'MCA': ['1', '2', '3', '4'],
+    'BTECH': ['1', '2', '3', '4', '5', '6', '7', '8'],
+    'BHARMA': ['1', '2', '3', '4', '5', '6', '7', '8'],
+  };
+
+  void _updateSemesters(String department) {
+    setState(() {
+      semesters = departmentSemesters[department] ?? [];
+      selectedSemester = null; // Reset selected semester
+    });
+  }
+
+  void uploadTimetable() {
+    // Your upload timetable logic here
+    // You can use selectedDepartment and selectedSemester here
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Assign Role"),
+      content: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DropdownButtonFormField<String>(
+              value: selectedDepartment,
+              hint: Text("Select Department"),
+              items: departmentSemesters.keys
+                  .map((department) => DropdownMenuItem(
+                        value: department,
+                        child: Text(department),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedDepartment = value;
+                  _updateSemesters(value!);
+                });
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 20),
+            DropdownButtonFormField<String>(
+              value: selectedSemester,
+              hint: Text("Select Semester"),
+              items: semesters
+                  .map((semester) => DropdownMenuItem(
+                        value: semester,
+                        child: Text(semester),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedSemester = value;
+                });
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        MaterialButton(
+          onPressed: uploadTimetable,
+          child: Text(
+            "Update",
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.deepPurple[800],
+        ),
+      ],
+    );
+  }

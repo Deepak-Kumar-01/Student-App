@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-class CustomSnackBar extends StatelessWidget {
-  final errorMsg;
+class CustomSuccessSnackBar extends StatefulWidget {
+  const CustomSuccessSnackBar({super.key});
 
-  const CustomSnackBar({
-    super.key,
-    required this.errorMsg,
+  @override
+  State<CustomSuccessSnackBar> createState() => _CustomSuccessSnackBarState();
+}
 
-  });
-
+class _CustomSuccessSnackBarState extends State<CustomSuccessSnackBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(12),
       height: 70,
       decoration: const BoxDecoration(
-          color: Colors.redAccent,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.green,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
 
       ),
       child: Row(
@@ -26,11 +25,11 @@ class CustomSnackBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Error Encountered!",
+                  "Task Complete",
                   style: TextStyle(fontSize: 14, color: Colors.white),
                 ),
                 Text(
-                  errorMsg,
+                  "Success",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

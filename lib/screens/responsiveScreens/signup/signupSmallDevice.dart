@@ -239,7 +239,7 @@ class _SignUpSmallDeviceState extends State<SignUpSmallDevice> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Homepage(studentUid: null,)));
+                                        builder: (context) => Homepage()));
                               });
                             },
                             child: Text(
