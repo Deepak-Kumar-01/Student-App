@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
-
 import 'package:studentapp/services/authentication.dart';
 import 'package:studentapp/services/databaseServices.dart';
 import 'package:studentapp/services/secureStorage.dart';
@@ -32,8 +31,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Admin"),
-        backgroundColor: Colors.orange,
+        title: Text("Student"),
+        backgroundColor: Color(0xff00c95d),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -59,10 +58,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
               //Edit Ongoing Session
               ElevatedButton(
                   onPressed: () {},
-                  child: Row(
+                  child: const Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.edit,
                         ),
@@ -74,10 +73,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
               ElevatedButton(
                   // onPressed: selectExcelFile,
                   onPressed: extractUserAuthDetail,
-                  child: Row(
+                  child: const Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.login,
                         ),
@@ -131,12 +130,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 rowMap[headers[colIndex]] = formattedDate;
               } else {
                 rowMap[headers[colIndex]] = cellValue;
-                rowMap['role']="student";
+                rowMap['role'] = "student";
               }
             }
             setAuthForStudent.add(rowMap);
+            String email = "${rowMap['universityEmailId'].toString()}@jssaten.ac.in";
             await _authRef.createAuthCredential(
-                rowMap['universityEmailId'].toString(),
+                email,
                 rowMap['dob'].toString());
             print("USER: ${FirebaseAuth.instance.currentUser?.uid} ");
             String uid = "${FirebaseAuth.instance.currentUser?.uid}";

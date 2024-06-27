@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:studentapp/providers/authProvider.dart';
 import 'package:studentapp/screens/homepage.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/login/loginFormController.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/onboarding/onboardingController.dart';
@@ -18,9 +19,9 @@ class Wrapper extends StatefulWidget {
 }
 
 class _WrapperState extends State<Wrapper> {
-  CustomStudent? _user;
-   String? userUid;
+  String? userUid;
   String _isOnboarded = "false";
+
   Future<void> initialization() async {
     print('ready in 3...');
     String? onBoardingStatus = await UserSecureStorage.getOnboarding();
@@ -30,6 +31,7 @@ class _WrapperState extends State<Wrapper> {
     });
     print('ready in 1...');
     userUid=await UserSecureStorage.getUserUID();
+    print(userUid);
     print('go!');
     FlutterNativeSplash.remove();
   }
@@ -47,26 +49,16 @@ class _WrapperState extends State<Wrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<AppUser?>.value(
-      value: DatabaseServices()
-          .getUserData(userUid.toString())
-          .map((snapshot) => snapshot.data()),
-      initialData: null,
-      child: Scaffold(
-        body: Consumer<CustomStudent?>(
-          builder: (context, user, child) {
-            //_user is CustomStudent ref/ user at current stream
-            _user = user;
-            return Center(
+    final authProvider = Provider.of<MyAuthProvider?>(context);
+    // print("Inside Wrapper:${authProvider?.user}");
+    return Scaffold(
+          body:Center(
               child: _isOnboarded != "false"
-                  ? (_user?.uid == null
-                      ? ResponsiveLogin()
-                      : Homepage(studentUid: userUid))
-                  : ResponsiveOnboarding(),
-            );
-          },
-        ),
-      ),
+                  ? (authProvider?.user?.uid == null
+                      ? const ResponsiveLogin()
+                      : const Homepage())
+                  : const ResponsiveOnboarding(),
+            )
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:studentapp/services/authentication.dart';
 
 import '../../../flashMessage/customSnackBar.dart';
 import '../../../modals/authStudent.dart';
+import '../../../providers/authProvider.dart';
 import '../../../services/secureStorage.dart';
 import '../../../wrapper.dart';
 
@@ -16,9 +17,12 @@ class LoginMediumDevice extends StatefulWidget {
 }
 
 class _LoginMediumDeviceState extends State<LoginMediumDevice> {
+  //Controller for UserEmail and Pass
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
-  AuthServices _authRef = AuthServices();
+  //Accessing UserData From Provider
+  MyAuthProvider _authProvider=MyAuthProvider();
+  //On Success Login Navigate
   Future<void> _loginAndNavigate() async {
     showDialog(
       context: context,
@@ -32,32 +36,32 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
       },
     );
     User? user;
+
     try {
-      user = await _authRef.signInCustomStudentUniversityRoll(
-          _controller1.text, _controller2.text);
-      print("user fetched:${user?.uid}");
+      user = await _authProvider.signIn(_controller1.text, _controller2.text);
+      print("Login Success inside LoginMedium:$user");
     } catch (e) {
       print("Error:$e");
     }
-    // Close the dialog
+    //Close the dialog
     if (mounted) {
       Navigator.of(context).pop();
     }
-    if(user!=null){
-      try{
+    if (user != null) {
+      try {
         await UserSecureStorage.setUserUID(
             "${user.uid}");
-        if(mounted){
+        if (mounted) {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => Wrapper()),
                 (Route<dynamic> route) => false,
           );
         }
-      }catch(e){
+      } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: CustomSnackBar(errorMsg: "${e.toString()}"),
+              content: CustomSnackBar(errorMsg: e.toString()),
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -65,7 +69,8 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
           );
         }
       }
-    }else{
+    }
+    else{
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

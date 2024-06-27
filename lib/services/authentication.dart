@@ -17,6 +17,7 @@ class AuthServices {
 
   //Converting User user into CustomStudent user in customStudent
   CustomStudent? _userFromFirebaseUser(User? user) {
+    print("user role:${user?.uid}");
     return user != null ? CustomStudent(uid: user.uid) : null;
   }
 

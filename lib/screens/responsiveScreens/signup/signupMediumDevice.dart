@@ -225,7 +225,7 @@ class _SignUpMediumDeviceState extends State<SignUpMediumDevice> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Homepage(studentUid: null,)));
+                                    builder: (context) => Homepage()));
                           });
                         },
                         child: Text(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:studentapp/screens/admin/admin.dart';
 import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
 
+import '../../modals/users.dart';
+import '../../providers/authProvider.dart';
 import '../../screens/appbar/appbarmenu.dart';
 import '../../screens/appbar/custom_appbar_shape.dart';
 import '../../screens/attendance.dart';
@@ -71,7 +74,8 @@ class AdminDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    final authProvider = Provider.of<MyAuthProvider?>(context);
+    print("Admin Dashboard:${authProvider?.appUser?.name}");
     return Scaffold(
       // drawer: Drawer(
       //   backgroundColor: Colors.blue,
