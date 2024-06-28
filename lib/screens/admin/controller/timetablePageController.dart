@@ -11,32 +11,46 @@ class TimetablePageController extends StatefulWidget {
   const TimetablePageController({super.key});
 
   @override
-  _TimetablePageControllerState createState() => _TimetablePageControllerState();
+  _TimetablePageControllerState createState() =>
+      _TimetablePageControllerState();
 }
+
 class _TimetablePageControllerState extends State<TimetablePageController> {
   String? selectedDepartment;
   String? selectedSemester;
   List<String> semesters = [];
   //
   //day wise time slots
-  List<Map<String,dynamic>> slots=[{}];
-  Map<String, dynamic> btechTimetable = {};
-  String currentSem = "semester_4";
-  String semName = "Fourth Semester";
+  List<Map<String, dynamic>> slots = [{}];
+  Map<String, dynamic> timetable = {};
+  String currentSem = "semester_";
+  List<String> semName = [
+    "First Semester",
+    "Second Semester",
+    "Third Semester",
+    "Fourth Semester",
+    "Fifth Semester",
+    "Sixth Semester",
+    "Seventh Semester",
+    "Eighth Semester"
+  ];
   List<String> timeSlot = [];
   //[subject code,subject name,faculty name]
-  List<String> facultySheetData=[];
+  List<String> facultySheetData = [];
   List<String> days = ["MON", "TUE", "WED", "THRU", "FRI", "SAT"];
   Map<String, dynamic> subjCodeDetails = {};
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   //Extract Data from excel file
-  Future<Map<String, dynamic>> extractTimetable()async{
+  Future<Map<String, dynamic>> extractTimetable() async {
     //initializing btech timetable
-    btechTimetable.addAll({
+    timetable.addAll({
       "semesters": {
-        currentSem: {"name": semName, "timetable": {}}
+        currentSem + selectedSemester!: {
+          "name": semName[int.parse(selectedSemester!)-1],
+          "timetable": {}
+        }
       }
     });
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -44,22 +58,22 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
       allowedExtensions: ['xlsx'],
       allowMultiple: false,
     );
-    if(result!=null){
+    if (result != null) {
       File file = File(result.files.single.path!);
       var bytes = file.readAsBytesSync();
       var excel = Excel.decodeBytes(bytes);
-      for(var table in excel.tables.keys){
+      for (var table in excel.tables.keys) {
         //sheet variable contains number of sheet in excel:sheet?.sheetName
         var sheet = excel.tables[table];
         //Reading Faculty Sheet
-        if(sheet!.sheetName == "Faculty"){
+        if (sheet!.sheetName == "Faculty") {
           subjCodeDetails.clear();
-          for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++){
+          for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++) {
             facultySheetData.clear();
-            for (int colIndex = 0; colIndex < sheet.maxColumns; colIndex++){
+            for (int colIndex = 0; colIndex < sheet.maxColumns; colIndex++) {
               var cellValue = sheet
                   .cell(CellIndex.indexByColumnRow(
-                  columnIndex: colIndex, rowIndex: rowIndex))
+                      columnIndex: colIndex, rowIndex: rowIndex))
                   .value;
               facultySheetData.add(cellValue.toString().trim());
               // print("Faculty Mapping:$facultySheetData");
@@ -76,32 +90,29 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
           // print("SubjectCodeDetails: ${subjCodeDetails}");
         }
         //Reading Routine sheet
-        if(sheet.sheetName=="Routine"){
+        if (sheet.sheetName == "Routine") {
           timeSlot.clear();
           for (int i = 1; i < sheet.maxColumns; i++) {
             timeSlot.add(sheet
                 .cell(CellIndex.indexByColumnRow(columnIndex: i, rowIndex: 0))
                 .value
-                .toString().trim());
+                .toString()
+                .trim());
           }
           // print("TimeSlots: $timeSlot");
-          for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++){
-            List<Map<String, dynamic>> daySlots = []; // Create a new list for each day
-            for (int colIndex = 1; colIndex < sheet.maxColumns; colIndex++){
+          for (int rowIndex = 1; rowIndex < sheet.maxRows; rowIndex++) {
+            // Create a new list for each day
+            List<Map<String, dynamic>> daySlots = [];
+            for (int colIndex = 1; colIndex < sheet.maxColumns; colIndex++) {
               var cellValue = sheet
                   .cell(CellIndex.indexByColumnRow(
-                  columnIndex: colIndex, rowIndex: rowIndex))
+                      columnIndex: colIndex, rowIndex: rowIndex))
                   .value;
-              var subCode=cellValue.toString().trim();
+              var subCode = cellValue.toString().trim();
               // print("SubjectCodeDetails:${subjCodeDetails}");
               String key = timeSlot[colIndex - 1];
               String? subj = subjCodeDetails[subCode]?["Subject"];
               String? faculty = subjCodeDetails[subCode]?["Faculty"];
-              if(subj==null){
-                print("subject null subcode:$subCode");
-                print("verifying key:subject $subCode: ${subjCodeDetails[subCode]?["Subject"]}");
-                print("SubjectCodeDetails:$subjCodeDetails");
-              }
               // print("key ${key} ,subCode ${subCode},faculty ${faculty} ");
               // addSlot(key, subCode, subj, faculty);
               daySlots.add({
@@ -111,11 +122,10 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
                 "faculty": faculty,
               });
               // print("Slots $rowIndex\n:$daySlots");
-
             }
             // print("Slots $rowIndex\n:$daySlots");
-            btechTimetable["semesters"][currentSem]["timetable"]
-            ["day_${rowIndex - 1}"] = {
+            timetable["semesters"][currentSem + selectedSemester!]
+                ["timetable"]["day_${rowIndex - 1}"] = {
               "day": days[rowIndex - 1],
               "slots": daySlots,
             };
@@ -124,22 +134,24 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
       }
     }
     // print("Btech Timetable:$btechTimetable");
-    return btechTimetable;
+    return timetable;
   }
+
   //Firebase Logic for uploading Timetable
-  Future<void> createDegreeTimetable(String degreeId, Map<String, dynamic> timetableData) async {
+  Future<void> createDegreeTimetable(
+      String dept, String sem, Map<String, dynamic> timetableData) async {
     // print("TimeTable: ${timetableData}");
     CollectionReference degrees = firestore.collection('degrees');
 
     for (String semesterId in timetableData['semesters'].keys) {
-      print("SemesterId: $semesterId");
-      await degrees.doc(degreeId).collection('semesters').doc(semesterId).set({
+      // print("SemesterId: $semesterId");
+      await degrees.doc(dept).collection('semesters').doc(semesterId).set({
         'name': timetableData['semesters'][semesterId]['name'],
       });
       for (String dayId
       in timetableData['semesters'][semesterId]['timetable'].keys) {
         await degrees
-            .doc(degreeId)
+            .doc(dept)
             .collection('semesters')
             .doc(semesterId)
             .collection('timetable')
@@ -153,14 +165,16 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
       }
     }
   }
+
   //UploadTimeTable Function gets called on onClick
-  Future<bool> uploadTimetable ()async{
-    Map<String, dynamic> result=await extractTimetable();
+  Future<bool> uploadTimetable() async {
+    Map<String, dynamic> result = await extractTimetable();
     // print("RESULT: ${result['semesters']["semester_4"]['timetable']["day_3"]}");
+    // print("RESULT:$result");
     if(result.isEmpty){
       print("Empty Content");
     }
-    await createDegreeTimetable("btec", btechTimetable).then((_) {
+    await createDegreeTimetable(selectedDepartment!,selectedSemester!, timetable).then((_) {
       print('Timetable updated successfully');
       return true;
     }).catchError((error) {
@@ -168,6 +182,7 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
     });
     return false;
   }
+
   final Map<String, List<String>> departmentSemesters = {
     'MCA': ['1', '2', '3', '4'],
     'BTECH': ['1', '2', '3', '4', '5', '6', '7', '8'],
@@ -181,11 +196,11 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
     });
   }
 
-  void uploadTT()async{
+  void uploadTT() async {
     if (!_formKey.currentState!.validate()) {
       return; // Form is not valid
     }
-    bool isComplete=false;
+    bool isComplete = false;
     print("Dept:$selectedDepartment, Sem:$selectedSemester");
     showDialog(
       context: context,
@@ -199,18 +214,17 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
       },
     );
     //UploadTimetable function called
-    isComplete=await uploadTimetable();
+    isComplete = await uploadTimetable();
     Navigator.pop(context);
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: CustomSuccessSnackBar(),
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
     );
-
   }
 
   @override
@@ -229,9 +243,9 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
                 hint: Text("Select Department"),
                 items: departmentSemesters.keys
                     .map((department) => DropdownMenuItem(
-                  value: department,
-                  child: Text(department),
-                ))
+                          value: department,
+                          child: Text(department),
+                        ))
                     .toList(),
                 onChanged: (value) {
                   setState(() {
@@ -255,9 +269,9 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
                 hint: Text("Select Semester"),
                 items: semesters
                     .map((semester) => DropdownMenuItem(
-                  value: semester,
-                  child: Text(semester),
-                ))
+                          value: semester,
+                          child: Text(semester),
+                        ))
                     .toList(),
                 onChanged: (value) {
                   setState(() {
