@@ -11,6 +11,10 @@ import '../../screens/attendance.dart';
 import '../../screens/custombutton/custom_button.dart';
 import '../../screens/facultyClub/faculty/faculty.dart';
 import '../../screens/routine.dart';
+import 'adminScreens/Notes.dart';
+import 'adminScreens/PYQ.dart';
+import 'adminScreens/Society.dart';
+import 'adminScreens/notificationAdmin.dart';
 
 class AdminDashboard extends StatelessWidget {
   // const Dashboard({super.key});
@@ -83,9 +87,37 @@ class AdminDashboard extends StatelessWidget {
           color: Colors.white
         ),
       ),
+      // appBar: AppBar(
+      //   // toolbarHeight: 100,
+      //   toolbarHeight: size.width <= smallDeviceWidth ? 100 : 130,
+      //   // toolbarHeight: size.height*0.18,
+      //   automaticallyImplyLeading:
+      //       false, // to disable auto menu button when using drawer
+      //   backgroundColor: Colors.transparent,
+      //   iconTheme: IconThemeData(
+      //       color: Colors.white), // Change the color of the drawer icon here
+      //   shadowColor: Colors.transparent,
+      //   excludeHeaderSemantics: true,
+      //   elevation: 0.0,
+      //   forceMaterialTransparency: true,
+      //   centerTitle: true,
+      //
+      //   flexibleSpace: ClipPath(
+      //     clipper: CustomAppBarShape(),
+      //     child: Container(
+      //       // // height: 150,
+      //       // width: MediaQuery.of(context).size.width,
+      //       color: Colors.blue[700],
+      //
+      //       //======AppBar Menu======
+      //       child: AppBarMenu(),
+      //     ),
+      //   ),
+      // ),
 
 
       body: Padding(
+        padding: const EdgeInsets.only(top: 8, left: 4, right: 4),
         child: SingleChildScrollView(
           child: Center(
             child: Wrap(
@@ -100,6 +132,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return AdminHomePage();
                         },
                       ));
                     },
@@ -111,6 +144,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return Attendance();
                         },
                       ));
                     },
@@ -121,6 +155,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return Faculty();
                         },
                       ));
                     },
@@ -131,6 +166,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return Notes();
                         },
                       ));
                     },
@@ -141,6 +177,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return NotificationAdmin();
                         },
                       ));
                     },
@@ -151,6 +188,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return PYQ();
                         },
                       ));
                     },
@@ -161,6 +199,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return Routine();
                         },
                       ));
                     },
@@ -171,6 +210,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return Society();
                         },
                       ));
                     },
@@ -219,12 +259,14 @@ class Dashboard_Container extends StatelessWidget {
         // color: Color(0xff8C4DE8),
         // color: Color(0xffF11E60),
         color: containerColor,
+        borderRadius: BorderRadius.circular(8),
         // border: Border.all(
         //   color: Colors.black,
         //   width: 1.3,
         // ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
@@ -240,6 +282,7 @@ class Dashboard_Container extends StatelessWidget {
           ClipRRect(
               borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(8),
+                  bottomLeft: Radius.circular(8)),
               child: Custom_Button(
                 btnBgColor: Color(0xff2F334E),
                 btnTextSize: 15,
@@ -252,6 +295,7 @@ class Dashboard_Container extends StatelessWidget {
                 btnWidth: 110,
                 btnBorderRadius: 0,
                 btnFunction: containerFunction,
+              )),
         ],
       ),
     );
