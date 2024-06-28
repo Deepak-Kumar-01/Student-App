@@ -134,6 +134,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
               }
             }
             setAuthForStudent.add(rowMap);
+            String email = rowMap['universityEmailId'].toString();
             await _authRef.createAuthCredential(
                 email,
                 rowMap['dob'].toString());

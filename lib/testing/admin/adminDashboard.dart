@@ -2,15 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studentapp/screens/admin/admin.dart';
 import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
+import 'package:studentapp/testing/admin/adminScreens/adminAttendance.dart';
+import 'package:studentapp/testing/admin/adminScreens/adminFaculty.dart';
+import 'package:studentapp/testing/admin/adminScreens/adminRoutine.dart';
 
 import '../../modals/users.dart';
 import '../../providers/authProvider.dart';
 import '../../screens/appbar/appbarmenu.dart';
 import '../../screens/appbar/custom_appbar_shape.dart';
+
+import 'package:studentapp/screens/admin/Student.dart';
+import 'package:studentapp/screens/admin/adminRoutine.dart';
+
 import '../../screens/attendance.dart';
 import '../../screens/custombutton/custom_button.dart';
 import '../../screens/facultyClub/faculty/faculty.dart';
 import '../../screens/routine.dart';
+import 'adminScreens/adminNotes.dart';
+import 'adminScreens/adminPYQ.dart';
+import 'adminScreens/adminSociety.dart';
+import 'adminScreens/adminNotificationAdmin.dart';
 
 class AdminDashboard extends StatelessWidget {
   // const Dashboard({super.key});
@@ -86,6 +97,7 @@ class AdminDashboard extends StatelessWidget {
 
 
       body: Padding(
+        padding: const EdgeInsets.only(top: 15, left: 4, right: 4),
         child: SingleChildScrollView(
           child: Center(
             child: Wrap(
@@ -100,6 +112,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return Student();
                         },
                       ));
                     },
@@ -111,6 +124,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return AdminAttendance();
                         },
                       ));
                     },
@@ -121,6 +135,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return AdminFaculty();
                         },
                       ));
                     },
@@ -131,6 +146,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return AdminNotes();
                         },
                       ));
                     },
@@ -141,6 +157,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return AdminNotification();
                         },
                       ));
                     },
@@ -151,6 +168,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return AdminPYQ();
                         },
                       ));
                     },
@@ -161,6 +179,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return AdminRoutine();
                         },
                       ));
                     },
@@ -171,6 +190,7 @@ class AdminDashboard extends StatelessWidget {
                     containerFunction: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
+                          return AdminSociety();
                         },
                       ));
                     },
@@ -219,12 +239,14 @@ class Dashboard_Container extends StatelessWidget {
         // color: Color(0xff8C4DE8),
         // color: Color(0xffF11E60),
         color: containerColor,
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8), bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8),),
         // border: Border.all(
         //   color: Colors.black,
         //   width: 1.3,
         // ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
@@ -237,9 +259,12 @@ class Dashboard_Container extends StatelessWidget {
                   color: Color(0xffF3F9F9)),
             ),
           ),
+
           ClipRRect(
               borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(8),
+                  bottomLeft: Radius.circular(8)
+              ),
               child: Custom_Button(
                 btnBgColor: Color(0xff2F334E),
                 btnTextSize: 15,
@@ -252,6 +277,8 @@ class Dashboard_Container extends StatelessWidget {
                 btnWidth: 110,
                 btnBorderRadius: 0,
                 btnFunction: containerFunction,
+              )
+          ),
         ],
       ),
     );

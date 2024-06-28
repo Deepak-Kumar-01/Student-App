@@ -10,6 +10,14 @@ class Faculty extends StatelessWidget {
       height:size.height*0.2 ,
       width: size.width*0.60,
 
+      decoration:BoxDecoration(color: Color(0xFFFFD1E3),borderRadius: BorderRadius.circular(10),border: Border.all(color: Colors.black),boxShadow: [BoxShadow (
+        color: Color(0xffffd1e3),
+        offset: Offset(2.0,2.0),
+        blurRadius: 25,
+        spreadRadius: 1.0
+      )
+
+          ]),
       child: Column(
         children: [
           Row(
@@ -83,6 +91,7 @@ class Faculty extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(15.0,0,0,0),
+                              child: Text('Followers',style: TextStyle(fontSize: 12,color: Colors.white),),
                             ),
                           ],
                         ),
@@ -98,6 +107,7 @@ class Faculty extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {},
                             child: Text('Follow',style:TextStyle(color: Colors.white,fontSize: 10),textAlign: TextAlign.center,),
+                              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.black),padding: MaterialStatePropertyAll(EdgeInsets.fromLTRB(5, 4, 5, 5))),
                           ),
                         ),
                         SizedBox(width: 8.0),
@@ -107,6 +117,10 @@ class Faculty extends StatelessWidget {
                           child: OutlinedButton(
                             onPressed: () {},
                             child: Text('View profile',style:TextStyle(color: Colors.black,fontSize: 10),textAlign: TextAlign.center,),
+
+                            style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white),padding: MaterialStatePropertyAll(EdgeInsets.fromLTRB(5, 4, 5, 5))),
+
+
                           ),
                         ),
                       ],
@@ -123,4 +137,5 @@ class Faculty extends StatelessWidget {
       ),
     );
   }
+
 }
