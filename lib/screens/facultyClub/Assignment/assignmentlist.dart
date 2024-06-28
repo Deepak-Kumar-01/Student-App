@@ -5,7 +5,6 @@ class Assignmentss {
   final String dueDate;
   final String url;
 
-  Assignmentss(this.title, this.dueDate,this.url);
 }
 
 class Assignmentlist extends StatefulWidget {
@@ -18,20 +17,6 @@ class Assignmentlist extends StatefulWidget {
 class _HomePageState extends State<Assignmentlist> {
   // Example data (you can replace this with your actual data)
   final List<Assignmentss> assignments = [
-    Assignmentss('TAFL Homework', 'October 25, 2021','assets/images/TAFL.png'),
-    Assignmentss('OPPs Project', 'November 15, 2021','assets/images/OOPs.png'),
-    Assignmentss('DSA Homework', 'October 25, 2021','assets/images/DSA.png'),
-    Assignmentss('DBMS Homework', 'October 25, 2021','assets/images/DBMS.png'),
-    Assignmentss('TAFL Homework', 'October 25, 2021','assets/images/TAFL.png'),
-    Assignmentss('TAFL Homework', 'October 25, 2021','assets/images/TAFL.png'),
-    Assignmentss('TAFL Homework', 'October 25, 2021','assets/images/TAFL.png'),
-    Assignmentss('TAFL Homework', 'October 25, 2021','assets/images/TAFL.png'),
-    Assignmentss('OPPs Project', 'November 15, 2021','assets/images/OOPs.png'),
-    Assignmentss('DSA Homework', 'October 25, 2021','assets/images/DSA.png'),
-    Assignmentss('DBMS Homework', 'October 25, 2021','assets/images/DBMS.png'),
-    Assignmentss('TAFL Homework', 'October 25, 2021','assets/images/TAFL.png'),
-    Assignmentss('TAFL Homework', 'October 25, 2021','assets/images/TAFL.png'),
-    Assignmentss('TAFL Homework', 'October 25, 2021','assets/images/TAFL.png'),
 
     // Add more assignments here
   ];
@@ -65,8 +50,6 @@ class _HomePageState extends State<Assignmentlist> {
               style: TextStyle(fontSize: 15),
             ),
             trailing: SizedBox(
-              width: 110,
-              height: 35,
               child: ElevatedButton(
                 onPressed: () {},
                 child: Text(
@@ -87,7 +70,6 @@ class _HomePageState extends State<Assignmentlist> {
           );
         },
         separatorBuilder: (BuildContext context, int index) {
-          return Divider(height: 10, thickness: 2);
         },
       ),
     );

@@ -1,213 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:studentapp/UserData.dart';
-import 'package:studentapp/screens/admin/admin.dart';
 import 'package:studentapp/screens/appbar/appbarmenu.dart';
 import 'package:studentapp/screens/appbar/custom_appbar_shape.dart';
 import 'package:studentapp/screens/profile.dart';
-import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
 import 'package:studentapp/screens/routine.dart';
-import 'package:studentapp/screens/settings/setting.dart';
-import 'package:studentapp/services/databaseServices.dart';
-import 'package:studentapp/testing/admin/adminDashboard.dart';
-import '../modals/users.dart';
-import '../services/authentication.dart';
-import '../services/secureStorage.dart';
-import '../wrapper.dart';
 import 'attendance.dart';
 import 'home.dart';
 
 class Homepage extends StatefulWidget {
-  final studentUid;
-
-  const Homepage({super.key, required this.studentUid});
+  const Homepage({super.key});
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-  int _currentIndex = 0;
-  String? _uid;
-  AppUser? _appUser;
-  AuthServices _authRef = AuthServices();
-  void init() async {
-    final uid = await UserSecureStorage.getUserUID();
-    setState(() {
-      _uid = uid;
-      print("Init State _uid:$uid}");
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-    // Future.delayed(Duration(seconds: 2),()=>print("App Running"));
-  }
+  int _currentIndex=0;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      // drawer: Drawer(
+      //   backgroundColor: Colors.blue[400],
+      // ),
 
-    double toolbarHeight;
-    if (size.height <= 640) {
-      // Small screen
-      toolbarHeight = 108;
-    } else if (size.height <= 731) {
-      // Medium screen
-      toolbarHeight = 105;
-    } else {
-      // Large screen
-      toolbarHeight = 100;
-    }
+      // -----------------Initial appBar ---------------------------,
+      // appBar: AppBar(
+      //   title: Text("Home",style: TextStyle(color: Colors.white),),
+      //   backgroundColor: Colors.blue[800],
+      //   iconTheme: const IconThemeData(color: Colors.white),
+      // ),
 
-    AppUser? user = Provider.of<AppUser?>(context);
-    return StreamBuilder(
-        stream:DatabaseServices()
-            .getUserData(_uid??"null")
-            .map((snapshot) => snapshot.data()),
-        builder: (context,snapshot){
-          _appUser=snapshot.data;
-          return Scaffold(
-            appBar: AppBar(
-              // toolbarHeight: 100,
-              toolbarHeight: toolbarHeight,
-              // toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
-//               toolbarHeight: size.width <= smallDeviceWidth ? 108:130,
-              // toolbarHeight: size.height*0.18,
-              automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
-              backgroundColor: Colors.transparent,
-              iconTheme: const IconThemeData(color: Colors.white), // Change the color of the drawer icon here
-              shadowColor: Colors.transparent,
-              excludeHeaderSemantics: true,
-              elevation: 0.0,
-              forceMaterialTransparency: true,
-              centerTitle: true,
+      // -----------------custom appBar ---------------------------,
+      appBar: AppBar(
+        toolbarHeight: 150,
+        // toolbarHeight: 120,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.white), // Change the color of the drawer icon here
+        shadowColor: Colors.transparent,
+        excludeHeaderSemantics: true,
+        elevation: 0.0,
+        forceMaterialTransparency: true,
+        centerTitle: true,
+        // title: Text("AppBar"),
 
-              flexibleSpace: ClipPath(
-                clipper: CustomAppBarShape(), //<<<===
-                child: Container(
-                  // // height: 150,
-                  // width: MediaQuery.of(context).size.width,
-                  color: Colors.blue[800],
+        // leading: Container(
+        //   color: Colors.red,
+        //   // margin: EdgeInsets.only(top: 0), // Adjust the top margin to position the icon
+        //   child: IconButton(
+        //     icon: Icon(Icons.menu),
+        //       onPressed: () {
+        //       // Add your onPressed logic here
+        //       },
+        //   ),
+        // ),
 
-                  //======AppBar Menu======
-                  child: AppBarMenu(),
-                ),
-              ),
-            ),
-            drawer: Drawer(
-              backgroundColor: Colors.blue,
-              child: ListView(
-                children: [
-                  DrawerHeader(
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${_appUser?.name}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                          ),
-                        ),
-                        Text(
-                          '${_appUser?.universityEmailId}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.home),
-                    title: const Text('Admin Login'),
-                    onTap: () {
-                      Navigator.pop(context); // Close the drawer
-                      // Add your onTap code here, for example navigate to another page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AdminDashboard()),
-                      );
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('Logout'),
-                      onTap: () async {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Colors.blue[900],
-                                ),
-                              );
-                            });
-                        await _authRef.signOutUser();
-                        await UserSecureStorage.setUserUID("null");
-                        if(mounted){
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (context) =>Wrapper()),
-                                (Route<dynamic> route) => false,
-                          );
-                        }
-                      },
-                  ),
-                ],
-              ),
-            ),
+        flexibleSpace: ClipPath(
+          clipper: CustomAppBarShape(),
+          child: Container(
+            height: 150,
+            width: MediaQuery.of(context).size.width,
+            // color: Color(0xff5757A4),
+            color: Colors.blue[700],
+
+//================AppBar Menu===================
+            child: AppBarMenu(),
+          ),
+        ),
+      ),
 
 
 // ==================Footer======================
-            bottomNavigationBar: Container(
-              height: 70,
-              color: Colors.transparent,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8)
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 3,
-                      color: Colors.blue,
-                    ),
-                    NavigationBar(
-                      height: 67,
-                      selectedIndex: _currentIndex,
-                      onDestinationSelected: (int index){
-                        setState(() {
-                          _currentIndex=index;
-                        });
-                      },
-                      indicatorColor: Colors.blue[200],
-                      destinations: const [
-                        NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-                        NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
-                        NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
-                        NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
-                        NavigationDestination(icon: Icon(Icons.data_object), label: "UserData")
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _currentIndex,
+        onDestinationSelected: (int index){
+          setState(() {
+            _currentIndex=index;
+          });
+        },
+        indicatorColor: Colors.blue[200],
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
+          NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
+          NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
+        ],
+      ),
 
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+      body: [const Home(),const Attendance(),const Routine(),const Profile()][_currentIndex],
+      // body: CustomAppBar_Widget_1(),
 
-            body: [const Home(),const Attendance(),const Routine(),const Profile(),const UserData()][_currentIndex],
-
-          );
-        });
-
+    );
   }
 }
+
+
