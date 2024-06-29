@@ -16,15 +16,10 @@ class _ForgetpasswordState extends State<Forgetpassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        elevation: 0,
-        title: Text("Reset Password"),
-      ),
-      body: Padding(
+    return
+      Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: ElevatedButton(onPressed: () {
+          child: TextButton(onPressed: () {
             myDialogBox(context);
           },
             child: Text("Reset Password"),
@@ -32,7 +27,7 @@ class _ForgetpasswordState extends State<Forgetpassword> {
           )
 
 
-      ),
+
 
 
     );
@@ -42,6 +37,7 @@ class _ForgetpasswordState extends State<Forgetpassword> {
     showDialog(context: context, builder: (BuildContext context){
       return Dialog( shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Container(
+            height: 240,
             decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
             padding: EdgeInsets.all(20),
             child: Column(

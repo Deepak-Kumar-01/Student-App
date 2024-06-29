@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentapp/forgot%20password/forgotpassword.dart';
 import '../../homepage.dart';
 import '../controllers/login/loginFormController.dart';
 
@@ -207,8 +208,7 @@ class _SignUpMediumDeviceState extends State<SignUpMediumDevice> {
                           Text("Remember Me")
                         ],
                       ),
-                      TextButton(
-                          onPressed: () {}, child: Text("Forgot Password?"))
+                     const Forgetpassword(),
                     ],
                   ),
                   //Buttons

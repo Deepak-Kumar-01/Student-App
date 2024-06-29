@@ -3,10 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:studentapp/forgot%20password/forgotpassword.dart';
 import 'package:studentapp/modals/authStudent.dart';
 import 'package:studentapp/providers/authProvider.dart';
 import 'package:studentapp/services/authentication.dart';
 import 'package:studentapp/wrapper.dart';
+import 'UserData.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Wrapper(),
+        home:Wrapper(),
       ),
     );
   }
