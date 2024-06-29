@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:studentapp/forgot%20password/forgotpassword.dart';
 import 'package:studentapp/screens/responsiveScreens/controllers/signup/signupFormController.dart';
 import 'package:studentapp/services/authentication.dart';
 
@@ -183,8 +184,7 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                           const Text("Remember Me")
                         ],
                       ),
-                      TextButton(
-                          onPressed: () {}, child: const Text("Forgot Password?"))
+                      const Forgetpassword(),
                     ],
                   ),
                   //Buttons
