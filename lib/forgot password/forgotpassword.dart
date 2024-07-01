@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:email_auth/email_auth.dart';
 
 import 'changepassword.dart';
 
@@ -15,34 +14,34 @@ class _ForgetpasswordState extends State<Forgetpassword> {
  final  TextEditingController emailController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
 
-  void sendOTP() async {
-   EmailAuth emailAuth= EmailAuth(sessionName: 'Test Session');
-    var res = await emailAuth.sendOtp(
-        recipientMail: emailController.text,otpLength: 4);
-    if(res){
-      print("OTP sent");
-    }
-    else{
-      print("We could not sent OTP");
-    }
-  }
+  // void sendOTP() async {
+  //  EmailAuth emailAuth= EmailAuth(sessionName: 'Test Session');
+  //   var res = await emailAuth.sendOtp(
+  //       recipientMail: emailController.text,otpLength: 4);
+  //   if(res){
+  //     print("OTP sent");
+  //   }
+  //   else{
+  //     print("We could not sent OTP");
+  //   }
+  // }
 
- void verifyOTP() async {
-   EmailAuth emailAuth = EmailAuth(sessionName: 'Sample session');
-   // Configure the remote server if needed: emailAuth.config(remoteServerConfiguration);
-
-   var res = await emailAuth.validateOtp(
-     recipientMail: emailController.text,userOtp:otpController.text // Replace with the actual OTP entered by the user
-   );
-   if(res){
-     Navigator.push(
-       context,
-       MaterialPageRoute(builder: (context) => Changepassword()), // Corrected widget name
-     );
-   }else{
-     print("Invalid OTP");
-   }
- }
+ // void verifyOTP() async {
+ //   EmailAuth emailAuth = EmailAuth(sessionName: 'Sample session');
+ //   // Configure the remote server if needed: emailAuth.config(remoteServerConfiguration);
+ //
+ //   var res = await emailAuth.validateOtp(
+ //     recipientMail: emailController.text,userOtp:otpController.text // Replace with the actual OTP entered by the user
+ //   );
+ //   if(res){
+ //     Navigator.push(
+ //       context,
+ //       MaterialPageRoute(builder: (context) => Changepassword()), // Corrected widget name
+ //     );
+ //   }else{
+ //     print("Invalid OTP");
+ //   }
+ // }
 
  @override
   Widget build(BuildContext context) {
@@ -87,7 +86,9 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                   controller: emailController,
                   decoration: InputDecoration(border:OutlineInputBorder(),labelText: "Enter Email",hintText: "eg. abc@gmail.com",suffixIcon: TextButton(
                     child: Text("Send OTP"),
-                    onPressed: ()=> sendOTP(),
+                    onPressed: ()=>{
+                      // sendOTP();
+                    } ,
                   ) ),
                 ),
                 SizedBox(height: 10,),
@@ -96,7 +97,9 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                   decoration: InputDecoration(border:OutlineInputBorder(),labelText: "Enter OTP",hintText: "1234", ),
                 ),
                 SizedBox(height: 20,),
-                ElevatedButton(onPressed: ()=> verifyOTP(),
+                ElevatedButton(onPressed: ()=> {
+                  // verifyOTP()
+                },
                  child: Text("Verify",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                   style: ElevatedButton.styleFrom(backgroundColor:Colors.blueAccent ),
                 ),

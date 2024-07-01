@@ -169,7 +169,7 @@ class _TimetablePageControllerState extends State<TimetablePageController> {
   //UploadTimeTable Function gets called on onClick
   Future<bool> uploadTimetable() async {
     Map<String, dynamic> result = await extractTimetable();
-    // print("RESULT: ${result['semesters']["semester_4"]['timetable']["day_3"]}");
+    print("RESULT: ${result['semesters']["semester_4"]['timetable']["day_3"]}");
     // print("RESULT:$result");
     if(result.isEmpty){
       print("Empty Content");

@@ -80,7 +80,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/images/lazy_panda.jpg
+     - assets/images/lazyPanda.jpg
      - assets/images/DBMS.png
      - assets/images/DSA.png
      - assets/images/TAFL.png
