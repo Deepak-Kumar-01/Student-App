@@ -86,7 +86,7 @@ class _FacultyState extends State<Faculty> {
                         height: size.height * 0.17,
                         width: size.width * 0.60,
                         decoration: BoxDecoration(color: Colors.transparent,),
-                        child:toggle_switch?events():clubs(),
+                        child:toggle_switch?Events():Clubs(),
 
                       ),
                     ),

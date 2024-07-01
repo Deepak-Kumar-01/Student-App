@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-class clubs extends StatelessWidget {
-  const clubs ({super.key});
+class Clubs extends StatefulWidget {
+  const Clubs ({super.key});
 
+  @override
+  State<Clubs> createState() => _ClubsState();
+}
+
+class _ClubsState extends State<Clubs> {
   @override
   Widget build(BuildContext context) {
     final size=MediaQuery.of(context).size;

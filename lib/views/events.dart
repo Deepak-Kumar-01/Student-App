@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-class events extends StatelessWidget {
-  const events({super.key});
+class Events extends StatelessWidget {
+  const Events({super.key});
 
   @override
   Widget build(BuildContext context) {
