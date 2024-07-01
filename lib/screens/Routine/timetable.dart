@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'package:studentapp/screens/Routine/timetable_api.dart';
 
 DateTime dateTime = DateTime.now();
@@ -8,7 +7,6 @@ DateTime dateTime = DateTime.now();
 // Selected day for routine display
 String selectedDay = DateFormat("EEEE").format(dateTime).toLowerCase();
 String dayName = DateFormat("EEEE").format(dateTime).toLowerCase();
-
 
 class TimeTable extends StatefulWidget {
   const TimeTable({super.key});
@@ -18,10 +16,6 @@ class TimeTable extends StatefulWidget {
 }
 
 class _TimeTableState extends State<TimeTable> {
-  
-  var subject = routineapi["monday"]?[1]["subject"];
-  var time = routineapi["monday"]?[1]["time"];
-  var room = routineapi["monday"]?[1]["room"];
 
   // Generate a list of the next 5 days including the current date
   List<DateTime> nextDays = List.generate(7, (index) {
@@ -36,42 +30,63 @@ class _TimeTableState extends State<TimeTable> {
       body: Column(
         children: [
           // ================ Date and weekday ===================
-          Container(
-            height: 100,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: nextDays.length,
-              itemBuilder: (context, index) {
-                DateTime day = nextDays[index]; // current DateTime details
-                dayName = DateFormat("EEEE").format(day).toLowerCase();
+          Padding(
+            padding: const EdgeInsets.only(left: 5,right: 5),
+            child: Container(
+              height: 65,
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: nextDays.length,
+                itemBuilder: (context, index) {
+                  DateTime day = nextDays[index]; // current DateTime details
+                  dayName = DateFormat("EEEE").format(day).toLowerCase(); // current day name
 
-                return InkWell(
-                  onTap: () {
-                    print("${DateFormat("EEEE").format(day)}");
-                    setState(() {
-                      selectedDay =
-                          DateFormat("EEEE").format(day).toLowerCase();
-                    });
-                  },
-                  child: Container(
-                    width: 80,
-                    color: selectedDay == dayName
-                        ? Colors.blueAccent
-                        : Colors.white,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("${DateFormat("dd").format(day)}"),
-                        Text("${DateFormat("E").format(day).toUpperCase()}"),
-                      ],
+                  return InkWell(
+                    onTap: () {
+                      print("${DateFormat("EEEE").format(day)}");
+                      setState(() {
+                        selectedDay =
+                            DateFormat("EEEE").format(day).toLowerCase();
+                      });
+                    },
+                    child: Container(
+                      width: 50,
+                      decoration: BoxDecoration(
+                          color: selectedDay == dayName
+                              ? Colors.blueAccent
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "${DateFormat("dd").format(day)}",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: selectedDay == dayName
+                                    ? Colors.white
+                                    : Colors.black),
+                          ),
+                          Text(
+                            "${DateFormat("E").format(day).toUpperCase()}",
+                            style: TextStyle(
+                                fontSize: 10,
+                                // fontWeight: FontWeight.w600,
+                                color: selectedDay == dayName
+                                    ? Colors.white
+                                    : Colors.black),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
-
 
           //================ RoutineDetails ==================
           Expanded(
@@ -90,7 +105,6 @@ class _TimeTableState extends State<TimeTable> {
                   fit: BoxFit.cover,
                 ),
               )
-
                   : ListView.builder(
                 itemCount: routineapi[selectedDay]?.length,
                 itemBuilder: (context, index) {
@@ -107,7 +121,7 @@ class _TimeTableState extends State<TimeTable> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 9, right: 9, top: 5, bottom: 4),
+                            left: 0, right: 0, top: 0, bottom: 5),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -136,65 +150,6 @@ class _TimeTableState extends State<TimeTable> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// ===================================================
-class RoutineDetails extends StatefulWidget {
-  const RoutineDetails({super.key});
-
-  @override
-  State<RoutineDetails> createState() => _RoutineDetailsState();
-}
-
-class _RoutineDetailsState extends State<RoutineDetails> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        // width: double.infinity,
-        // height: 200,
-        decoration: BoxDecoration(
-          color: Color(0xFFE5E5EC),
-        ),
-        child: ListView.builder(
-          itemCount: routineapi["monday"]?.length,
-          itemBuilder: (context, index) {
-            var subjectTime = routineapi["monday"]?[index]["time"];
-            var subjectCode = routineapi["monday"]?[index]["subjectCode"];
-            var subjectName = routineapi["monday"]?[index]["subjectName"];
-            var subjectTeacher = routineapi["monday"]?[index]["subjectTeacher"];
-
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 9, right: 9, top: 5, bottom: 4),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: ListTile(
-                      leading: Text(
-                        subjectTime!,
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      title: Text(
-                        "$subjectName ($subjectCode)",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(subjectTeacher!,
-                          style: TextStyle(color: Color(0xFF5E5E5E))),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
       ),
     );
   }
