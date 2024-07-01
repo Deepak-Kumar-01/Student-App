@@ -90,7 +90,7 @@ class AttendanceList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Text("KCA"),
-                        Text(subjectDetails[index]["subjectCode"]!, style: TextStyle(fontSize: 12),),
+                        Text(subjectCode!, style: TextStyle(fontSize: 12),),
                       ],
                     ),
                     title: Text(subjectName!, style: TextStyle(fontWeight: FontWeight.bold),),
