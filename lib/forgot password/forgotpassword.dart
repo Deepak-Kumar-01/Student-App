@@ -1,7 +1,8 @@
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:email_auth/email_auth.dart';
 
+import 'changepassword.dart';
 
 class Forgetpassword extends StatefulWidget {
   const Forgetpassword({Key? key}):super(key:key);
@@ -11,10 +12,39 @@ class Forgetpassword extends StatefulWidget {
 }
 
 class _ForgetpasswordState extends State<Forgetpassword> {
-  TextEditingController emailController = TextEditingController();
-  final auth = FirebaseAuth.instance;
+ final  TextEditingController emailController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
 
-  @override
+  void sendOTP() async {
+   EmailAuth emailAuth= EmailAuth(sessionName: 'Test Session');
+    var res = await emailAuth.sendOtp(
+        recipientMail: emailController.text,otpLength: 4);
+    if(res){
+      print("OTP sent");
+    }
+    else{
+      print("We could not sent OTP");
+    }
+  }
+
+ void verifyOTP() async {
+   EmailAuth emailAuth = EmailAuth(sessionName: 'Sample session');
+   // Configure the remote server if needed: emailAuth.config(remoteServerConfiguration);
+
+   var res = await emailAuth.validateOtp(
+     recipientMail: emailController.text,userOtp:otpController.text // Replace with the actual OTP entered by the user
+   );
+   if(res){
+     Navigator.push(
+       context,
+       MaterialPageRoute(builder: (context) => Changepassword()), // Corrected widget name
+     );
+   }else{
+     print("Invalid OTP");
+   }
+ }
+
+ @override
   Widget build(BuildContext context) {
     return
       Padding(
@@ -22,7 +52,7 @@ class _ForgetpasswordState extends State<Forgetpassword> {
           child: TextButton(onPressed: () {
             myDialogBox(context);
           },
-            child: Text("Reset Password"),
+            child: Text("Forgot Password"),
 
           )
 
@@ -37,7 +67,7 @@ class _ForgetpasswordState extends State<Forgetpassword> {
     showDialog(context: context, builder: (BuildContext context){
       return Dialog( shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Container(
-            height: 240,
+            height: 350,
             decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
             padding: EdgeInsets.all(20),
             child: Column(
@@ -55,17 +85,19 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                 SizedBox(height: 20,),
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(border:OutlineInputBorder(),labelText: "Enter Email",hintText: "eg. abc@gmail.com", ),
+                  decoration: InputDecoration(border:OutlineInputBorder(),labelText: "Enter Email",hintText: "eg. abc@gmail.com",suffixIcon: TextButton(
+                    child: Text("Send OTP"),
+                    onPressed: ()=> sendOTP(),
+                  ) ),
+                ),
+                SizedBox(height: 10,),
+                TextField(
+                  controller: otpController,
+                  decoration: InputDecoration(border:OutlineInputBorder(),labelText: "Enter OTP",hintText: "1234", ),
                 ),
                 SizedBox(height: 20,),
-                ElevatedButton(onPressed: ()async{
-                  try {
-                    await auth.sendPasswordResetEmail(email: emailController.text);
-                  }catch(error){
-
-                    print('Error sending password reset email: $error');
-                  }
-                }, child: Text("Reset Password",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                ElevatedButton(onPressed: ()=> verifyOTP(),
+                 child: Text("Verify",style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                   style: ElevatedButton.styleFrom(backgroundColor:Colors.blueAccent ),
                 ),
               ],
