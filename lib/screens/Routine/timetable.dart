@@ -3,24 +3,12 @@ import 'package:intl/intl.dart';
 
 import 'package:studentapp/screens/Routine/timetable_api.dart';
 
-var routineapi_1 = {
-  "monday": [
-    {"subject": "Math", "time": "09:00-10:00", "room": "101"},
-    {"subject": "English", "time": "10:15-11:15", "room": "102"}
-  ],
-  "Tuesday": [
-    {"subject": "Physics", "time": "09:00-10:00", "room": "201"},
-    {"subject": "Chemistry", "time": "10:15-11:15", "room": "202"}
-  ],
-  "Saturday": [
-    {"subject": "CS", "time": "09:00-10:00", "room": "201"},
-    {"subject": "Chemistry", "time": "10:15-11:15", "room": "202"}
-  ],
-};
-
-List<String> days = ["monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
 DateTime dateTime = DateTime.now();
+
+// Selected day for routine display
+String selectedDay = DateFormat("EEEE").format(dateTime).toLowerCase();
+String dayName = DateFormat("EEEE").format(dateTime).toLowerCase();
+
 
 class TimeTable extends StatefulWidget {
   const TimeTable({super.key});
@@ -39,43 +27,37 @@ class _TimeTableState extends State<TimeTable> {
   List<DateTime> nextDays = List.generate(7, (index) {
     return dateTime.add(Duration(days: index));
   });
-  // var abc = dateTime.weekday;
-
-  // Selected day for routine display
-  String selectedDay = DateFormat("EEEE").format(dateTime).toLowerCase();
-  String dayName = DateFormat("EEEE").format(dateTime).toLowerCase();
 
   @override
   Widget build(BuildContext context) {
-    dateTime = DateTime.now();
+    // dateTime = DateTime.now();
 
     return Scaffold(
       body: Column(
         children: [
-          // ================ upper part =============================
+          // ================ Date and weekday ===================
           Container(
             height: 100,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: nextDays.length,
-
               itemBuilder: (context, index) {
                 DateTime day = nextDays[index]; // current DateTime details
                 dayName = DateFormat("EEEE").format(day).toLowerCase();
-                // print(day);
 
                 return InkWell(
                   onTap: () {
                     print("${DateFormat("EEEE").format(day)}");
                     setState(() {
-                      selectedDay = DateFormat("EEEE").format(day).toLowerCase();
-                      // abc = selectedDay;
+                      selectedDay =
+                          DateFormat("EEEE").format(day).toLowerCase();
                     });
                   },
                   child: Container(
                     width: 80,
-                    // color: Colors.blueAccent,
-                    color: selectedDay == dayName ? Colors.greenAccent : Colors.blueAccent,
+                    color: selectedDay == dayName
+                        ? Colors.blueAccent
+                        : Colors.white,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,27 +72,74 @@ class _TimeTableState extends State<TimeTable> {
             ),
           ),
 
-          // ===================================================
-          Container(
-            height: 80,
-            child: Column(
-              children: [
-                Text("$selectedDay"),
-                // Text("$abc"),
-              ],
-            ),
-          ),
 
-          //============================
+          //================ RoutineDetails ==================
           Expanded(
-            child: RoutineDetails(),
+            child: Container(
+              // height: 200,
+              decoration: BoxDecoration(
+                color: Color(0xFFE5E5EC),
+              ),
+
+              child: selectedDay == "sunday"
+                  ? Container(
+                height: 100,
+                color: Colors.blueAccent,
+                child: Image.asset(
+                  'assets/images/lazy_panda.jpg',
+                  fit: BoxFit.cover,
+                ),
+              )
+
+                  : ListView.builder(
+                itemCount: routineapi[selectedDay]?.length,
+                itemBuilder: (context, index) {
+                  var subjectTime =
+                  routineapi[selectedDay]?[index]["time"];
+                  var subjectCode =
+                  routineapi[selectedDay]?[index]["subjectCode"];
+                  var subjectName =
+                  routineapi[selectedDay]?[index]["subjectName"];
+                  var subjectTeacher =
+                  routineapi[selectedDay]?[index]["subjectTeacher"];
+
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 9, right: 9, top: 5, bottom: 4),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: ListTile(
+                            leading: Text(
+                              subjectTime!,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            title: Text(
+                              "$subjectName ($subjectCode)",
+                              style:
+                              TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(subjectTeacher!,
+                                style:
+                                TextStyle(color: Color(0xFF5E5E5E))),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 }
-
 
 // ===================================================
 class RoutineDetails extends StatefulWidget {
