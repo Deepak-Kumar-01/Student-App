@@ -209,32 +209,6 @@ var routineapi = {
 // ===============================================================
 
 var routineapi_1 = {
-  "Monday": [
-    {
-      "subject": "Math",
-      "time": "09:00-10:00",
-      "room": "101"
-    },
-    {"subject": "English", "time": "10:15-11:15", "room": "102"}
-  ],
-  "Tuesday": [
-    {
-      "subject": "Physics",
-      "time": "09:00-10:00",
-      "room": "201"
-    },
-    {"subject": "Chemistry", "time": "10:15-11:15", "room": "202"}
-  ],
-  "Wednesday": [
-    {"subject": "Biology", "time": "09:00-10:00", "room": "301"},
-    {"subject": "History", "time": "10:15-11:15", "room": "302"}
-  ],
-  "Thursday": [
-    {"subject": "Math", "time": "09:00-10:00", "room": "101"},
-    {"subject": "Computer Science", "time": "10:15-11:15", "room": "102"}
-  ],
-  "Friday": [
-    {"subject": "Physical Education", "time": "09:00-10:00", "room": "Gym"},
-    {"subject": "Art", "time": "10:15-11:15", "room": "Art Room"}
-  ]
+  "day":"Mon",
+  "slots":[],
 };

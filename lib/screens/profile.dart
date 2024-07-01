@@ -10,13 +10,13 @@ class Profile extends StatelessWidget {
 
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: AppBar(
-      //   title: Text('Example'),
-      // ),
-      drawer: Drawer(
-          // Drawer contents
-          ),
-      body: TimeTable()
+      appBar: AppBar(
+        title: Text('Example'),
+      ),
+      // drawer: Drawer(
+      //     // Drawer contents
+      //     ),
+      body: Text("Profile")
     );
   }
 }
