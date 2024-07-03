@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studentapp/screens/responsiveScreens/dimensions.dart';
 import '../../clubList/ClubList.dart';
@@ -35,7 +36,8 @@ class _AssignmentState extends State<Assignment> {
     final size = MediaQuery.of(context).size;
     return size.width < smallDeviceWidth
         ? Container(
-            height: size.height * 0.43,
+            // height: size.height * 0.43,
+            height: 220,
             width: size.width*0.97,
             child: Column(
               children: [
@@ -75,12 +77,13 @@ class _AssignmentState extends State<Assignment> {
                   ],
                 ),
                 Divider(
-                  height: 10,
-                  thickness: 5,
+                  height: 3,
+                  thickness: 3,
                   color: Colors.blue[800],
                 ),
-                SizedBox(
-                  height: 188,
+                Container(
+                  height: 155,
+                  // color: Colors.green,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -116,7 +119,7 @@ class _AssignmentState extends State<Assignment> {
                           },
                           separatorBuilder: (context, index) {
                             return const Divider(
-                              height: 10,
+                              height: 3,
                               thickness: 2,
                             );
                           },

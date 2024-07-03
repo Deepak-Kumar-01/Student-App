@@ -93,7 +93,7 @@ class AttendanceList extends StatelessWidget {
                         Text(subjectCode!, style: TextStyle(fontSize: 12),),
                       ],
                     ),
-                    title: Text(subjectName!, style: TextStyle(fontWeight: FontWeight.bold),),
+                    title: Text(subjectName!, style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
                     subtitle: Text(subjectTeacher!,
                         style: TextStyle(color: Color(0xFF5E5E5E))),
 
