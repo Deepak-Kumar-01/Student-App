@@ -47,9 +47,11 @@ class _HomepageState extends State<Homepage> {
     } else if (size.height <= 731) {
       // Medium screen
       toolbarHeight = 105;
-    } else {
+    } else if(size.height<=780) {
       // Large screen
       toolbarHeight = 100;
+    }else{
+      toolbarHeight=108;
     }
     return Scaffold(
       appBar: AppBar(
