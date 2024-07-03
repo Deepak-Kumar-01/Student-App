@@ -12,14 +12,15 @@ class UserData extends StatefulWidget {
   @override
   State<UserData> createState() => _UserDataState();
 }
+
 class _UserDataState extends State<UserData> {
-    String? _uid=FirebaseAuth.instance.currentUser?.uid;
+  String? _uid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {
     print("USER DATA uid:${_uid}");
     return Scaffold(
-      body:StreamBuilder<DocumentSnapshot<AppUser>>(
+      body: StreamBuilder<DocumentSnapshot<AppUser>>(
         stream: DatabaseServices().getUserData(_uid!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -42,6 +43,22 @@ class _UserDataState extends State<UserData> {
               Text('Name: ${user.name}'),
               Text('PersonalEmail: ${user.personalEmail}'),
               // Add other fields as needed
+              Container(
+                height: 10,
+                // color: Colors.red,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  boxShadow: [
+                    BoxShadow(
+                      // color: Colors.black.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 1,
+                      color: Colors.red,
+                      offset: Offset(0, 30), // changes position of shadow
+                    ),
+                  ],
+                ),
+              ),
             ],
           );
         },

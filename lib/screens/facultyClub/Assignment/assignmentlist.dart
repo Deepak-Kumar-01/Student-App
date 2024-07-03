@@ -50,53 +50,86 @@ class _HomePageState extends State<Assignmentlist> {
           color: Colors.white, // Change the back arrow color here
         ),
       ),
-      body: ListView.separated(
+      body: GridView.builder(
+        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15, // Number of columns
+        ),
 
-        padding: EdgeInsets.all(4),
-        shrinkWrap: true,
+        padding: EdgeInsets.fromLTRB(10,10,10,0),
         scrollDirection: Axis.vertical,
         itemCount: assignments.length,
         itemBuilder: (context, index) {
           final assignment = assignments[index];
           return ListTile(
-            title: Text(
-              assignment.title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            subtitle: Text(
-              'Due: ${assignment.dueDate}',
-              style: TextStyle(fontSize: 15),
-            ),
-            trailing: SizedBox(
-              width: 100,
-              height: 33,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  "Mark as Completed",
-                  style: TextStyle(color: Colors.white,fontSize: 10),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: EdgeInsets.all(0),
-                  shadowColor: Colors.grey[850],
-                )
+            title: Padding(
+              padding: const EdgeInsets.fromLTRB(10,8.0,0,0),
+              child: Text(
+                assignment.title,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
-            leading: SizedBox(
-              height:100,
-              width: 70,
-              child: Image.asset(assignment.url,fit: BoxFit.cover,),
+            subtitle: Column(
+              children: [
+
+                   Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0,0,0,0),
+                        child: Text(
+                          'Due: ${assignment.dueDate}',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ],
+                  ),
+                 Row( children: [ Padding(
+                   padding: const EdgeInsets.fromLTRB(42.0,60,0,0),
+                   child: SizedBox(
+                      width: 100,
+                      height: 25,
+                      child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Mark as Completed",
+                            style: TextStyle(color: Colors.white,fontSize: 10),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+
+                            padding: EdgeInsets.all(5),
+                            shadowColor: Colors.grey[850],
+                          )
+                      ),
+                    ),
+                 ),
+                  ],
+                 ),
+
+              ],
             ),
+
+
+            //leading: SizedBox(
+             // height:100,
+              //width: 40,
+              //child: Image.asset(assignment.url,fit: BoxFit.cover,),
+            //),
             tileColor: assignment.c1,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),),
+              borderRadius: BorderRadius.circular(30),),
             contentPadding: EdgeInsets.all(4),
+
           );
+
+
+
+
         },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider(height: 10,thickness: 5,color: Colors.grey[700],);
-        },
+
+
+
       ),
     );
   }
