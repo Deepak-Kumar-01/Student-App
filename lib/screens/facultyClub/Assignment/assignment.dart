@@ -81,48 +81,46 @@ class _AssignmentState extends State<Assignment> {
                 ),
                 SizedBox(
                   height: 188,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 2,
-                          itemBuilder: (context, index) {
-                            final assignment = assignments[index];
-                            return ListTile(
-                              title: Text(
-                                assignment.title,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,fontSize: 14),
+                  child: Column(
+                    children: [
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 2,
+                        itemBuilder: (context, index) {
+                          final assignment = assignments[index];
+                          return ListTile(
+                            title: Text(
+                              assignment.title,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,fontSize: 14),
+                            ),
+                            subtitle: Text('Due: ${assignment.dueDate}'),
+                            trailing: ElevatedButton(
+                              onPressed: () {},
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      WidgetStatePropertyAll(Colors.green),
+                                  shape: WidgetStatePropertyAll<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18),
+                                  ))),
+                              child: const Text(
+                                'Mark as Complete',
+                                style: TextStyle(color: Colors.white,fontSize: 12),
                               ),
-                              subtitle: Text('Due: ${assignment.dueDate}'),
-                              trailing: ElevatedButton(
-                                onPressed: () {},
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStatePropertyAll(Colors.green),
-                                    shape: MaterialStatePropertyAll<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18),
-                                    ))),
-                                child: const Text(
-                                  'Mark as Complete',
-                                  style: TextStyle(color: Colors.white,fontSize: 12),
-                                ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const Divider(
-                              height: 10,
-                              thickness: 2,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const Divider(
+                            height: 10,
+                            thickness: 2,
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ],

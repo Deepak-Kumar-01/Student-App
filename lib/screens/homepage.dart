@@ -52,150 +52,151 @@ class _HomepageState extends State<Homepage> {
       toolbarHeight = 100;
     }
     return Scaffold(
-            appBar: AppBar(
-              // toolbarHeight: 100,
-              toolbarHeight: toolbarHeight,
-              // toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
+      appBar: AppBar(
+        // toolbarHeight: 100,
+        toolbarHeight: toolbarHeight,
+        // toolbarHeight: size.width <= smallDeviceWidth ? 100:130,
 //               toolbarHeight: size.width <= smallDeviceWidth ? 108:130,
-              // toolbarHeight: size.height*0.18,
-              automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
-              backgroundColor: Colors.transparent,
-              iconTheme: const IconThemeData(color: Colors.white), // Change the color of the drawer icon here
-              shadowColor: Colors.transparent,
-              excludeHeaderSemantics: true,
-              elevation: 0.0,
-              forceMaterialTransparency: true,
-              centerTitle: true,
+        // toolbarHeight: size.height*0.18,
+        automaticallyImplyLeading: false,  // to disable auto menu button when using drawer
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white), // Change the color of the drawer icon here
+        shadowColor: Colors.transparent,
+        excludeHeaderSemantics: true,
+        elevation: 0.0,
+        forceMaterialTransparency: true,
+        centerTitle: true,
 
-              flexibleSpace: ClipPath(
-                clipper: CustomAppBarShape(), //<<<===
-                child: Container(
-                  // // height: 150,
-                  // width: MediaQuery.of(context).size.width,
-                  color: Colors.blue[800],
+        flexibleSpace: ClipPath(
+          clipper: CustomAppBarShape(), //<<<===
+          child: Container(
+            // // height: 150,
+            // width: MediaQuery.of(context).size.width,
+            color: Colors.blue[800],
 
-                  //======AppBar Menu======
-                  child: AppBarMenu(),
-                ),
+            //======AppBar Menu======
+            child: AppBarMenu(),
+          ),
+        ),
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.blue,
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.blue,
               ),
-            ),
-            drawer: Drawer(
-              backgroundColor: Colors.blue,
-              child: ListView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DrawerHeader(
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${userData?.name}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                          ),
-                        ),
-                        Text(
-                          '${userData?.universityEmailId}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Text(
-                          '${userData?.role}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
+                  Text(
+                    '${userData?.name}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
                     ),
                   ),
-              userData?.role!="student"?ListTile(
-                leading: Icon(Icons.home),
-                title: const Text('Admin Login'),
-                onTap: () {
-                  Navigator.pop(context); // Close the drawer
-                  // Add your onTap code here, for example navigate to another page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AdminDashboard()),
-                  );
-                },
-              ):Text(""),
-                  ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('Logout'),
-                      onTap: () async {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Colors.blue[900],
-                                ),
-                              );
-                            });
-                        // await _authRef.signOutUser();
-                        await authProvider!.signOut();
-                        await UserSecureStorage.setUserUID("null");
-                        if(mounted){
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (context) =>Wrapper()),
-                                (Route<dynamic> route) => false,
-                          );
-                        }
-                      },
+                  Text(
+                    '${userData?.universityEmailId}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    '${userData?.role}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
             ),
+            userData?.role!="student"?ListTile(
+              leading: Icon(Icons.home),
+              title: const Text('Admin Login'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                // Add your onTap code here, for example navigate to another page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AdminDashboard()),
+                );
+              },
+            ):Text(""),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Logout'),
+              onTap: () async {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.blue[900],
+                        ),
+                      );
+                    });
+                // await _authRef.signOutUser();
+                await authProvider!.signOut();
+                await UserSecureStorage.setUserUID("null");
+                if(mounted){
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) =>Wrapper()),
+                        (Route<dynamic> route) => false,
+                  );
+                }
+              },
+            ),
+          ],
+        ),
+      ),
 
 
 // ==================Footer======================
-            bottomNavigationBar: Container(
-              height: 70,
-              color: Colors.transparent,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8)
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 3,
-                      color: Colors.blue,
-                    ),
-                    NavigationBar(
-                      height: 67,
-                      selectedIndex: _currentIndex,
-                      onDestinationSelected: (int index){
-                        setState(() {
-                          _currentIndex=index;
-                        });
-                      },
-                      indicatorColor: Colors.blue[200],
-                      destinations: const [
-                        NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-                        NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
-                        NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
-                        NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
-                        NavigationDestination(icon: Icon(Icons.data_object), label: "UserData")
-
-                      ],
-                    ),
-                  ],
-                ),
+      bottomNavigationBar: Container(
+        height: 70,
+        color: Colors.transparent,
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8)
+          ),
+          child: Column(
+            children: [
+              Container(
+                height: 3,
+                color: Colors.blue[800],
               ),
-            ),
+              NavigationBar(
+                height: 67,
+                selectedIndex: _currentIndex,
+                onDestinationSelected: (int index){
+                  setState(() {
+                    _currentIndex=index;
+                  });
+                },
+                indicatorColor: Colors.blue[200],
+                backgroundColor: Colors.white,
+                destinations: const [
+                  NavigationDestination(icon: ImageIcon(AssetImage("assets/images/home.png"),size: 22,), label: "Home"),
+                  NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
+                  NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
+                  NavigationDestination(icon: Icon(Icons.person_2_outlined), label: "Profile"),
+                  NavigationDestination(icon: Icon(Icons.data_object), label: "UserData")
 
-            body: [const Home(),const Attendance(),const Routine(),const Profile(),const UserData()][_currentIndex],
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
 
-          );
+      body: [const Home(),const Attendance(),const Routine(),const Profile(),const UserData()][_currentIndex],
+
+    );
   }
 }
