@@ -44,14 +44,14 @@ dependencies:
   #file handling
   file_picker: ^8.0.3
   excel: ^4.0.3
-  firebase_auth: ^4.19.5
-  cloud_firestore: ^4.17.3
-  firebase_core: ^2.31.0
+  firebase_auth: ^5.1.1
+  cloud_firestore: ^5.0.2
+  firebase_core: ^3.1.1
   provider: ^6.1.2
   flutter_secure_storage: ^4.2.1
-  firebase_storage: ^11.7.6
+  firebase_storage: ^12.1.0
   path_provider: ^2.1.3
-  http: ^0.13.1
+  http: ^1.2.1
   permission_handler: ^11.3.1
   url_launcher: ^6.2.6
 
@@ -65,7 +65,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -84,10 +84,10 @@ flutter:
      - assets/images/home.png
      - assets/images/tablecalendar.png
      - assets/images/user.png
-     - assets/images/DBMS.png
-     - assets/images/DSA.png
-     - assets/images/TAFL.png
-     - assets/images/OOPs.png
+     - assets/images/dbms.png
+     - assets/images/os.png
+     - assets/images/autmata.png
+     - assets/images/Java.png
      - assets/images/carousel/
      - assets/images/carousel/book.jpeg
      - assets/images/carousel/coding.jpg
@@ -97,6 +97,7 @@ flutter:
      - assets/onboarding_gifs/event_notifications.gif
      - assets/logo/logo_2x.png
      - assets/logo/logo_1x.png
+
 #     - assets/logo/logo_4x.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
