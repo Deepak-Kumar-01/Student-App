@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:studentapp/forgot%20password/forgotpassword.dart';
 import 'package:studentapp/modals/authStudent.dart';
 import 'package:studentapp/providers/authProvider.dart';
+import 'package:studentapp/screens/facultyClub/Assignment/assignmentlist.dart';
 import 'package:studentapp/services/authentication.dart';
 import 'package:studentapp/wrapper.dart';
 import 'UserData.dart';
