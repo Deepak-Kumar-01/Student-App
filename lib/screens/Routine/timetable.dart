@@ -157,12 +157,12 @@ class _TimeTableState extends State<TimeTable> {
                                         ),
                                         title: Text(
                                           "$subjectName - $subjectCode",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        subtitle: Text(subjectTeacher!,
-                                            style: TextStyle(
+                                        subtitle: Text(subjectTeacher,
+                                            style: const TextStyle(
                                                 color: Color(0xFF5E5E5E))),
                                       ),
                                     ),

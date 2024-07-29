@@ -94,6 +94,9 @@ flutter:
      - assets/images/bg.jpg
      - assets/onboarding_gifs/excited.gif
      - assets/onboarding_gifs/code.gif
+     - assets/onboarding_gifs/peace.gif
+     - assets/onboarding_gifs/welcome.gif
+     - assets/onboarding_gifs/study.gif
      - assets/onboarding_gifs/event_notifications.gif
      - assets/logo/logo_2x.png
      - assets/logo/logo_1x.png

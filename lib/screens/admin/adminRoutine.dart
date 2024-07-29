@@ -30,8 +30,11 @@ class _AdminRoutineState extends State<AdminRoutine> {
   Widget build(BuildContext context) {
      return Scaffold(
       appBar: AppBar(
-        title: Text("Routine"),
+        title: Text("Routine",style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.blue[800],
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Change the back arrow color here
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),

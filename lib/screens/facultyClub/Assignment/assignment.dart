@@ -39,6 +39,7 @@ class _AssignmentState extends State<Assignment> {
             // height: size.height * 0.43,
             height: 220,
             width: size.width*0.97,
+            color: Colors.white,
             child: Column(
               children: [
                 Row(
@@ -104,8 +105,8 @@ class _AssignmentState extends State<Assignment> {
                                 onPressed: () {},
                                 style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStatePropertyAll(Colors.green),
-                                    shape: MaterialStatePropertyAll<
+                                        WidgetStatePropertyAll(Colors.green),
+                                    shape: WidgetStatePropertyAll<
                                             RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18),
@@ -134,6 +135,7 @@ class _AssignmentState extends State<Assignment> {
         : Container(
             height: size.height * 0.30,
             width: size.width*0.97,
+            color: Colors.white,
             child: Column(
               children: [
                 Row(
@@ -198,8 +200,8 @@ class _AssignmentState extends State<Assignment> {
                                 onPressed: () {},
                                 style: ButtonStyle(
                                     backgroundColor:
-                                        MaterialStatePropertyAll(Colors.green),
-                                    shape: MaterialStatePropertyAll<
+                                        WidgetStatePropertyAll(Colors.green),
+                                    shape: WidgetStatePropertyAll<
                                             RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18),

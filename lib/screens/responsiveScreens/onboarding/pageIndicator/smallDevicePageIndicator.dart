@@ -13,8 +13,8 @@ class SmallPageIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: size.height * 0.85,
-      left: size.width * 0.15,
+      top: size.height*0.68,
+      left: size.width*0.34,
       child: Row(
           children: List.generate(
               3,

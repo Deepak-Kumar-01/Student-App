@@ -22,9 +22,9 @@ class OnboardingSkipButton extends StatelessWidget {
                 duration: Duration(milliseconds: 700),
                 curve: Curves.slowMiddle);
           },
-          child: const Text(
+          child: Text(
             "Skip",
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 16,color: Colors.blue[900]),
           ),
         ));
   }

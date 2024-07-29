@@ -31,50 +31,71 @@ class _OnboardingSmallDeviceState extends State<OnboardingSmallDevice> {
     );
     // print("Re-build");
     return Scaffold(
-      body: Stack(children: [
-        //Horizontal PageView
-        PageView(
-          controller: pageController,
-          onPageChanged: onPageChange,
-          children: [
-            CustomPageWidget(
-              size: size,
-              image: "assets/onboarding_gifs/code.gif",
-                title: "Academic Odyssey",
-                subTitle:"Navigating Your Academic Journey with Ease and Confidence Through Comprehensive Support and Resources"
-            ),
-            CustomPageWidget(
-              size: size,
-              image: "assets/onboarding_gifs/event_notifications.gif",
-              title: "AttendEase & EventSync",
-              subTitle:
-              "Track Attendance and Keep Tabs on Upcoming Events with Ease",
-            ),
-            CustomPageWidget(
-              size: size,
-              image: "assets/onboarding_gifs/excited.gif",
-              title: "Campus Connect",
-              subTitle:
-              "Building Bridges Between Students, Faculty, and Resources for Enhanced Learning and Achievement",
-            ),
-          ],
-        ),
-        //Skip Button
-        OnboardingSkipButton(
-            size: size, lastIndex: 3, controller: pageController),
-        //Page Indicator
-        currentValue < 2
-            ? SmallPageIndicator(size: size, currentValue: currentValue)
-            : Text(""),
-        //Button
-        currentValue < 2
-            ? SmallNextButton(
-          size: size,
-          controller: pageController,
-          currentIndex: currentValue + 1,
-        )
-            : size.width>smallDeviceWidth?MdStartedButton(size: size):SmStartedButton(size: size),
-      ]),
+      body: Container(
+        // decoration: BoxDecoration(
+        //   // color: Colors.blue
+        //   gradient: LinearGradient(
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.bottomRight,
+        //     colors: [
+        //       // Color(0xFF130F40),
+        //       // Color(0xFF322B93),
+        //       Color(0xFF0D47A1),
+        //       Color(0xFF000000),
+        //       // Color(0xFF0D47A1),
+        //       //last pair
+        //       // Color(0xff7068DE),
+        //       // Color(0xff61A9D6),
+        //     ]
+        //   )
+        // ),
+        child: Stack(children: [
+          //Horizontal PageView
+          PageView(
+            controller: pageController,
+            onPageChanged: onPageChange,
+            children: [
+              CustomPageWidget(
+                size: size,
+                image: "assets/onboarding_gifs/study.gif",
+                title: "Campus Connect",
+                subTitle:
+                "Building Bridges Between Students, Faculty, and Resources for Enhanced Learning and Achievement",
+                // "Empowering Your Academic Journey",
+              ),
+              CustomPageWidget(
+                size: size,
+                image: "assets/onboarding_gifs/peace.gif",
+                title: "AttendEase & EventSync",
+                subTitle:
+                "Track Attendance and Keep Tabs on Upcoming Events with Ease",
+              ),
+              CustomPageWidget(
+                size: size,
+                  image: "assets/onboarding_gifs/welcome.gif",
+                  title: "Learning Synergy",
+                subTitle:"Navigating Your Academic Journey with Ease and Confidence"
+
+              ),
+            ],
+          ),
+          //Skip Button
+          currentValue==2?Text(""):OnboardingSkipButton(
+              size: size, lastIndex: 3, controller: pageController),
+          //Page Indicator
+          currentValue < 3
+              ? SmallPageIndicator(size: size, currentValue: currentValue)
+              : Text(""),
+          //Button
+          currentValue <3
+              ? SmallNextButton(
+            size: size,
+            controller: pageController,
+            currentIndex: currentValue+1 ,
+          )
+              :Text("something went wrong!"),
+        ]),
+      ),
     );
   }
 }

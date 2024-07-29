@@ -12,8 +12,8 @@ class MdStartedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: size.height * 0.77,
-      left: size.width * 0.29,
+      top: size.height*0.8,
+      left: size.width * 0.20,
       child: ElevatedButton(
         onPressed: ()async{
           showDialog(
@@ -33,12 +33,12 @@ class MdStartedButton extends StatelessWidget {
         },
         child: Text(
           "Let's Get Started",
-          style: TextStyle(color: Colors.white, fontSize: 18),
+          style: TextStyle(color: Colors.white,fontSize: 22),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue[900],
-          shape: RoundedRectangleBorder(),
-          padding: EdgeInsets.all(20),
+            shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            backgroundColor: Colors.blue[900],
+            minimumSize: Size(size.width*0.6, 65)
         ),
       ),
     );

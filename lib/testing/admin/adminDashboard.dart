@@ -89,7 +89,8 @@ class AdminDashboard extends StatelessWidget {
       // ),
 
       appBar: AppBar(
-        backgroundColor: Colors.blue[700],
+        title: const Text("Admin Dashboard",style: TextStyle(color: Colors.white,),),
+        backgroundColor: Colors.blue[800],
         iconTheme: IconThemeData(
           color: Colors.white
         ),

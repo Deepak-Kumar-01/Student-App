@@ -26,7 +26,7 @@ class OnboardingNextButton extends StatelessWidget {
                 curve: Curves.easeInOutSine);
           },
           style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
+              // shape: CircleBorder(),
               backgroundColor: Colors.blue[900],
               minimumSize: Size(75, 75)),
           child: Icon(

@@ -32,7 +32,7 @@ class _AppBarMenuState extends State<AppBarMenu> {
                     child: Builder(
                       builder: (context) {
                         return IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.menu,
                             color: Colors.white,
                             size: 30,
@@ -48,7 +48,7 @@ class _AppBarMenuState extends State<AppBarMenu> {
                 Padding(
                   padding: EdgeInsets.all(11.0),
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.notifications,
                       color: Colors.white,
                       size: 30,

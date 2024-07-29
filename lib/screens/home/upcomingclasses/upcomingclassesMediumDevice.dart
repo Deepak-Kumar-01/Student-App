@@ -32,10 +32,9 @@ class UpcomingClassesMediumDevice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Colors.white,
       body:Stack(
           children: [
-
             Padding(
               padding: const EdgeInsets.only(left: 2, right: 2),
               child: Card(

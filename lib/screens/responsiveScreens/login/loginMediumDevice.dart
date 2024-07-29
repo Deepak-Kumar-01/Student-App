@@ -23,6 +23,10 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
   final TextEditingController _controller2 = TextEditingController();
   //Accessing UserData From Provider
   MyAuthProvider _authProvider=MyAuthProvider();
+  //show password
+  bool showPass=false;
+  //remember me checkbox
+  bool isRemember=true;
   //On Success Login Navigate
   Future<void> _loginAndNavigate() async {
     showDialog(
@@ -88,9 +92,10 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 100, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 160, 20, 20),
           child: Column(
             children: [
               //Logo and Welcome Message
@@ -157,8 +162,16 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                     width: 300,
                     child: TextField(
                         controller: _controller2,
-                        decoration: const InputDecoration(
+                        obscureText: !showPass,
+                        decoration:  InputDecoration(
                           prefixIcon: Icon(Icons.password_sharp),
+                          suffixIcon: InkWell(
+                            onTap: (){
+                              setState(() {
+                                showPass= !showPass;
+                              });
+                            },
+                              child: showPass?Icon(Icons.visibility):Icon(Icons.visibility_off)),
                           border: OutlineInputBorder(),
                           label: Text("Password"),
                           hintText: "",
@@ -178,8 +191,12 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                       Row(
                         children: [
                           Checkbox(
-                            value: true,
-                            onChanged: (val) {},
+                            value: isRemember,
+                            onChanged: (val) {
+                              setState(() {
+                                isRemember= !isRemember;
+                              });
+                            },
                           ),
                           const Text("Remember Me")
                         ],
@@ -189,21 +206,23 @@ class _LoginMediumDeviceState extends State<LoginMediumDevice> {
                   ),
                   //Buttons
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   SizedBox(
-                    width: size.width * 0.6,
-                    child: ElevatedButton(
-                        onPressed:_loginAndNavigate,
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(15),
-                            // shape: RoundedRectangleBorder(),
-                            backgroundColor: Colors.blue[900]),
-                        child: const Text(
-                          "Log in",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        )),
-                  ),
+                      width: size.width * 0.6,
+                      child: ElevatedButton(
+                          onPressed: _loginAndNavigate,
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue[900],
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              padding: EdgeInsets.all(12),
+                              minimumSize: Size(size.width*0.6, 60)
+                          ),
+                          child: const Text(
+                            "Log in",
+                            style: TextStyle(color: Colors.white, fontSize: 22),
+                          )
+                      )),
                 ],
               )),
             ],

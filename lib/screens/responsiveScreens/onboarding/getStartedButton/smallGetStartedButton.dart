@@ -11,6 +11,7 @@ class SmStartedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Positioned(
       top: size.height * 0.8,
       left: size.width * 0.29,
@@ -31,14 +32,16 @@ class SmStartedButton extends StatelessWidget {
                 (Route<dynamic> route) => false,
           );
         },
-        child: Text(
-          "Let's Get Started",
-          style: TextStyle(color: Colors.white, fontSize: 18),
-        ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue[900],
-          shape: RoundedRectangleBorder(),
-          padding: EdgeInsets.all(12),
+            backgroundColor: Colors.blue[900],
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            padding: EdgeInsets.all(12),
+            minimumSize: Size(size.width*0.45, 50)
+
+        ),
+        child: const Text(
+          "Let's Get Started",
+          style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
     );

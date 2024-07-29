@@ -62,11 +62,14 @@ class _StudentState extends State<Student> {
         title: Text("Student",style: TextStyle(color: Colors.white),),
         // backgroundColor: Color(0xff00c95d),
         backgroundColor: Colors.blue[800],
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Change the back arrow color here
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
-          width: size.width * 0.7,
+          // width: size.width * 0.8,
           child: Column(
             children: [
               //Create New Session

@@ -11,6 +11,12 @@ class Notes extends StatelessWidget {
           color: Colors.white,
         ),),
         backgroundColor: Colors.blue[800],
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Change the back arrow color here
+        ),
+      ),
+      body: Center(
+        child: Text("Coming Soon..."),
       ),
     );
   }

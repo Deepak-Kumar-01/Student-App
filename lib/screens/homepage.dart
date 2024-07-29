@@ -54,6 +54,7 @@ class _HomepageState extends State<Homepage> {
       toolbarHeight=108;
     }
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         // toolbarHeight: 100,
         toolbarHeight: toolbarHeight,
@@ -188,7 +189,7 @@ class _HomepageState extends State<Homepage> {
                   NavigationDestination(icon: Icon(Icons.calendar_month_sharp), label: "Attendance"),
                   NavigationDestination(icon: Icon(Icons.receipt_outlined), label: "Routine"),
                   NavigationDestination(icon: Icon(Icons.person_2_outlined), label: "Profile"),
-                  NavigationDestination(icon: Icon(Icons.data_object), label: "UserData")
+                  // NavigationDestination(icon: Icon(Icons.data_object), label: "UserData")
 
                 ],
               ),
@@ -197,7 +198,8 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
 
-      body: [const Home(),const Attendance(),const Routine(),const Profile(),const UserData()][_currentIndex],
+      // body: [const Home(),const Attendance(),const Routine(),const Profile(),const UserData()][_currentIndex],
+      body: [const Home(),const Attendance(),const Routine(),const Profile()][_currentIndex],
 
     );
   }

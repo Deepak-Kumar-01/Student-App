@@ -19,6 +19,10 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
   final TextEditingController _controller2 = TextEditingController();
   final AuthServices _authRef = AuthServices();
   final MyAuthProvider _authProvider=MyAuthProvider();
+  //show password
+  bool showPass=false;
+  //remember me checkbox
+  bool isRemember=true;
 
   Future<void> _loginAndNavigate() async {
     showDialog(
@@ -90,9 +94,10 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 100, 20, 20),
           child: Column(
             children: [
               //Logo and Welcome Message
@@ -141,6 +146,7 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
               Form(
                   child: Column(
                 children: [
+                  //Email
                   SizedBox(
                     width: 300,
                     child: TextField(
@@ -161,14 +167,19 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                   ),
                   SizedBox(
                     width: 300,
-                    child: TextField(
+                    child:TextField(
                         controller: _controller2,
-                        decoration: const InputDecoration(
+                        obscureText: !showPass,
+                        decoration:  InputDecoration(
                           prefixIcon: Icon(Icons.password_sharp),
-                          border: OutlineInputBorder(
-                              // borderRadius: BorderRadius.circular(30)
-                              ),
-                          contentPadding: EdgeInsets.symmetric(vertical: 10),
+                          suffixIcon: InkWell(
+                              onTap: (){
+                                setState(() {
+                                  showPass= !showPass;
+                                });
+                              },
+                              child: showPass?Icon(Icons.visibility):Icon(Icons.visibility_off)),
+                          border: OutlineInputBorder(),
                           label: Text("Password"),
                           hintText: "",
                         )),
@@ -177,14 +188,19 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                     height: 15,
                   ),
                   //Checkbox and Forgot Password
+                  //Remember
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
                           Checkbox(
-                            value: true,
-                            onChanged: (val) {},
+                            value: isRemember,
+                            onChanged: (val) {
+                              setState(() {
+                                isRemember= !isRemember;
+                              });
+                            },
                           ),
                           Text("Remember Me")
                         ],
@@ -202,17 +218,18 @@ class _LoginSmallDeviceState extends State<LoginSmallDevice> {
                       SizedBox(
                         width: size.width * 0.4,
                         child: ElevatedButton(
-                          onPressed: _loginAndNavigate,
+                            onPressed: _loginAndNavigate,
                             style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.all(5),
-                                // shape: RoundedRectangleBorder(),
-                                backgroundColor: Colors.blue[900]),
+                                backgroundColor: Colors.blue[900],
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                padding: EdgeInsets.all(12),
+                                minimumSize: Size(size.width*0.6, 50)
+                            ),
                             child: const Text(
                               "Log in",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
-                            )),
-                      ),
+                              style: TextStyle(color: Colors.white, fontSize: 16),
+                            )
+                      )),
                     ],
                   )
                 ],

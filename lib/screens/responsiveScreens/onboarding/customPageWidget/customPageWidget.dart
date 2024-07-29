@@ -19,38 +19,47 @@ class CustomPageWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Stack(alignment: Alignment.topCenter, children: [
         Image(
-            width: size.width * 0.6,
-            height: size.height * 0.6,
+          //Medium Device
+          //   width: size.width * 0.6,
+          //   height: size.height * 0.6,
+          //Small Device
+            width: size.width * 0.9,
+            height: size.height * 0.5,
             image: AssetImage(image)),
         Positioned(
-          top: size.height*0.49,
+          //large device
+          // top: size.height*0.49,
+          //small device
+          top:size.height*0.48,
             child: Column(
           children: [
             SizedBox(
               width: size.width * 0.8,
               child: Text(
                 title,
-                style: size.width>smallDeviceWidth?TextStyle(
+                style: size.width>smallDeviceWidth?const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                ):TextStyle(
-                  fontSize: 21,
+                  color: Colors.black
+                ):const TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SizedBox(
-              width: size.width * 0.8,
+              width: size.width>smallDeviceWidth?size.width * 0.8:size.width * 0.8,
               child: Text(
                 subTitle,
-                style: size.width>smallDeviceWidth?TextStyle(
+                style: size.width>smallDeviceWidth?const TextStyle(
                   fontSize: 19,
-                ):TextStyle(
-                  fontSize: 16,
+                  color: Colors.black
+                ):const TextStyle(
+                  fontSize: 14,
                 ),
                 textAlign: TextAlign.center,
               ),
