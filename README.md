@@ -7,5 +7,5 @@ Mobile Application For University Students
 | nonadmin@gmail.com | User  | 01022024  |
 |--------------------|-------|-----------|
 # Note: We are still working on it.
-![StudentApp.jpg](..%2F..%2F..%2FDownloads%2FStudentApp.jpg)
+![StudentApp.jpg](https://drive.google.com/file/d/1NSFSz5DBQ_P7zJMj7wy7CjpnXbqx_lS2/view?usp=sharing)
 
