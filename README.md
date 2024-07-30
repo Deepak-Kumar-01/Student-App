@@ -1,6 +1,10 @@
 # studentapp
-
-Mobile Application For JSS Students
-
+Mobile Application For University Students
 # instruction:
-You have to click on Login button present inside Login Form to see HOMEPAGE.
+| Email              | Role  | Pass      |
+|--------------------|-------|-----------|
+| admin@gmail.com    | Admin | 01012024  |
+| nonadmin@gmail.com | User  | 01022024  |
+|--------------------|-------|-----------|
+# Note: We are still working on it.
+

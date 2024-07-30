@@ -100,6 +100,9 @@ flutter:
      - assets/onboarding_gifs/event_notifications.gif
      - assets/logo/logo_2x.png
      - assets/logo/logo_1x.png
+     - assets/logo/appLogo.png
+     - assets/logo/appLogo2x.png
+     - assets/logo/appLogoWhite2x.png
 
 #     - assets/logo/logo_4x.png
 
