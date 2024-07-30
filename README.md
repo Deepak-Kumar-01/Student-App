@@ -1,6 +1,6 @@
 # StudentApp
 Mobile Application For University Students
-# Live Url: https://appetize.io/app/b_a2kjregnwjb3je2nxykvr7eqt4
+# Live Url: https://appetize.io/app/b_tfa7yeiqspdpjwqadhrttsfnca
 # instruction:
 | Email              | Role  | Pass      |
 |--------------------|-------|-----------|
