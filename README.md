@@ -1,5 +1,6 @@
-# studentapp
+# StudentApp
 Mobile Application For University Students
+# Live Url: https://appetize.io/app/b_a2kjregnwjb3je2nxykvr7eqt4
 # instruction:
 | Email              | Role  | Pass      |
 |--------------------|-------|-----------|
@@ -7,5 +8,5 @@ Mobile Application For University Students
 | nonadmin@gmail.com | User  | 01022024  |
 |--------------------|-------|-----------|
 # Note: We are still working on it.
-![StudentApp.jpg](https://drive.google.com/file/d/1NSFSz5DBQ_P7zJMj7wy7CjpnXbqx_lS2/view?usp=sharing)
+![StudentApp](https://github.com/user-attachments/assets/f72d4d2c-d1ba-4407-b072-e81067c13ad7)
 
