@@ -1,4 +1,4 @@
-# StudentApp
+# CampusConnect 
 Mobile Application For University Students
 # Live Url: https://appetize.io/app/b_tfa7yeiqspdpjwqadhrttsfnca
 # instruction:
