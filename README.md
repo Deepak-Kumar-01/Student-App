@@ -1,4 +1,4 @@
-# CampusConnect 
+# U N I V R S Λ (new ui will be added soon)
 Mobile Application For University Students
 # Live Url: https://appetize.io/app/b_tfa7yeiqspdpjwqadhrttsfnca
 # instruction:
