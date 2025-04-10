@@ -3,9 +3,9 @@
 ![Dark Mode (1)](https://github.com/user-attachments/assets/91008e5a-b8fa-4e3e-9241-6a7176403636)
 # Light Mode
 ![Light Mode](https://github.com/user-attachments/assets/da9313d2-cbf0-40ac-ba02-08d938f3b13d)
-This is an old codebase. The new codebase has been moved to a private repository for security purposes.
 Mobile Application For University Students
 # Live Url: https://appetize.io/app/b_tfa7yeiqspdpjwqadhrttsfnca
+This is an old codebase. The new codebase has been moved to a private repository for security purposes.
 # instruction:
 | Email              | Role  | Pass      |
 |--------------------|-------|-----------|
