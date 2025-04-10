@@ -1,6 +1,9 @@
 # U N I V R S Λ (new ui will be added soon)
 # DARK MODE
-![Dark Mode](https://github.com/user-attachments/assets/d3e60ad6-7b51-4884-84e1-7fe45bfba973)
+![Dark Mode (1)](https://github.com/user-attachments/assets/91008e5a-b8fa-4e3e-9241-6a7176403636)
+# Light Mode
+![Light Mode](https://github.com/user-attachments/assets/da9313d2-cbf0-40ac-ba02-08d938f3b13d)
+This is an old codebase. The new codebase has been moved to a private repository for security purposes.
 Mobile Application For University Students
 # Live Url: https://appetize.io/app/b_tfa7yeiqspdpjwqadhrttsfnca
 # instruction:
